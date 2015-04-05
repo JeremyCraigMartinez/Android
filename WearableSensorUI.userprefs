@@ -1,0 +1,12 @@
+﻿<Properties StartupItem="WearableSensorUI\WearableSensorUI.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.192.168.250.101:5555" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="c:\Users\faust_000\Desktop\Senior design\WearableSensorUI_V2.01\WearableSensorUI\Activities\MainActivity.cs">
+    <Files>
+      <File FileName="c:\Users\faust_000\Desktop\Senior design\WearableSensorUI_V2.01\WearableSensorUI\Activities\MainActivity.cs" Line="179" Column="33" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
