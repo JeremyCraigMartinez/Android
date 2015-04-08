@@ -1,0 +1,2 @@
+backend_testing.MainActivity;backend_testing.MainActivity
+api_interaction_kit.Battery;api_interaction_kit.Battery
