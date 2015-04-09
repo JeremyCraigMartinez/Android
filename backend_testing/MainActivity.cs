@@ -1,11 +1,7 @@
-﻿using System;
-
-using Android.App;
-using Android.Content;
-using Android.Runtime;
-using Android.Views;
+﻿using Android.App;
 using Android.Widget;
 using Android.OS;
+using api_interaction_kit;
 
 namespace backend_testing
 {
@@ -18,8 +14,11 @@ namespace backend_testing
 		{
 			base.OnCreate (bundle);
 
+			api_interaction_kit.api a = new api ();
+
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
+
 
 			// Get our button from the layout resource,
 			// and attach an event to it

@@ -120,7 +120,8 @@ namespace api_interaction_kit
 					if (stream.CanRead)
 					{
 						stream.Read (b, 0, (int)client.ReceiveBufferSize);
-						Log.Info("Server Response", b.ToString());
+						string retrieved = Encoding.ASCII.GetString(b);
+						Log.Info("Server Response", retrieved);
 					}
 					stream.Flush ();
 				} catch { 
