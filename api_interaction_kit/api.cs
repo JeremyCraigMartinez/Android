@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Text;
-using System.Net;
 using System.Net.Sockets;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Linq;
+using Android.Util;
 
 namespace api_interaction_kit
 {
@@ -60,9 +58,7 @@ namespace api_interaction_kit
 		/// <returns><c>true</c>, if connection is alive, <c>false</c> otherwise.</returns>
 		private bool is_alive()
 		{ 
-			if (client.Connected)
-				return true;
-			return false;
+			return (client.Connected);
 		}
 
 		/// <summary>
@@ -111,27 +107,29 @@ namespace api_interaction_kit
 		/// <summary>
 		/// API's best friend; they could talk forever
 		/// </summary>
-		private void start()
+		private void start ()
 		{
 			while (state == States.Running) {
-				while (is_alive()) {
-					try {
-						byte[] b = new byte[client.ReceiveBufferSize];
-						NetworkStream stream = client.GetStream();
-						//System.Diagnostics.Debug.Write("Fetching Data");
-						byte[] request = Encoding.UTF8.GetBytes("GET / HTTP/1.0\r\n\r\n");
-						if (stream.CanWrite)
-							stream.Write(request, 0, request.Length);
-						if (stream.CanRead)
-							stream.Read(b, 0, (int)client.ReceiveBufferSize);
-						stream.Flush();
-					} catch { 
-						announcment("Error: C001");
-						if (!check_connection())
-							state_change(ref state, States.Offline);
-						else
-							continue;
+				try {
+					byte[] b = new byte[client.ReceiveBufferSize];
+					NetworkStream stream = client.GetStream ();
+					//System.Diagnostics.Debug.Write("Fetching Data");
+					byte[] request = Encoding.UTF8.GetBytes ("GET / HTTP/1.0\r\n\r\n");
+					if (stream.CanWrite)
+						stream.Write (request, 0, request.Length);
+					if (stream.CanRead)
+					{
+						stream.Read (b, 0, (int)client.ReceiveBufferSize);
+						Log.Info("Server Response", b.ToString());
 					}
+					stream.Flush ();
+				} catch { 
+					announcment ("Error: C001");
+					Log.Error ("Server Connection Error", "C001");
+					if (!check_connection ())
+						state_change (ref state, States.Offline);
+					else
+						continue;
 				}
 			}
 		}

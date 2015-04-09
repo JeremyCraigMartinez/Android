@@ -20,3 +20,14 @@ C:\Users\kyle.avery\Documents\GitHub\Android\api_interaction_kit\obj\Debug\andro
 C:\Users\kyle.avery\Documents\GitHub\Android\api_interaction_kit\obj\Debug\res\values\strings.xml
 C:\Users\kyle.avery\Documents\GitHub\Android\api_interaction_kit\obj\Debug\R.cs.flag
 C:\Users\kyle.avery\Documents\GitHub\Android\api_interaction_kit\obj\Debug\uploadflags.txt
+K:\Github\Android\api_interaction_kit\obj\Debug\api_interaction_kit.dll
+K:\Github\Android\api_interaction_kit\bin\Debug\api_interaction_kit.dll
+K:\Github\Android\api_interaction_kit\bin\Debug\api_interaction_kit.pdb
+K:\Github\Android\api_interaction_kit\bin\Debug\api_interaction_kit.dll.mdb
+K:\Github\Android\api_interaction_kit\bin\Debug\api_interaction_kit.api_interaction_kit.apk
+K:\Github\Android\api_interaction_kit\bin\Debug\api_interaction_kit.api_interaction_kit-Signed.apk
+K:\Github\Android\api_interaction_kit\obj\Debug\api_interaction_kit.pdb
+K:\Github\Android\api_interaction_kit\obj\Debug\android\bin\api_interaction_kit.api_interaction_kit.apk
+K:\Github\Android\api_interaction_kit\obj\Debug\res\values\strings.xml
+K:\Github\Android\api_interaction_kit\obj\Debug\R.cs.flag
+K:\Github\Android\api_interaction_kit\obj\Debug\uploadflags.txt

@@ -1,4 +1,4 @@
-﻿<Properties StartupItem="backend_testing\backend_testing.csproj">
+﻿<Properties StartupItem="WearableSensorUI\WearableSensorUI.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.MonoForAndroid_API_12" />
   <MonoDevelop.Ide.Workbench ActiveDocument="backend_testing\MainActivity.cs">
     <Files>
