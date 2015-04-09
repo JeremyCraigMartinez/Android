@@ -120,8 +120,7 @@ namespace api_interaction_kit
 					if (stream.CanRead)
 					{
 						stream.Read (b, 0, (int)client.ReceiveBufferSize);
-						string retrieved = Encoding.ASCII.GetString(b);
-						Log.Info("Server Response", retrieved);
+						Log.Info("Server Response", byte_to_str(b));
 					}
 					stream.Flush ();
 				} catch { 
@@ -135,6 +134,16 @@ namespace api_interaction_kit
 			}
 		}
 
+		private string byte_to_str(byte[] arr)
+		{
+			string str = "";
+			foreach (byte b in arr) 
+			{
+				if (Convert.ToChar (b) != '\0')
+					str += Convert.ToChar (b);
+			}
+			return str;
+		}
 		/// <summary>
 		/// Reattempts to connect to the API 3 times
 		/// </summary>
