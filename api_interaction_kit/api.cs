@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Net.Sockets;
+using System.Net.Security;
 using System.Threading.Tasks;
 using Android.Util;
 
@@ -112,11 +113,11 @@ namespace api_interaction_kit
 			while (state == States.Running) {
 				try {
 					byte[] b = new byte[client.ReceiveBufferSize];
-					NetworkStream stream = client.GetStream ();
+					SslStream stream = new SslStream(client.GetStream());
 					//System.Diagnostics.Debug.Write("Fetching Data");
-					byte[] request = Encoding.UTF8.GetBytes ("GET / HTTP/1.0\r\n\r\n");
+					byte[] buffer = new byte[2048];
 					if (stream.CanWrite)
-						stream.Write (request, 0, request.Length);
+						stream.Write(buffer, 0, buffer.Length);
 					if (stream.CanRead)
 					{
 						stream.Read (b, 0, (int)client.ReceiveBufferSize);
