@@ -1,10 +1,10 @@
 ﻿<Properties StartupItem="WearableSensorUI\WearableSensorUI.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="api_interaction_kit\api.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="api_interaction_kit\json.cs">
     <Files>
-      <File FileName="api_interaction_kit\api.cs" Line="148" Column="6" />
+      <File FileName="api_interaction_kit\api.cs" Line="21" Column="21" />
       <File FileName="api_interaction_kit\event_object.cs" Line="1" Column="1" />
-      <File FileName="api_interaction_kit\json.cs" Line="37" Column="4" />
+      <File FileName="api_interaction_kit\json.cs" Line="24" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

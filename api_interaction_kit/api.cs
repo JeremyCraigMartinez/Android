@@ -139,17 +139,20 @@ namespace api_interaction_kit
 		private void request_user_data(string username)
 		{
 			try {
-				byte[] b = Encoding.ASCII.GetBytes("user");//new byte[client.ReceiveBufferSize];
+				byte[] b = Encoding.ASCII.GetBytes(@"/user");//new byte[client.ReceiveBufferSize];
 				NetworkStream stream = client.GetStream();
 				//System.Diagnostics.Debug.Write("Fetching Data");
 				byte[] buffer = new byte[2048];
-				if (stream.CanWrite)
-					stream.Write(buffer, 0, buffer.Length);
-				stream.Flush ();
-				if (stream.CanRead)
+				using(System.IO.StreamReader sr = new System.IO.StreamReader(stream))
 				{
-					stream.Read (b, 0, (int)client.ReceiveBufferSize);
-					Log.Info("Server Response", byte_to_str(b));
+					using(System.IO.StreamWriter sw = new System.IO.StreamWriter(stream))
+						sw.WriteLine(b);
+					string line = "";
+					string total = "";
+					while((line=sr.ReadLine())!=null)
+					{
+						total += line;
+					}
 				}
 
 			} catch { 
