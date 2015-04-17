@@ -4,6 +4,7 @@ using System.Net.Sockets;
 using System.Net.Security;
 using System.Threading.Tasks;
 using Android.Util;
+using System.IO;
 
 namespace api_interaction_kit
 {
@@ -139,17 +140,13 @@ namespace api_interaction_kit
 		private void request_user_data(string username)
 		{
 			try {
-				byte[] b = Encoding.ASCII.GetBytes("user");//new byte[client.ReceiveBufferSize];
+				byte[] b = Encoding.ASCII.GetBytes(@"/user");//new byte[client.ReceiveBufferSize];
 				NetworkStream stream = client.GetStream();
 				//System.Diagnostics.Debug.Write("Fetching Data");
 				byte[] buffer = new byte[2048];
-				if (stream.CanWrite)
-					stream.Write(buffer, 0, buffer.Length);
-				stream.Flush ();
-				if (stream.CanRead)
+				(using StreamReader sr = new StreamReader(stream))
 				{
-					stream.Read (b, 0, (int)client.ReceiveBufferSize);
-					Log.Info("Server Response", byte_to_str(b));
+
 				}
 
 			} catch { 
