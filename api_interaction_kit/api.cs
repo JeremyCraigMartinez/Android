@@ -111,27 +111,52 @@ namespace api_interaction_kit
 		private void start ()
 		{
 			while (state == States.Running) {
-				try {
-					byte[] b = new byte[client.ReceiveBufferSize];
-					SslStream stream = new SslStream(client.GetStream());
-					//System.Diagnostics.Debug.Write("Fetching Data");
-					byte[] buffer = new byte[2048];
-					if (stream.CanWrite)
-						stream.Write(buffer, 0, buffer.Length);
-					if (stream.CanRead)
-					{
-						stream.Read (b, 0, (int)client.ReceiveBufferSize);
-						Log.Info("Server Response", byte_to_str(b));
-					}
-					stream.Flush ();
-				} catch { 
-					announcment ("Error: C001");
-					Log.Error ("Server Connection Error", "C001");
-					if (!check_connection ())
-						state_change (ref state, States.Offline);
-					else
-						continue;
+//				try {
+//					byte[] b = new byte[client.ReceiveBufferSize];
+//					SslStream stream = new SslStream(client.GetStream());
+//					//System.Diagnostics.Debug.Write("Fetching Data");
+//					byte[] buffer = new byte[2048];
+//					if (stream.CanWrite)
+//						stream.Write(buffer, 0, buffer.Length);
+//					if (stream.CanRead)
+//					{
+//						stream.Read (b, 0, (int)client.ReceiveBufferSize);
+//						Log.Info("Server Response", byte_to_str(b));
+//					}
+//					stream.Flush ();
+//				} catch { 
+//					announcment ("Error: C001");
+//					Log.Error ("Server Connection Error", "C001");
+//					if (!check_connection ())
+//						state_change (ref state, States.Offline);
+//					else
+//						continue;
+//				}
+				request_user_data("");
+			}
+		}
+
+		private void request_user_data(string username)
+		{
+			try {
+				byte[] b = Encoding.ASCII.GetBytes("user");//new byte[client.ReceiveBufferSize];
+				NetworkStream stream = client.GetStream();
+				//System.Diagnostics.Debug.Write("Fetching Data");
+				byte[] buffer = new byte[2048];
+				if (stream.CanWrite)
+					stream.Write(buffer, 0, buffer.Length);
+				stream.Flush ();
+				if (stream.CanRead)
+				{
+					stream.Read (b, 0, (int)client.ReceiveBufferSize);
+					Log.Info("Server Response", byte_to_str(b));
 				}
+
+			} catch { 
+				announcment ("Error: C001");
+				Log.Error ("Server Connection Error", "C001");
+				if (!check_connection ())
+					state_change (ref state, States.Offline);
 			}
 		}
 

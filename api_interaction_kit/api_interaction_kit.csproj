@@ -46,6 +46,8 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="api.cs" />
     <Compile Include="hardware_inspector.cs" />
+    <Compile Include="event_object.cs" />
+    <Compile Include="json.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
