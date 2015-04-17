@@ -34,7 +34,7 @@ namespace api_interaction_kit
 		}
 		static public Object deserializer (System.Runtime.Serialization.Json.DataContractJsonSerializer s)
 		{
-			
+			return (Object)null;
 		}
 	}
 }
