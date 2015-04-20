@@ -5,25 +5,24 @@ using System.IO;
 namespace api_interaction_kit
 {
 	[DataContract]
-	public class json : Object
-	{
-		
-	}
-		
-	public class information : json
+	public class user_information
 	{
 		[DataMember]
-		protected string first_name;
+		public string _id;
 		[DataMember]
-		protected string last_name;
+		public string first_name;
 		[DataMember]
-		protected string age;
+		public string last_name;
 		[DataMember]
-		protected string height; //Inches
+		public string age;
 		[DataMember]
-		protected string weight; //pounds
+		public string height; //Inches
 		[DataMember]
-		protected string sex;
+		public string weight; //pounds
+		[DataMember]
+		public string sex;
+		[DataMember]
+		public string group;
 	}
 
 	public static class json_functions
@@ -32,9 +31,11 @@ namespace api_interaction_kit
 		{
 			return (new System.Runtime.Serialization.Json.DataContractJsonSerializer (T));
 		}
-		static public Object deserializer (System.Runtime.Serialization.Json.DataContractJsonSerializer s)
+		static public Object deserializer (Stream data, Type T)
 		{
-			return (Object)null;
+			System.Runtime.Serialization.Json.DataContractJsonSerializer s = new System.Runtime.Serialization.Json.DataContractJsonSerializer (T);
+			var temp = s.ReadObject (data);
+			return temp;
 		}
 	}
 }
