@@ -139,23 +139,33 @@ namespace api_interaction_kit
 		private void request_user_data(string username)
 		{
 			try {
-				byte[] b = Encoding.ASCII.GetBytes(@"/user");//new byte[client.ReceiveBufferSize];
+				byte[] b = Encoding.ASCII.GetBytes(@"/user/");//new byte[client.ReceiveBufferSize];
 				NetworkStream stream = client.GetStream();
 				//System.Diagnostics.Debug.Write("Fetching Data");
-				byte[] buffer = new byte[2048];
-				using(System.IO.StreamReader sr = new System.IO.StreamReader(stream))
+				if (stream.CanWrite)
+					stream.Write(b, 0, b.Length);
+				if (stream.CanRead)
 				{
-					using(System.IO.StreamWriter sw = new System.IO.StreamWriter(stream))
-						sw.WriteLine(b);
-					string line = "";
-					string total = "";
-					while((line=sr.ReadLine())!=null)
-					{
-						total += line;
-					}
+					byte[] buffer = new byte[client.ReceiveBufferSize];
+					stream.Read (buffer, 0, client.ReceiveBufferSize);
+					string result = byte_to_str(buffer);
+					Log.Info("Server Response", result);
 				}
+				stream.Flush ();
+//				using(System.IO.StreamReader sr = new System.IO.StreamReader(stream))
+//				{
+//					using(System.IO.StreamWriter sw = new System.IO.StreamWriter(stream))
+//						sw.WriteLine(b);
+//					string line = "";
+//					string total = "";
+//					while((line=sr.ReadLine())!=null)
+//					{
+//						total += line;
+//					}
+//				}
 
-			} catch { 
+			} catch (Exception e) {
+				string err = e.ToString ();
 				announcment ("Error: C001");
 				Log.Error ("Server Connection Error", "C001");
 				if (!check_connection ())

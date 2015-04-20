@@ -14,8 +14,8 @@ namespace backend_testing
 		{
 			base.OnCreate (bundle);
 
-			api_interaction_kit.api a = new api ();
-
+			api a = new api ();
+			a.announcment += A_announcment;
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
 
@@ -27,6 +27,11 @@ namespace backend_testing
 			button.Click += delegate {
 				button.Text = string.Format ("{0} clicks!", count++);
 			};
+		}
+
+		void A_announcment (string input)
+		{
+			
 		}
 	}
 }
