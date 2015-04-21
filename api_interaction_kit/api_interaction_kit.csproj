@@ -51,6 +51,7 @@
     <Compile Include="hardware_inspector.cs" />
     <Compile Include="event_object.cs" />
     <Compile Include="json.cs" />
+    <Compile Include="api_function_calls.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

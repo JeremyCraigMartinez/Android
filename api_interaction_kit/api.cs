@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Security;
@@ -14,10 +15,9 @@ namespace api_interaction_kit
 		Running,
 		Offline,
 		Stopping
-
 	}
 
-	public class api
+	public partial class api
 	{
 		#region Variables
 
@@ -27,12 +27,16 @@ namespace api_interaction_kit
 
 		//Announces what's going on
 		public delegate void Announcment(string input);
-
 		public event Announcment announcment;
+
+		public delegate void User_Information_Update (user_information info);
+		public event User_Information_Update user_information_update;
 
 		States state;
 
 		HttpClient client;
+
+		List<event_object> events;
 
 		#endregion
 
@@ -53,16 +57,6 @@ namespace api_interaction_kit
 			else if (input.Contains("Error"))
 				state_change(ref state, States.Stopping);
 		}
-
-		/// <summary>
-		/// Makes sure the connection is still alive
-		/// </summary>
-		/// <returns><c>true</c>, if connection is alive, <c>false</c> otherwise.</returns>
-//		private bool is_alive()
-//		{ 
-//			return (client.Connected);
-//		}
-
 		/// <summary>
 		/// Changes the state
 		/// </summary>
@@ -92,7 +86,6 @@ namespace api_interaction_kit
 					break;
 			}
 		}
-
 		/// <summary>
 		/// Initializes the connection.
 		/// </summary>
@@ -113,30 +106,14 @@ namespace api_interaction_kit
 		/// </summary>
 		private void start ()
 		{
-			while (state == States.Running) {
-				request_user_data("j@m.com");
-			}
+			events = new List<event_object> ();
+			while (state == States.Running) 
+				foreach(event_object e in events)
+					e.execute ();
 		}
-
-		public user_information request_user_data(string username)
+		public void update_user_data(string username)
 		{
-			try
-			{
-				HttpResponseMessage response = client.GetAsync("user/" + username).Result;
-
-				if(response.IsSuccessStatusCode)
-				{
-					var data = response.Content.ReadAsStreamAsync().Result;
-					return(user_information)json_functions.deserializer(data, typeof(user_information));
-				}
-			} 
-			catch (Exception e) {
-				string err = e.ToString ();
-				announcment ("Error: C001");
-				Log.Error ("Server Connection Error", "C001");
-				return null;
-			}
-			return null;
+			events.Add(new request_user_event(username, this));
 		}
 	}
 }
