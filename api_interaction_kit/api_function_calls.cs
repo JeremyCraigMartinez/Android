@@ -33,13 +33,8 @@ namespace api_interaction_kit
 				login_information user = new login_information (){ email = Email, pass = Pass };
 				MemoryStream stream = new MemoryStream ();
 				json_functions.serializer (user, user.GetType (), ref stream);
-				string str2 = Encoding.ASCII.GetString (stream.ToArray());
-				//HttpContent content = new StreamContent (stream);
-				//HttpContent content = new ByteArrayContent(stream.ToArray());
-				HttpContent content = new StringContent(Encoding.ASCII.GetString(stream.ToArray()));
-				HttpContent c2 = new StringContent(@"{email:xirdie@a.com,pass:123456}");
-				//HttpResponseMessage response = client.PostAsync ("user/create", content).Result;
-				HttpResponseMessage response = client.PostAsync ("user/create", c2).Result;
+				HttpContent content = new StreamContent (stream);
+				HttpResponseMessage response = client.PostAsync ("user/create", content).Result;
 				if (response.IsSuccessStatusCode) {
 				
 				}
