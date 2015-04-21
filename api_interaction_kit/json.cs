@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using System.IO;
+using System.Text;
 
 namespace api_interaction_kit
 {
@@ -36,9 +37,10 @@ namespace api_interaction_kit
 
 	public static class json_functions
 	{
-		static public System.Runtime.Serialization.Json.DataContractJsonSerializer serializer (Object o, Type T)
+		static public void serializer (Object o, Type T, ref MemoryStream S)
 		{
-
+			System.Runtime.Serialization.Json.DataContractJsonSerializer s = new System.Runtime.Serialization.Json.DataContractJsonSerializer (T);
+			s.WriteObject (S, o);
 		}
 		static public Object deserializer (Stream data, Type T)
 		{

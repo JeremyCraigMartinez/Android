@@ -20,7 +20,7 @@ namespace api_interaction_kit
 		public request_user_event(string Username, api Reference) { data = Username; reference = Reference;}
 		public override void execute ()
 		{
-			reference.user_information_update((user_information)reference.request_user_data ((string)data));
+			reference.server_response_helper(reference.request_user_data((string)data), Response_Type.user_info);
 		}
 	}
 
@@ -28,10 +28,10 @@ namespace api_interaction_kit
 	{
 		string user = "";
 		string p = "";
-		public create_user_event(string Username, string Pass, api Reference) { user = Username; p = Pass, reference = Reference; }
+		public create_user_event(string Username, string Pass, api Reference) { user = Username; p = Pass; reference = Reference; }
 		public override void execute()
 		{
-
+			reference.create_user (user, p);
 		}
 	}
 }

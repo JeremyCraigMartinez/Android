@@ -8,14 +8,13 @@ namespace backend_testing
 	[Activity (Label = "backend_testing", MainLauncher = true, Icon = "@drawable/icon")]
 	public class MainActivity : Activity
 	{
-		int count = 1;
-
+		api a;
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
-			api a = new api ();
-			a.announcment += A_announcment;
+			a = new api ();
+			a.server_update += A_server_update;
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
 
@@ -24,14 +23,18 @@ namespace backend_testing
 			// and attach an event to it
 			Button button = FindViewById<Button> (Resource.Id.myButton);
 			
-			button.Click += delegate {
-				button.Text = string.Format ("{0} clicks!", count++);
+			button.Click += delegate 
+			{
+				a.api_create_new_user("xirdie@a.com", "123456");
 			};
 		}
 
-		void A_announcment (string input)
+		void A_server_update (object o, Response_Type r)
 		{
-			
+			if (r == api_interaction_kit.Response_Type.user_info) 
+			{
+				user_information i = o as user_information;
+			}
 		}
 	}
 }

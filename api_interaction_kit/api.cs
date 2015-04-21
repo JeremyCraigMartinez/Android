@@ -17,6 +17,12 @@ namespace api_interaction_kit
 		Stopping
 	}
 
+	public enum Response_Type
+	{
+		user_created,
+		user_info
+	}
+
 	public partial class api
 	{
 		#region Variables
@@ -29,14 +35,16 @@ namespace api_interaction_kit
 		public delegate void Announcment(string input);
 		public event Announcment announcment;
 
-		public delegate void User_Information_Update (user_information info);
-		public event User_Information_Update user_information_update;
+		public delegate void Server_Update (Object o, Response_Type r);
+		public event Server_Update server_update;
 
 		States state;
 
 		HttpClient client;
 
 		List<event_object> events;
+
+		bool run_lock;
 
 		#endregion
 
@@ -91,6 +99,7 @@ namespace api_interaction_kit
 		/// </summary>
 		private void initialize()
 		{
+			run_lock = false;
 			try {
 				client = new HttpClient();
 				client.BaseAddress = new Uri("http://" + server_ip + ":" + server_port + "/" );
@@ -107,13 +116,36 @@ namespace api_interaction_kit
 		private void start ()
 		{
 			events = new List<event_object> ();
+			bool clear = false;
 			while (state == States.Running) 
-				foreach(event_object e in events)
-					e.execute ();
+			{
+				if (!run_lock) {
+					foreach (event_object e in events) {
+						e.execute ();
+						clear = true;
+					}
+				}
+				if (events.Count != 0 && clear) {
+					events.Clear ();
+					clear = false;
+				}
+			}
 		}
-		public void update_user_data(string username)
+		public void api_update_user_data(string username)
 		{
+			run_lock = true;
 			events.Add(new request_user_event(username, this));
+			run_lock = false;
+		}
+		public void api_create_new_user(string username, string password)
+		{
+			run_lock = true;
+			events.Add (new create_user_event (username, password, this));
+			run_lock = false;
+		}
+		public void server_response_helper(Object o, Response_Type r)
+		{
+			server_update (o, r);
 		}
 	}
 }
