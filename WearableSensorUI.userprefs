@@ -1,9 +1,28 @@
 ﻿<Properties StartupItem="WearableSensorUI\WearableSensorUI.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.192.168.250.101:5555" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="c:\Users\faust_000\Desktop\Senior design\WearableSensorUI_V2.01\WearableSensorUI\Activities\MainActivity.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.192.168.56.101:5555" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="WearableSensorUI\Fragments\HomeFragment.cs">
     <Files>
-      <File FileName="c:\Users\faust_000\Desktop\Senior design\WearableSensorUI_V2.01\WearableSensorUI\Activities\MainActivity.cs" Line="179" Column="33" />
+      <File FileName="WearableSensorUI\Fragments\ProfileFragment.cs" Line="24" Column="41" />
+      <File FileName="WearableSensorUI\Fragments\HomeFragment.cs" Line="44" Column="20" />
+      <File FileName="WearableSensorUI\Fragments\HistoryFragment.cs" Line="48" Column="13" />
+      <File FileName="WearableSensorUI\Fragments\GoalsFragment.cs" Line="1" Column="1" />
+      <File FileName="WearableSensorUI\Fragments\ExerciseFragment.cs" Line="42" Column="13" />
+      <File FileName="WearableSensorUI\DataModels\WearableActivity.cs" Line="58" Column="70" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="WearableSensorUI" expanded="True">
+            <Node name="ComponentReferenceFolder" expanded="True" />
+            <Node name="Packages" expanded="True" />
+            <Node name="DataModels" expanded="True" />
+            <Node name="Fragments" expanded="True">
+              <Node name="HomeFragment.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
