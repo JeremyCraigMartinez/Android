@@ -44,15 +44,7 @@ namespace WearableSensorUI
             base.OnCreate(savedInstanceState);
             Activity.SetTitle(Resource.String.activity_title);
            
-            mDetectedActivities = WearableActivitiesLab.get(Activity).getActivities();
-
-            // The adapter that handles displaying of information to the user
-            ArrayAdapter<WearableActivity> adapter = new ArrayAdapter<WearableActivity>(
-                                                         Activity, Android.Resource.Layout.SimpleListItem1, mDetectedActivities
-                                                     );
-
-            // Attach the adapter to the Fragment
-            this.ListAdapter = adapter;
+         
         }
 
         //        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

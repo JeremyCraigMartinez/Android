@@ -7,9 +7,14 @@
     android:minHeight="25px"
     android:background="#ffe28827">
     <TextView
-        android:text="Welcome to your Home Page"
+        android:text="Detected Activities Summary "
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView1" />
+        android:id="@+id/txtTitle" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
 </LinearLayout>

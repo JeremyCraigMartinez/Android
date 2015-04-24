@@ -30,45 +30,58 @@ namespace WearableSensorUI
     public class WearableActivity
     {
      
-        private UUID mId;
+        public string Name { get; set; }
+        public string Duration { get; set; }
+        public string TotalSteps { get; set; }
+        public string CaloriesBurned { get; set; }
+        public string AvgPac { get; set; }
+        public string AvgSpeed { get; set; }
+        public string TotalDistance { get; set; }
 
-        public UUID getId()
-        {
-            return mId;
-            mDate = new Date();
-        }
-
-        private Date mDate;
-
+        System.Random rnd;
+      
         public WearableActivity()
         {
-            this.mId = UUID.RandomUUID();
-        }
-     
-        // Properties
-        public string ActivityType
+            rnd = new System.Random();    
+        }       
+
+        public void Generate()
         {
-            get;
-            set;
+             
+
+            Duration = rnd.Next(20, 120).ToString();
+            TotalSteps = rnd.Next(10, 10000).ToString();
+            CaloriesBurned = rnd.Next(10, Convert.ToInt32(TotalSteps) * Convert.ToInt32(Duration)).ToString();
+           
+            TotalDistance = rnd.Next(Convert.ToInt32(TotalSteps) / Convert.ToInt32(Duration), 6000).ToString();
+            AvgPac = rnd.Next(0, 40).ToString();
+            AvgSpeed = rnd.Next(3, 15).ToString();
+
+            Name = getActivityName(AvgPac);
+
+
         }
 
-        public int Duration
+        public string getActivityName(string avgpace)
         {
-            get;
-            set;
+            int pace = Convert.ToInt32(AvgPac);
+
+            if (pace <= 3)
+                return "Walking";
+            else if( pace > 3 && pace <= 5)
+                return "Jogging";
+            else if (pace > 5 && pace <= 10)
+                return "Running";
+            else if (pace >10 && pace <= 15)
+                return "Biking";
+            else if (pace > 15 && pace <= 60)
+                return "Driving";
+            else 
+                return "Unknown Activity";
         }
 
-        public double AvgPace
-        {
-            get;
-            set;
-        }
+      
 
-        public int Calorie
-        {
-            get;
-            set;
-        }
     }
 }
 

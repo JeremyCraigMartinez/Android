@@ -73,7 +73,7 @@ namespace WearableSensorUI
 
             // Set the On Item Click listener for the List
             mRightDrawerList.ItemClick += RightDrawerList_ItemClicked;
-            mLeftDrawerList.ItemClick += MLeftDrawerList_ItemClick;
+            mLeftDrawerList.ItemClick +=  (sender, args) => LeftDrawer_ListItemClicked(args.Position);
 
 
             // Set the drawer shadow
@@ -110,14 +110,22 @@ namespace WearableSensorUI
             SupportActionBar.SetDisplayShowTitleEnabled(true);
             mDrawerToggle.SyncState();
 
-            // Check to see if Activity needs to recreate itself or Configuration changed
+
+            // First Time the Activity Starts
+            //if first time you will want to go ahead and click first item.
+            if (savedInstanceState == null) {
+                LeftDrawer_ListItemClicked (0);
+            }
+
+
+
            
         }
 
-        void MLeftDrawerList_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        void LeftDrawer_ListItemClicked(int position)
         {
             Android.Support.V4.App.Fragment fragment = null;
-            switch (e.Position)
+            switch (position)
             {
                 case 0:
                     fragment = new HomeFragment();
@@ -144,8 +152,8 @@ namespace WearableSensorUI
 
 
             // Finalize Drawer Events (I FInally Understand This)
-            this.mLeftDrawerList.SetItemChecked(e.Position, true);
-            mToolbar.Title = this.Title = mLeftData[e.Position];
+            this.mLeftDrawerList.SetItemChecked(position, true);
+            mToolbar.Title = this.Title = mLeftData[position];
 
             mDrawerLayout.CloseDrawer(mLeftDrawerList);
 

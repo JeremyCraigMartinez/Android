@@ -54,6 +54,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Components\json.net-4.5.11.1\lib\android\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.RecyclerView">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.RecyclerView.21.0.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
@@ -70,13 +73,14 @@
     <Compile Include="Fragments\HistoryFragment.cs" />
     <Compile Include="Fragments\ExerciseFragment.cs" />
     <Compile Include="Fragments\GoalsFragment.cs" />
-    <Compile Include="DataModels\WearableActivitiesLab.cs" />
+    <Compile Include="Fragments\RecyclerAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="packages.config" />
+    <None Include="DataModels\WearableActivitiesLab.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -113,6 +117,21 @@
     <AndroidResource Include="Resources\drawable\drawer_shadow.9.png" />
     <AndroidResource Include="Resources\drawable\ic_drawer.png" />
     <AndroidResource Include="Resources\layout\generic_activity_fragment.axml" />
+    <AndroidResource Include="Resources\layout\rowActivity.axml" />
+    <AndroidResource Include="Resources\drawable\ic_action_forward.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_new.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_read.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_save.png" />
+    <AndroidResource Include="Resources\drawable\lollipop_android5.jpg" />
+    <AndroidResource Include="Resources\drawable\lollipop.jpg" />
+    <AndroidResource Include="Resources\layout\rowSummary.axml" />
+    <AndroidResource Include="Resources\menu\actionbar_home.axml" />
+    <AndroidResource Include="Resources\drawable\ic_exercise_fitness.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_route.png" />
+    <AndroidResource Include="Resources\anim\flip.xml" />
+    <AndroidResource Include="Resources\anim\slide_left_to_right.xml" />
+    <AndroidResource Include="Resources\anim\slide_right_to_left.xml" />
+    <AndroidResource Include="Resources\anim\slide_up.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
@@ -132,6 +151,10 @@
       <Version>4.5.11.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
+    <XamarinComponentReference Include="xamandroidsupportv7recyclerview">
+      <Version>21.0.3.0</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\menu\" />
@@ -141,6 +164,7 @@
     <Folder Include="Activities\" />
     <Folder Include="DataModels\" />
     <Folder Include="Test\" />
+    <Folder Include="Resources\anim\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
