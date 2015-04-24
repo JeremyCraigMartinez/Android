@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Text;
-using System.Net;
-using System.Net.Sockets;
-using System.Threading;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Security;
 using System.Threading.Tasks;
-using System.Linq;
+using Android.Util;
 
 namespace api_interaction_kit
 {
@@ -14,10 +15,15 @@ namespace api_interaction_kit
 		Running,
 		Offline,
 		Stopping
-
 	}
 
-	public class api
+	public enum Response_Type
+	{
+		user_created,
+		user_info
+	}
+
+	public partial class api
 	{
 		#region Variables
 
@@ -27,12 +33,18 @@ namespace api_interaction_kit
 
 		//Announces what's going on
 		public delegate void Announcment(string input);
-
 		public event Announcment announcment;
+
+		public delegate void Server_Update (Object o, Response_Type r);
+		public event Server_Update server_update;
 
 		States state;
 
-		TcpClient client;
+		HttpClient client;
+
+		List<event_object> events;
+
+		bool run_lock;
 
 		#endregion
 
@@ -53,18 +65,6 @@ namespace api_interaction_kit
 			else if (input.Contains("Error"))
 				state_change(ref state, States.Stopping);
 		}
-
-		/// <summary>
-		/// Makes sure the connection is still alive
-		/// </summary>
-		/// <returns><c>true</c>, if connection is alive, <c>false</c> otherwise.</returns>
-		private bool is_alive()
-		{ 
-			if (client.Connected)
-				return true;
-			return false;
-		}
-
 		/// <summary>
 		/// Changes the state
 		/// </summary>
@@ -91,18 +91,20 @@ namespace api_interaction_kit
 					t.Start();
 					break;
 				case States.Stopping:
-					client.Close();
 					break;
 			}
 		}
-
 		/// <summary>
 		/// Initializes the connection.
 		/// </summary>
 		private void initialize()
 		{
+			run_lock = false;
 			try {
-				client = new TcpClient(server_ip, server_port);
+				client = new HttpClient();
+				client.BaseAddress = new Uri("http://" + server_ip + ":" + server_port + "/" );
+				client.DefaultRequestHeaders.Accept.Clear();
+				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 			} catch {
 				announcment("Error: C001");
 			} //C001 = can't open a connection to the api
@@ -111,48 +113,39 @@ namespace api_interaction_kit
 		/// <summary>
 		/// API's best friend; they could talk forever
 		/// </summary>
-		private void start()
+		private void start ()
 		{
-			while (state == States.Running) {
-				while (is_alive()) {
-					try {
-						byte[] b = new byte[client.ReceiveBufferSize];
-						NetworkStream stream = client.GetStream();
-						//System.Diagnostics.Debug.Write("Fetching Data");
-						byte[] request = Encoding.UTF8.GetBytes("GET / HTTP/1.0\r\n\r\n");
-						if (stream.CanWrite)
-							stream.Write(request, 0, request.Length);
-						if (stream.CanRead)
-							stream.Read(b, 0, (int)client.ReceiveBufferSize);
-						stream.Flush();
-					} catch { 
-						announcment("Error: C001");
-						if (!check_connection())
-							state_change(ref state, States.Offline);
-						else
-							continue;
+			events = new List<event_object> ();
+			bool clear = false;
+			while (state == States.Running) 
+			{
+				if (!run_lock) {
+					foreach (event_object e in events) {
+						e.execute ();
+						clear = true;
 					}
+				}
+				if (events.Count != 0 && clear) {
+					events.Clear ();
+					clear = false;
 				}
 			}
 		}
-
-		/// <summary>
-		/// Reattempts to connect to the API 3 times
-		/// </summary>
-		/// <returns><c>true</c>, if connection was checked, <c>false</c> otherwise.</returns>
-		private bool check_connection()
+		public void api_update_user_data(string username)
 		{
-			for (int i = 0; i < 3; ++i) {
-				announcment(String.Format("Trying to Reconnect {0}/3", i + 1));
-				try {
-					client = new TcpClient(server_ip, server_port);
-					if (is_alive())
-						return true;
-				} catch {
-					continue;
-				}
-			}
-			return false;
+			run_lock = true;
+			events.Add(new request_user_event(username, this));
+			run_lock = false;
+		}
+		public void api_create_new_user(string username, string password)
+		{
+			run_lock = true;
+			events.Add (new create_user_event (username, password, this));
+			run_lock = false;
+		}
+		public void server_response_helper(Object o, Response_Type r)
+		{
+			server_update (o, r);
 		}
 	}
 }

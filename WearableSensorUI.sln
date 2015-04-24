@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WearableSensorUI", "Wearabl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api_interaction_kit", "api_interaction_kit\api_interaction_kit.csproj", "{1EB0BDB2-351E-48BB-B855-EAAAF1CAE6ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend_testing", "backend_testing\backend_testing.csproj", "{7CCF901D-F875-4031-A76E-A22A1C761764}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1EB0BDB2-351E-48BB-B855-EAAAF1CAE6ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EB0BDB2-351E-48BB-B855-EAAAF1CAE6ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EB0BDB2-351E-48BB-B855-EAAAF1CAE6ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CCF901D-F875-4031-A76E-A22A1C761764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CCF901D-F875-4031-A76E-A22A1C761764}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CCF901D-F875-4031-A76E-A22A1C761764}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CCF901D-F875-4031-A76E-A22A1C761764}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F8198B12-F05F-419D-85B3-60466B273F55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F8198B12-F05F-419D-85B3-60466B273F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8198B12-F05F-419D-85B3-60466B273F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
