@@ -12,7 +12,7 @@ namespace api_interaction_kit
 		{
 			try
 			{
-				HttpResponseMessage response = client.GetAsync("user/" + username).Result;
+				HttpResponseMessage response = client.GetAsync("patients/" + username).Result;
 				if(response.IsSuccessStatusCode)
 				{
 					var data = response.Content.ReadAsStreamAsync().Result;
