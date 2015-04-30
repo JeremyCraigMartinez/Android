@@ -1,117 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/primary">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:background="@android:color/holo_red_dark"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:gravity="top">
-        <ImageView
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_welcome"
-            android:layout_alignWithParentIfMissing="false"
-            android:layout_marginRight="60dp"
-            android:layout_marginLeft="60dp"
-            android:id="@+id/welcome" />
-        <ImageView
-            android:src="@drawable/ic_welcome2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxWidth="100dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:layout_below="@id/welcome"
-            android:id="@+id/imageView1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginRight="80dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginBottom="39.0dp" />
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@android:color/transparent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="9.5dp">
-            <TableRow
-                android:id="@+id/table">
-                <EditText
-                    android:id="@+id/textEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Email Address"
-                    android:gravity="center"
-                    android:textColorHint="#ffffffff"
-                    android:textSize="14dp"
-                    android:textStyle="italic"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:paddingBottom="10dp"
-                    android:layout_marginBottom="14.0dp"
-                    android:layout_weight=".5"
-                    android:layout_marginTop="34.5dp" />
-            </TableRow>
-            <TableRow>
-                <EditText
-                    android:id="@+id/Password"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:hint="Password"
-                    android:textColorHint="#ffffffff"
-                    android:textSize="14dp"
-                    android:textStyle="italic"
-                    android:soundEffectsEnabled="true"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:password="true" />
-            </TableRow>
-        </TableLayout>
-        <LinearLayout
-            android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#2579BF"
+    android:padding="10dp">
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:stretchColumns="1">
+        <TableRow
+            android:layout_width="wrap_content">
+            <TextView
+                android:text="My Wearable Nurse Login"
+                android:layout_span="2" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/loginWithWidget"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_span="2"
+                android:text="Login with Widget"
+                android:gravity="center" />
+        </TableRow>
+        <TableRow
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/otherOptions"
             android:minWidth="25px"
-            android:minHeight="25px"
+            android:minHeight="25px">
+        <!--        <Button
+            android:id="@+id/loginWithWidgetAndRefreshToken"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayout1"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="0dp">
+            android:layout_height="fill_parent"
+            android:layout_span="2"
+            android:text="Login with Widget &amp; refresh_token"
+            android:gravity="center" />-->
+            <TextView
+                android:text="Or"
+                android:layout_span="2"
+                android:gravity="center" />
+        </TableRow>
+        <TableRow>
             <Button
-                android:text="Log In"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/buttonLogIn"
-                android:layout_marginRight="40.0dp"
-                android:layout_marginLeft="40.0dp"
+                android:id="@+id/loginWithConnection"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_span="2"
+                android:text="Login with Google"
+                android:gravity="center" />
+        </TableRow>
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+        <TableRow>
+            <TextView
+                android:text="Login with user/password"
+                android:layout_span="2" />
+        </TableRow>
+        <TableRow>
+            <EditText
+                android:id="@+id/txtUserName"
+                android:layout_column="0"
+                android:layout_span="2"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:background="@android:color/darker_gray" />
+                android:background="@android:color/white"
+                android:textColor="@color/primary_text"
+                android:textStyle="normal"
+                android:layout_height="40dp"
+                android:hint="Email Address"
+                android:gravity="center"
+                android:textColorHint="@color/secondary_text" />
+        </TableRow>
+        <TableRow>
+            <EditText
+                android:id="@+id/txtUserPassword"
+                android:layout_column="0"
+                android:layout_span="2"
+                android:hint="Password"
+                android:password="true"
+                android:layout_height="40dp"
+                android:textColorHint="@color/secondary_text"
+                android:background="@android:color/white"
+                android:textStyle="normal"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center" />
+        </TableRow>
+        <TableRow>
             <Button
-                android:id="@+id/new_user"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40.0dp"
-                android:layout_marginLeft="40.0dp"
-                android:text="Register Account"
-                android:layout_marginBottom="13.0dp"
-                android:background="@android:color/darker_gray" />
+                android:id="@+id/loginWithUserPassword"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_span="2"
+                android:text="Login"
+                android:gravity="center" />
+        </TableRow>
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+        <TableRow>
+            <TextView
+                android:text="Result"
+                android:layout_span="2" />
+        </TableRow>
+        <TableRow>
             <Button
-                android:text="Sign In As Guest"
+                android:id="@+id/refreshWithIdToken"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/button_skip"
-                android:layout_marginRight="40.0dp"
-                android:layout_marginLeft="40.0dp"
-                android:layout_marginBottom="20.5dp"
-                android:background="@android:color/darker_gray"
-                android:onClick="guest_login" />
-        </LinearLayout>
-    </RelativeLayout>
+                android:layout_height="fill_parent"
+                android:layout_span="2"
+                android:text="Refresh with id_token"
+                android:gravity="center" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/refreshWithRefreshToken"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_span="2"
+                android:text="Refresh with refresh_token"
+                android:gravity="center" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="Result"
+                android:layout_span="2" />
+        </TableRow>
+        <TableRow>
+            <ScrollView
+                android:layout_span="2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <TextView
+                    android:id="@+id/txtResult"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
+            </ScrollView>
+        </TableRow>
+    </TableLayout>
 </LinearLayout>
