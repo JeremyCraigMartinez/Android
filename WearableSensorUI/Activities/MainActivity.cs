@@ -1,5 +1,5 @@
 ﻿using System;
-
+using api_interaction_kit;
 
 using Android.Views;
 using Android.Widget;
@@ -34,6 +34,9 @@ namespace WearableSensorUI
 
         string mTitle;
         string mDrawerTitle;
+
+        //The Backend
+        api a;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -79,6 +82,8 @@ namespace WearableSensorUI
             // Set the drawer shadow
             this.mDrawerLayout.SetDrawerShadow(Resource.Drawable.drawer_shadow, (int)GravityFlags.Start);
 
+            a = new api();
+            a.server_update += server_update;
 
             // This is what toggles our drawer
             mDrawerToggle = new MyActionBarDrawerToggle(
@@ -234,13 +239,18 @@ namespace WearableSensorUI
             base.OnSaveInstanceState(outState);
         }
 
-
-      
-
         public override void OnConfigurationChanged(Android.Content.Res.Configuration newConfig)
         {
             base.OnConfigurationChanged(newConfig);
             mDrawerToggle.OnConfigurationChanged(newConfig);
+        }
+
+        private void server_update(Object o, api_interaction_kit.Response_Type r)
+        {
+            if (r == Response_Type.user_info)
+            {
+                api_interaction_kit.user_information i = o as user_information;
+            }
         }
 
     }
