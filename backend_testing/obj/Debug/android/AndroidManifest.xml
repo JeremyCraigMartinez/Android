@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="backend_testing.backend_testing">
-  <uses-sdk android:minSdkVersion="19" />
+  <uses-sdk android:minSdkVersion="11" />
   <application android:label="backend_testing" android:name="mono.android.app.Application" android:debuggable="true">
-    <activity android:icon="@drawable/icon" android:label="backend_testing" android:name="backend_testing.MainActivity">
+    <activity android:icon="@drawable/icon" android:label="backend_testing" android:name="md571af7618d8edbd4dfd76172ef10a2258.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />

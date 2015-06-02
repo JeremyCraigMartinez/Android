@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Security;
@@ -28,7 +29,7 @@ namespace api_interaction_kit
 		#region Variables
 
 		// API IP and Port
-		private const int server_port = 5024;
+		private const int server_port = 5025;
 		private const string server_ip = "104.236.169.12";
 
 		//Announces what's going on
@@ -51,6 +52,7 @@ namespace api_interaction_kit
 		public api()
 		{
 			announcment += listener;
+			ServicePointManager.ServerCertificateValidationCallback = delegate { return true;};
 			state_change(ref state, States.Initializing);
 		}
 
@@ -102,7 +104,7 @@ namespace api_interaction_kit
 			run_lock = false;
 			try {
 				client = new HttpClient();
-				client.BaseAddress = new Uri("http://" + server_ip + ":" + server_port + "/" );
+				client.BaseAddress = new Uri("https://" + server_ip + ":" + server_port + "/" );
 				client.DefaultRequestHeaders.Accept.Clear();
 				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 			} catch {
@@ -119,13 +121,13 @@ namespace api_interaction_kit
 			bool clear = false;
 			while (state == States.Running) 
 			{
-				if (!run_lock) {
+				if (!run_lock && events.Count != 0) {
 					foreach (event_object e in events) {
 						e.execute ();
 						clear = true;
 					}
 				}
-				if (events.Count != 0 && clear) {
+				else if (events.Count != 0 && clear) {
 					events.Clear ();
 					clear = false;
 				}
@@ -146,6 +148,12 @@ namespace api_interaction_kit
 		public void server_response_helper(Object o, Response_Type r)
 		{
 			server_update (o, r);
+		}
+		public void api_create_group(string name)
+		{
+			run_lock = true;
+			events.Add (new request_create_group_event (name, this));
+			run_lock = false;
 		}
 	}
 }

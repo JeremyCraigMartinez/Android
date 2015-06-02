@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Net;
 using System.Net.Http;
 using Android.Util;
+using Newtonsoft.Json;
 
 namespace api_interaction_kit
 {
@@ -30,13 +32,26 @@ namespace api_interaction_kit
 		public void create_user(string Email, string Pass)
 		{
 			try {
-				login_information user = new login_information (){ email = Email, pass = Pass };
-				MemoryStream stream = new MemoryStream ();
-				json_functions.serializer (user, user.GetType (), ref stream);
-				HttpContent content = new StreamContent (stream);
-				HttpResponseMessage response = client.PostAsync ("user/create", content).Result;
+//				login_information user = new login_information (){ email = Email, pass = Pass };
+//				MemoryStream stream = new MemoryStream ();
+//				json_functions.serializer (user, user.GetType (), ref stream);
+//				HttpContent content = new StreamContent (stream);
+//				HttpResponseMessage response = client.PostAsync ("user/create", content).Result;
+//				if (response.IsSuccessStatusCode) {
+//				
+//				}
+			} catch (Exception e) {
+				string err = e.ToString ();
+			}
+		}
+		public void create_group(string name)
+		{
+			try {
+				string content = json_functions.serializer(new group(){_id = name});
+				HttpResponseMessage response = client.PostAsync ("/groups", 
+					new StringContent(content)).Result;
 				if (response.IsSuccessStatusCode) {
-				
+					//Announce success
 				}
 			} catch (Exception e) {
 				string err = e.ToString ();
