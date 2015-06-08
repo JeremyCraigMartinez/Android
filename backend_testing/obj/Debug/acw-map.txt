@@ -1,8 +1,0 @@
-backend_testing.MainActivity, backend_testing;md571af7618d8edbd4dfd76172ef10a2258.MainActivity
-backend_testing.MainActivity, backend_testing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md571af7618d8edbd4dfd76172ef10a2258.MainActivity
-backend_testing.MainActivity;md571af7618d8edbd4dfd76172ef10a2258.MainActivity
-backend_testing.MainActivity;md571af7618d8edbd4dfd76172ef10a2258.MainActivity
-api_interaction_kit.Battery, api_interaction_kit;md571b396826afc1ffb59f682a4f91d2c7d.Battery
-api_interaction_kit.Battery, api_interaction_kit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;md571b396826afc1ffb59f682a4f91d2c7d.Battery
-api_interaction_kit.Battery;md571b396826afc1ffb59f682a4f91d2c7d.Battery
-api_interaction_kit.Battery;md571b396826afc1ffb59f682a4f91d2c7d.Battery

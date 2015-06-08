@@ -10,7 +10,9 @@ namespace api_interaction_kit
 	public class user_information
 	{
 		[DataMember]
-		public string _id;
+		public string email;
+		[DataMember]
+		public string pass;
 		[DataMember]
 		public string first_name;
 		[DataMember]
