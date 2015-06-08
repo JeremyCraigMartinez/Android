@@ -24,6 +24,11 @@ namespace api_interaction_kit
 		user_info
 	}
 
+	public enum Announcement_Type
+	{
+		Initialization_Complete,
+		Error
+	}
 	public partial class api
 	{
 		#region Variables
@@ -32,8 +37,11 @@ namespace api_interaction_kit
 		private const int server_port = 5025;
 		private const string server_ip = "104.236.169.12";
 
+		private string userName;
+		private string password;
+
 		//Announces what's going on
-		public delegate void Announcment(string input);
+		public delegate void Announcment(Announcement_Type input);
 		public event Announcment announcment;
 
 		public delegate void Server_Update (Object o, Response_Type r);
@@ -49,8 +57,10 @@ namespace api_interaction_kit
 
 		#endregion
 
-		public api()
+		public api(string username, string pass)
 		{
+			userName = username;
+			password = pass;
 			announcment += listener;
 			ServicePointManager.ServerCertificateValidationCallback = delegate { return true;};
 			state_change(ref state, States.Initializing);
@@ -60,11 +70,11 @@ namespace api_interaction_kit
 		/// Listens for special announcements
 		/// </summary>
 		/// <param name="input">Input.</param>
-		private void listener(string input)
+		private void listener(Announcement_Type input)
 		{
-			if (input.CompareTo("Initialization Complete") == 0)
+			if (input == Announcement_Type.Initialization_Complete)
 				state_change(ref state, States.Running);
-			else if (input.Contains("Error"))
+			else if (input == Announcement_Type.Error)
 				state_change(ref state, States.Stopping);
 		}
 		/// <summary>
@@ -86,13 +96,14 @@ namespace api_interaction_kit
 			switch (old_state) {
 				case States.Initializing:
 					initialize();
-					announcment("Initialization Complete");
+					announcment(Announcement_Type.Initialization_Complete);
 					break;
 				case States.Running:
 					Task t = new Task(start);
 					t.Start();
 					break;
-				case States.Stopping:
+			case States.Stopping:
+				exit ();
 					break;
 			}
 		}
@@ -103,12 +114,15 @@ namespace api_interaction_kit
 		{
 			run_lock = false;
 			try {
-				client = new HttpClient();
+				NetworkCredential credentials = new NetworkCredential(userName, password);
+				HttpClientHandler handler = new HttpClientHandler {Credentials = credentials};
+				client = new HttpClient(handler);
 				client.BaseAddress = new Uri("https://" + server_ip + ":" + server_port + "/" );
 				client.DefaultRequestHeaders.Accept.Clear();
 				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
 			} catch {
-				announcment("Error: C001");
+				announcment(Announcement_Type.Error);
 			} //C001 = can't open a connection to the api
 		}
 
@@ -154,6 +168,11 @@ namespace api_interaction_kit
 			run_lock = true;
 			events.Add (new request_create_group_event (name, this));
 			run_lock = false;
+		}
+		private void exit()
+		{
+			client.Dispose ();
+			events.Clear ();
 		}
 	}
 }

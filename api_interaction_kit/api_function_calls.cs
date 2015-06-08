@@ -23,7 +23,7 @@ namespace api_interaction_kit
 			} 
 			catch (Exception e) {
 				string err = e.ToString ();
-				announcment ("Error: C001");
+				announcment (Announcement_Type.Error);
 				Log.Error ("Server Connection Error", "C001");
 				return null;
 			}
@@ -49,7 +49,7 @@ namespace api_interaction_kit
 			try {
 				string content = json_functions.serializer(new group(){_id = name});
 				HttpResponseMessage response = client.PostAsync ("/groups", 
-					new StringContent(content)).Result;
+					new StringContent(content, Encoding.UTF8, "application/json")).Result;
 				if (response.IsSuccessStatusCode) {
 					//Announce success
 				}
