@@ -10,32 +10,17 @@ namespace api_interaction_kit
 {
 	public partial class api
 	{
-		public Object request_user_data(string username)
+		public Object request_user_data()
 		{
-			try
-			{
-				HttpResponseMessage response = client.GetAsync("patients/" + username).Resul t;
-				if(response.IsSuccessStatusCode)
-				{
-					var data = response.Content.ReadAsStreamAsync().Result;
-					return json_functions.deserializer(data, typeof(user_information));
-				}
-			} 
-			catch (Exception e) {
-				string err = e.ToString ();
-				announcment (Announcement_Type.Error);
-				Log.Error ("Server Connection Error", "C001");
-				return null;
-			}
-			return null;
+			return _get ("patients/" + userName, typeof(user_information));
 		}
 		public void create_user(string Email, string Pass)
 		{
-			post ("/patients", json_functions.serializer (new user_information (){ email = Email }));
+			post ("patients", json_functions.serializer (new user_information (){ email = Email }));
 		}
 		public void create_group(string name)
 		{
-			post("/groups",json_functions.serializer(new group(){_id = name}));
+			post("groups",json_functions.serializer(new group(){_id = name}));
 		}
 		public bool post(string location, string content)
 		{
@@ -45,16 +30,16 @@ namespace api_interaction_kit
 				return true;
 			return false;
 		}
-		public Object _get(string location)
+		public Object _get(string location, Type T)
 		{
-				HttpResponseMessage response = client.GetAsync("patients/" + username).Resul t;
-				if(response.IsSuccessStatusCode)
-				{
-					var data = response.Content.ReadAsStreamAsync().Result;
-					return json_functions.deserializer(data, typeof(user_information));
-				}
-				announcment (Announcement_Type.Error);
-				return null;
+			HttpResponseMessage response = client.GetAsync (location).Result;
+			if (response.IsSuccessStatusCode) 
+			{
+				var data = response.Content.ReadAsStreamAsync().Result;
+				return json_functions.deserializer(data, T);
+			}
+			announcment (Announcement_Type.Error);
+			return null;
 		}
 	}
 }

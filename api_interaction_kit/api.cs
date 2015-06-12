@@ -113,19 +113,26 @@ namespace api_interaction_kit
 		private void initialize()
 		{
 			run_lock = false;
-			try {
-				NetworkCredential credentials = new NetworkCredential(userName, password);
-				HttpClientHandler handler = new HttpClientHandler {Credentials = credentials};
-				client = new HttpClient(handler);
-				client.BaseAddress = new Uri("https://" + server_ip + ":" + server_port + "/" );
-				client.DefaultRequestHeaders.Accept.Clear();
-				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-			} catch {
-				announcment(Announcement_Type.Error);
-			} //C001 = can't open a connection to the api
+			connect(true);
 		}
-
+		private void connect(bool init)
+		{
+			if (!init) // Are we initializing? 
+			{
+				NetworkCredential credentials = new NetworkCredential (userName, password);
+				HttpClientHandler handler = new HttpClientHandler { Credentials = credentials };
+				client = new HttpClient (handler);
+			} 
+			else
+				client = new HttpClient ();
+			client.BaseAddress = new Uri ("https://" + server_ip + ":" + server_port + "/");
+			client.DefaultRequestHeaders.Accept.Clear ();
+			client.DefaultRequestHeaders.Accept.Add (new MediaTypeWithQualityHeaderValue ("application/json"));
+		}
+		private void reconnect()
+		{
+			connect(false);
+		}
 		/// <summary>
 		/// API's best friend; they could talk forever
 		/// </summary>
