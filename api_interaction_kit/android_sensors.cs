@@ -23,11 +23,7 @@ namespace api_interaction_kit
 		{
 
 		}
-
-		protected override void OnCreate(Bundle bundle)
-		{
-			base.OnCreate(bundle)
-		}
+			
 	}
 }
 

@@ -35,7 +35,7 @@ namespace api_interaction_kit
 		[DataMember]
 		public string email;
 		[DataMember]
-		public string pass;
+		public string password;
 	}
 
 	[DataContract]

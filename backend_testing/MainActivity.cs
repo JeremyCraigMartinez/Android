@@ -25,7 +25,7 @@ namespace backend_testing
 			
 			button.Click += delegate 
 			{
-				a.api_create_group("avery");
+				a.login("kavry@yahoo.com", "qweasd1234");
 			};
 		}
 

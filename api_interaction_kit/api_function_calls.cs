@@ -22,6 +22,12 @@ namespace api_interaction_kit
 		{
 			post("groups",json_functions.serializer(new group(){_id = name}));
 		}
+		private bool authenticate(string _email, string _password)
+		{
+			return post("auth", json_functions.serializer(new login_information() {email = _email, password = _password}));
+		}
+
+
 		public bool post(string location, string content)
 		{
 			HttpResponseMessage response = client.PostAsync (location,

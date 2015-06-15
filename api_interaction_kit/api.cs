@@ -20,6 +20,7 @@ namespace api_interaction_kit
 
 	public enum Response_Type
 	{
+		login_result,
 		user_created,
 		user_info
 	}
@@ -57,15 +58,28 @@ namespace api_interaction_kit
 
 		#endregion
 
-		public api(string username, string pass)
+		public api()
 		{
-			userName = username;
-			password = pass;
 			announcment += listener;
 			ServicePointManager.ServerCertificateValidationCallback = delegate { return true;};
-			state_change(ref state, States.Initializing);
 		}
 
+		public void login(string username, string pass)
+		{
+			client = new HttpClient ();
+			client.BaseAddress = new Uri ("https://" + server_ip + ":" + server_port + "/");
+			client.DefaultRequestHeaders.Accept.Clear ();
+			client.DefaultRequestHeaders.Accept.Add (new MediaTypeWithQualityHeaderValue ("application/json"));
+
+			if (authenticate (username, pass)) {
+				userName = username;
+				password = pass;
+				server_update (true, Response_Type.login_result);
+				state_change (ref state, States.Initializing);
+			} 
+			else
+				server_update (false, Response_Type.login_result);
+		}
 		/// <summary>
 		/// Listens for special announcements
 		/// </summary>
@@ -113,25 +127,16 @@ namespace api_interaction_kit
 		private void initialize()
 		{
 			run_lock = false;
-			connect(true);
+			connect();
 		}
-		private void connect(bool init)
+		private void connect()
 		{
-			if (!init) // Are we initializing? 
-			{
-				NetworkCredential credentials = new NetworkCredential (userName, password);
-				HttpClientHandler handler = new HttpClientHandler { Credentials = credentials };
-				client = new HttpClient (handler);
-			} 
-			else
-				client = new HttpClient ();
+			NetworkCredential credentials = new NetworkCredential (userName, password);
+			HttpClientHandler handler = new HttpClientHandler { Credentials = credentials };
+			client = new HttpClient (handler);
 			client.BaseAddress = new Uri ("https://" + server_ip + ":" + server_port + "/");
 			client.DefaultRequestHeaders.Accept.Clear ();
 			client.DefaultRequestHeaders.Accept.Add (new MediaTypeWithQualityHeaderValue ("application/json"));
-		}
-		private void reconnect()
-		{
-			connect(false);
 		}
 		/// <summary>
 		/// API's best friend; they could talk forever
