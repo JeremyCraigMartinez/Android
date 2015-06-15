@@ -1,10 +1,10 @@
 ﻿<Properties StartupItem="WearableSensorUI.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.192.168.56.101:5555" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Activities\LoginActivity.cs">
     <Files>
-      <File FileName="Activities/LoginActivity.cs" Line="1" Column="1" />
-      <File FileName="Properties/AndroidManifest.xml" Line="1" Column="1" />
-      <File FileName="Activities/MainActivity.cs" Line="1" Column="1" />
+      <File FileName="Activities\LoginActivity.cs" Line="13" Column="38" />
+      <File FileName="Properties\AndroidManifest.xml" Line="1" Column="1" />
+      <File FileName="Activities\MainActivity.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

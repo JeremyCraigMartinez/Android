@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.IO;
 using System.Text;
@@ -9,7 +10,9 @@ namespace api_interaction_kit
 	public class user_information
 	{
 		[DataMember]
-		public string _id;
+		public string email;
+		[DataMember]
+		public string pass;
 		[DataMember]
 		public string first_name;
 		[DataMember]
@@ -32,15 +35,21 @@ namespace api_interaction_kit
 		[DataMember]
 		public string email;
 		[DataMember]
-		public string pass;
+		public string password;
+	}
+
+	[DataContract]
+	public class group
+	{
+		[DataMember]
+		public string _id;
 	}
 
 	public static class json_functions
 	{
-		static public void serializer (Object o, Type T, ref MemoryStream S)
+		static public string serializer (Object o)
 		{
-			System.Runtime.Serialization.Json.DataContractJsonSerializer s = new System.Runtime.Serialization.Json.DataContractJsonSerializer (T);
-			s.WriteObject (S, o);
+			return JsonConvert.SerializeObject (o);
 		}
 		static public Object deserializer (Stream data, Type T)
 		{

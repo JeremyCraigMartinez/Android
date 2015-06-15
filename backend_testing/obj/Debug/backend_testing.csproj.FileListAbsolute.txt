@@ -61,6 +61,7 @@ C:\Users\Kyle\Documents\GitHub\Android\backend_testing\obj\Debug\res\drawable-xx
 C:\Users\Kyle\Documents\GitHub\Android\backend_testing\obj\Debug\res\drawable-xxxhdpi\icon.png
 C:\Users\Kyle\Documents\GitHub\Android\backend_testing\obj\Debug\R.cs.flag
 C:\Users\Kyle\Documents\GitHub\Android\backend_testing\obj\Debug\uploadflags.txt
+<<<<<<< HEAD
 C:\Users\faust_000\Documents\Projects\Android\WearablesSeniorDesign\backend_testing\bin\Debug\backend_testing.dll
 C:\Users\faust_000\Documents\Projects\Android\WearablesSeniorDesign\backend_testing\bin\Debug\backend_testing.pdb
 C:\Users\faust_000\Documents\Projects\Android\WearablesSeniorDesign\backend_testing\bin\Debug\backend_testing.dll.mdb
@@ -82,3 +83,27 @@ C:\Users\faust_000\Documents\Projects\Android\WearablesSeniorDesign\backend_test
 C:\Users\faust_000\Documents\Projects\Android\WearablesSeniorDesign\backend_testing\obj\Debug\res\drawable-xxxhdpi\icon.png
 C:\Users\faust_000\Documents\Projects\Android\WearablesSeniorDesign\backend_testing\obj\Debug\R.cs.flag
 C:\Users\faust_000\Documents\Projects\Android\WearablesSeniorDesign\backend_testing\obj\Debug\uploadflags.txt
+=======
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\bin\Debug\backend_testing.dll
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\bin\Debug\backend_testing.pdb
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\bin\Debug\backend_testing.dll.mdb
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\bin\Debug\backend_testing.backend_testing.apk
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\bin\Debug\backend_testing.backend_testing-Signed.apk
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\bin\Debug\api_interaction_kit.dll
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\bin\Debug\Newtonsoft.Json.dll
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\bin\Debug\api_interaction_kit.pdb
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\bin\Debug\api_interaction_kit.dll.mdb
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\obj\Debug\backend_testing.csprojResolveAssemblyReference.cache
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\obj\Debug\backend_testing.dll
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\obj\Debug\backend_testing.pdb
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\obj\Debug\android\bin\backend_testing.backend_testing.apk
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\obj\Debug\res\layout\main.xml
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\obj\Debug\res\values\strings.xml
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\obj\Debug\res\drawable-hdpi\icon.png
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\obj\Debug\res\drawable-mdpi\icon.png
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\obj\Debug\res\drawable-xhdpi\icon.png
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\obj\Debug\res\drawable-xxhdpi\icon.png
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\obj\Debug\res\drawable-xxxhdpi\icon.png
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\obj\Debug\R.cs.flag
+C:\Users\black_000\Documents\GitHub\Android\backend_testing\obj\Debug\uploadflags.txt
+>>>>>>> origin/backend
