@@ -1,2 +1,0 @@
-C:\Users\faust_000\Documents\Projects\Android\WearablesSeniorDesign\backend_testing\bin\Debug\backend_testing.dll
-C:\Users\faust_000\Documents\Projects\Android\WearablesSeniorDesign\api_interaction_kit\bin\Debug\api_interaction_kit.dll
