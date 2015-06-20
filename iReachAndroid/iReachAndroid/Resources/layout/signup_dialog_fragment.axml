@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="1"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="4dp">
+    <TableRow>
+        <TextView
+            android:layout_column="0"
+            android:text="Create Account"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_span="2"
+            android:gravity="center" />
+    </TableRow>
+    <View
+        android:layout_height="1dip"
+        android:background="#FF909090"
+        android:layout_marginBottom="20dp" />
+    <TableRow>
+        <TextView
+            android:layout_column="0"
+            android:text="Full Name: "
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="right" />
+        <EditText
+            android:id="@+id/txtName"
+            android:layout_column="1"
+            android:layout_span="2" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_column="0"
+            android:text="Email Address: "
+            android:layout_marginTop="4dp"
+            android:gravity="right" />
+        <EditText
+            android:id="@+id/txtEmail"
+            android:layout_column="1"
+            android:layout_span="2" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_column="0"
+            android:text="Password: "
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="right" />
+        <EditText
+            android:id="@+id/txtPassword"
+            android:layout_column="1"
+            android:layout_span="2" />
+    </TableRow>
+    <View
+        android:layout_height="1dip"
+        android:background="#FF909090"
+        android:layout_marginTop="100dp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:weightSum="2">
+        <Button
+            android:id="@+id/btnCancel"
+            android:text="Cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <Button
+            android:id="@+id/btnSubmit"
+            android:text="Submit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+</TableLayout>

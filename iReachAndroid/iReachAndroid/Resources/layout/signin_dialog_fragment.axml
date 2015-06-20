@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="1"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="4dp">
+    <TableRow>
+        <TextView
+            android:layout_column="0"
+            android:text="Login with Email"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="40dp"
+            android:layout_span="2"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </TableRow>
+    <View
+        android:layout_height="1dip"
+        android:background="#FF909090"
+        android:layout_marginBottom="20dp" />
+    <TableRow>
+        <EditText
+            android:id="@+id/txtEmailSignin"
+            android:layout_span="2"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/white"
+            android:textColor="@color/primary_text"
+            android:textStyle="normal"
+            android:layout_height="40dp"
+            android:hint="Email Address"
+            android:gravity="center"
+            android:textColorHint="@color/secondary_text" />
+    </TableRow>
+    <TableRow>
+        <EditText
+            android:id="@+id/txtPasswordSignin"
+            android:layout_span="2"
+            android:hint="Password"
+            android:password="true"
+            android:layout_height="40dp"
+            android:textColorHint="@color/secondary_text"
+            android:background="@android:color/white"
+            android:textStyle="normal"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center" />
+    </TableRow>
+    <View
+        android:layout_height="1dip"
+        android:background="#FF909090"
+        android:layout_marginTop="40dp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:weightSum="2">
+        <Button
+            android:id="@+id/btnCancelSignin"
+            android:text="Cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <Button
+            android:id="@+id/btnSubmitSignin"
+            android:text="Submit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+</TableLayout>
