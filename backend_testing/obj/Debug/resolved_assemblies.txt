@@ -1,2 +1,0 @@
-K:\Github\Android\backend_testing\bin\Debug\backend_testing.dll
-K:\Github\Android\api_interaction_kit\bin\Debug\api_interaction_kit.dll
