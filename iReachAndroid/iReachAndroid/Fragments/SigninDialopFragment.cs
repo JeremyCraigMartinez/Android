@@ -12,7 +12,6 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using iReachAndroid.Activities;
-using api_interaction_kit;
 
 
 namespace iReachAndroid.Fragments
@@ -20,24 +19,17 @@ namespace iReachAndroid.Fragments
 	public class SigninDialopFragment : DialogFragment
 	{
 		// Create an instance of the Api
-		api iReachApi;
-		private bool authenticated = false;
 
 		private EditText mTextEmail;
 		private EditText mTextPassword;
 		private Button mSubmitButton;
 		private Button mCancelButton;
 
-		private login_information myLogin;
 
 		public override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
 			// Create your fragment here
-			iReachApi = new api ();
-
-			// Associate an event to get response from server
-			iReachApi.server_update += OnApiServerUpdate;
 
 		}
 
@@ -58,24 +50,7 @@ namespace iReachAndroid.Fragments
 
 		}
 
-		void OnApiServerUpdate (object sender, Response_Type response)
-		{
-			switch (response) {
-			case api_interaction_kit.Response_Type.user_info:
-				user_information authenticatedUser = sender as user_information;
-				break;
-			case api_interaction_kit.Response_Type.login_result:
-				authenticated = true;
-				break;
-			case api_interaction_kit.Response_Type.user_created:
-				authenticated = true;
-				break;
-			default:
-				break;
-			}
-			 
-		}
-
+	
 		void CancelButton_Click (object sender, EventArgs e)
 		{
 			Dismiss ();
@@ -84,19 +59,7 @@ namespace iReachAndroid.Fragments
 		void SubmitButton_Click (object sender, EventArgs e)
 		{
 			var email = mTextEmail.Text;
-			var password = mTextPassword.Text;
-
-			iReachApi.login (email, password);
-
-			if (authenticated == true) {
-			
-				var UserName = myLogin.email;
-				Dismiss ();
-				var intent = new Intent (Activity, typeof(MainActivity));
-				intent.PutExtra ("Email", email);
-				StartActivity (intent);
-			}
-
+			var password = mTextPassword.Text;		
 		}
 
 		void initViews (View v)

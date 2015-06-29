@@ -17,7 +17,7 @@ using Android.Views;
 using Android.Widget;
 using iReachAndroid.Fragments;
 using SupportFragment = Android.Support.V4.App.Fragment;
-using api_interaction_kit;
+
 
 namespace iReachAndroid.Activities
 {
@@ -29,7 +29,6 @@ namespace iReachAndroid.Activities
 		private ActionBarDrawerToggle drawerToggle;
 		private TextView HeaderUserName;
 		private string USER_EMAIL;
-		private api iReachApi;
 
 
 		protected override void OnCreate (Bundle savedInstanceState)

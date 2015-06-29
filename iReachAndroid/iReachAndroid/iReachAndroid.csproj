@@ -73,6 +73,11 @@
     <Compile Include="Helpers\ClickListener.cs" />
     <Compile Include="Fragments\SigninDialopFragment.cs" />
     <Compile Include="Fragments\SignupDialogFragment.cs" />
+    <Compile Include="Adapters\FoodListAdapter.cs" />
+    <Compile Include="Fragments\ScanFoodFragment.cs" />
+    <Compile Include="Fragments\BrowseFoodFragment.cs" />
+    <Compile Include="Fragments\MyFoodDiaryFragment.cs" />
+    <Compile Include="Application\iReachApp.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -118,6 +123,10 @@
     <AndroidResource Include="Resources\layout\fragment_history.axml" />
     <AndroidResource Include="Resources\layout\fragments_goals.axml" />
     <AndroidResource Include="Resources\layout\signin_dialog_fragment.axml" />
+    <AndroidResource Include="Resources\layout\fragment_scan_food.axml" />
+    <AndroidResource Include="Resources\layout\fragment_browse_food.axml" />
+    <AndroidResource Include="Resources\layout\fragment_food_diary.axml" />
+    <AndroidResource Include="Resources\Raw\food.db" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
@@ -127,11 +136,14 @@
     <Folder Include="Resources\menu\" />
     <Folder Include="Fragments\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Adapters\" />
+    <Folder Include="Resources\Raw\" />
+    <Folder Include="Application\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\api_interaction_kit\api_interaction_kit.csproj">
-      <Project>{1EB0BDB2-351E-48BB-B855-EAAAF1CAE6ED}</Project>
-      <Name>api_interaction_kit</Name>
+    <ProjectReference Include="..\iReach.Core\iReach.Core.csproj">
+      <Project>{03A01439-BFEF-428D-8113-9DDD4A1B7E17}</Project>
+      <Name>iReach.Core</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
