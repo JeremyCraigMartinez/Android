@@ -145,5 +145,9 @@
       <Project>{03A01439-BFEF-428D-8113-9DDD4A1B7E17}</Project>
       <Name>iReach.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\api_interaction_kit\api_interaction_kit.csproj">
+      <Project>{1EB0BDB2-351E-48BB-B855-EAAAF1CAE6ED}</Project>
+      <Name>api_interaction_kit</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

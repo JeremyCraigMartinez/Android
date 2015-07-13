@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Security;
 using System.Threading.Tasks;
-using Android.Util;
+using Android;
+using Android.App;
 
 namespace api_interaction_kit
 {
@@ -31,7 +30,7 @@ namespace api_interaction_kit
 		Error
 	}
 
-	public partial class api
+	public partial class api : Application
 	{
 		#region Variables
 

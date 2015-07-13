@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iReachAndroid.UITests", "iR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iReach.Core", "iReach.Core\iReach.Core.csproj", "{03A01439-BFEF-428D-8113-9DDD4A1B7E17}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api_interaction_kit", "api_interaction_kit\api_interaction_kit.csproj", "{1EB0BDB2-351E-48BB-B855-EAAAF1CAE6ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{03A01439-BFEF-428D-8113-9DDD4A1B7E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03A01439-BFEF-428D-8113-9DDD4A1B7E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03A01439-BFEF-428D-8113-9DDD4A1B7E17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EB0BDB2-351E-48BB-B855-EAAAF1CAE6ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EB0BDB2-351E-48BB-B855-EAAAF1CAE6ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EB0BDB2-351E-48BB-B855-EAAAF1CAE6ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EB0BDB2-351E-48BB-B855-EAAAF1CAE6ED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3B6C5B67-45E9-48F2-9F64-63A6A4300481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3B6C5B67-45E9-48F2-9F64-63A6A4300481}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B6C5B67-45E9-48F2-9F64-63A6A4300481}.Release|Any CPU.ActiveCfg = Release|Any CPU

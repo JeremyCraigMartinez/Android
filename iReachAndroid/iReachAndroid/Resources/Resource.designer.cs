@@ -26,6 +26,9 @@ namespace iReachAndroid
 		
 		public static void UpdateIdValues()
 		{
+			global::api_interaction_kit.Resource.String.ApplicationName = global::iReachAndroid.Resource.String.ApplicationName;
+			global::api_interaction_kit.Resource.String.Hello = global::iReachAndroid.Resource.String.Hello;
+			global::api_interaction_kit.Resource.String.library_name = global::iReachAndroid.Resource.String.library_name;
 			global::iReach.Core.Resource.String.ApplicationName = global::iReachAndroid.Resource.String.ApplicationName;
 			global::iReach.Core.Resource.String.Hello = global::iReachAndroid.Resource.String.Hello;
 			global::iReach.Core.Resource.String.library_name = global::iReachAndroid.Resource.String.library_name;
