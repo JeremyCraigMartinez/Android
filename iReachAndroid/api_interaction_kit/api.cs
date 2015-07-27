@@ -41,6 +41,7 @@ namespace api_interaction_kit
 		private string userName;
 		private string password;
 
+		private static api singletron;
 		//Announces what's going on
 		public delegate void Announcment (Announcement_Type input);
 
@@ -66,6 +67,17 @@ namespace api_interaction_kit
 			ServicePointManager.ServerCertificateValidationCallback = delegate {
 				return true;
 			};
+		}
+
+		public api getInstance() 
+		{
+			return singletron;
+		}
+			
+		public override void onCreate()
+		{
+			base.OnCreate ();
+			singletron = this;
 		}
 
 		public void login (string username, string pass)

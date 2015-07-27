@@ -24,11 +24,23 @@ namespace iReachAndroid
 		private Button mCancelButton;
 		private Button mSubmitButton;
 
+		private api_interaction_kit.api api;
 
 		public override void OnCreate (Bundle savedInstanceState)
 		{
+			api = (api_interaction_kit.api)getApplicationContext();
+			api.server_update += Api_server_update;
 			base.OnCreate (savedInstanceState);
 			// Create your fragment here
+		}
+
+		void Api_server_update (object o, api_interaction_kit.Response_Type r)
+		{
+			if (r == api_interaction_kit.Response_Type.user_created) {
+				if ((bool)o == true) {
+					//do something
+				}
+			}
 		}
 
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -54,7 +66,7 @@ namespace iReachAndroid
 
 		void MSubmitButton_Click (object sender, EventArgs e)
 		{
-			
+			api.api_create_new_user (mEmail, mPassword);
 		}
 	}
 }

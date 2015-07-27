@@ -24,13 +24,23 @@ namespace iReachAndroid.Fragments
 		private EditText mTextPassword;
 		private Button mSubmitButton;
 		private Button mCancelButton;
-
+		private api_interaction_kit.api api;
 
 		public override void OnCreate (Bundle savedInstanceState)
 		{
+			api = (api_interaction_kit.api)getApplicationContext ();
+			api.server_update += Api_server_update;
 			base.OnCreate (savedInstanceState);
 			// Create your fragment here
 
+		}
+
+		void Api_server_update (object o, api_interaction_kit.Response_Type r)
+		{
+			if (r == api_interaction_kit.Response_Type.login_result) {
+				if ((bool)o == true) {
+				}
+			}
 		}
 
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -59,7 +69,8 @@ namespace iReachAndroid.Fragments
 		void SubmitButton_Click (object sender, EventArgs e)
 		{
 			var email = mTextEmail.Text;
-			var password = mTextPassword.Text;		
+			var password = mTextPassword.Text;	
+			api.login (email, password);
 		}
 
 		void initViews (View v)
