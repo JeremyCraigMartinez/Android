@@ -28,7 +28,7 @@ namespace iReachAndroid.Fragments
 
 		public override void OnCreate (Bundle savedInstanceState)
 		{
-			api = (api_interaction_kit.api)getApplicationContext ();
+			api = (api_interaction_kit.api)Android.App.Application.Context;
 			api.server_update += Api_server_update;
 			base.OnCreate (savedInstanceState);
 			// Create your fragment here

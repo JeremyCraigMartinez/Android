@@ -74,7 +74,7 @@ namespace api_interaction_kit
 			return singletron;
 		}
 			
-		public override void onCreate()
+		public override void OnCreate()
 		{
 			base.OnCreate ();
 			singletron = this;
