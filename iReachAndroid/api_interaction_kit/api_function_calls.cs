@@ -13,7 +13,7 @@ namespace api_interaction_kit
 	{
 		private Object request_user_data()
 		{
-			return _get ("patients/" + userName, typeof(user_information));
+			return _get ("patients", typeof(user_information));
 		}
 
 		private void create_user(string Email, string Pass)
