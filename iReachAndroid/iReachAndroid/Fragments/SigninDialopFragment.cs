@@ -24,6 +24,8 @@ namespace iReachAndroid.Fragments
 		private EditText mTextPassword;
 		private Button mSubmitButton;
 		private Button mCancelButton;
+
+		// API Access
 		private static api_interaction_kit.api api;
 
 		public override void OnCreate (Bundle savedInstanceState)

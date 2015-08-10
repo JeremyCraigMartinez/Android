@@ -88,6 +88,25 @@ namespace iReachAndroid
 			}
 		}
 		
+		public partial class Array
+		{
+			
+			// aapt resource value: 0x7f0d0001
+			public const int gender_array = 2131558401;
+			
+			// aapt resource value: 0x7f0d0000
+			public const int groups_array = 2131558400;
+			
+			static Array()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Array()
+			{
+			}
+		}
+		
 		public partial class Attribute
 		{
 			
@@ -1749,8 +1768,8 @@ namespace iReachAndroid
 			// aapt resource value: 0x7f07003d
 			public const int action_mode_close_button = 2131165245;
 			
-			// aapt resource value: 0x7f070092
-			public const int action_settings = 2131165330;
+			// aapt resource value: 0x7f070099
+			public const int action_settings = 2131165337;
 			
 			// aapt resource value: 0x7f07003e
 			public const int activity_chooser_view_content = 2131165246;
@@ -1761,8 +1780,8 @@ namespace iReachAndroid
 			// aapt resource value: 0x7f070018
 			public const int always = 2131165208;
 			
-			// aapt resource value: 0x7f070091
-			public const int app_search = 2131165329;
+			// aapt resource value: 0x7f070098
+			public const int app_search = 2131165336;
 			
 			// aapt resource value: 0x7f070071
 			public const int appbar = 2131165297;
@@ -1773,8 +1792,8 @@ namespace iReachAndroid
 			// aapt resource value: 0x7f07002b
 			public const int bottom = 2131165227;
 			
-			// aapt resource value: 0x7f07008e
-			public const int btnCancel = 2131165326;
+			// aapt resource value: 0x7f070095
+			public const int btnCancel = 2131165333;
 			
 			// aapt resource value: 0x7f070089
 			public const int btnCancelSignin = 2131165321;
@@ -1788,8 +1807,8 @@ namespace iReachAndroid
 			// aapt resource value: 0x7f07006d
 			public const int btnSkipToApp = 2131165293;
 			
-			// aapt resource value: 0x7f07008f
-			public const int btnSubmit = 2131165327;
+			// aapt resource value: 0x7f070096
+			public const int btnSubmit = 2131165334;
 			
 			// aapt resource value: 0x7f07008a
 			public const int btnSubmitSignin = 2131165322;
@@ -1896,6 +1915,12 @@ namespace iReachAndroid
 			// aapt resource value: 0x7f070073
 			public const int food_viewpager = 2131165299;
 			
+			// aapt resource value: 0x7f070090
+			public const int genderSpinner = 2131165328;
+			
+			// aapt resource value: 0x7f070091
+			public const int groupSpinner = 2131165329;
+			
 			// aapt resource value: 0x7f070079
 			public const int header_userName = 2131165305;
 			
@@ -1956,14 +1981,14 @@ namespace iReachAndroid
 			// aapt resource value: 0x7f070020
 			public const int multiply = 2131165216;
 			
-			// aapt resource value: 0x7f070094
-			public const int nav_activity_fragment = 2131165332;
+			// aapt resource value: 0x7f07009b
+			public const int nav_activity_fragment = 2131165339;
 			
-			// aapt resource value: 0x7f070095
-			public const int nav_food_fragment = 2131165333;
+			// aapt resource value: 0x7f07009c
+			public const int nav_food_fragment = 2131165340;
 			
-			// aapt resource value: 0x7f070093
-			public const int nav_home_fragment = 2131165331;
+			// aapt resource value: 0x7f07009a
+			public const int nav_home_fragment = 2131165338;
 			
 			// aapt resource value: 0x7f07001b
 			public const int never = 2131165211;
@@ -2112,8 +2137,8 @@ namespace iReachAndroid
 			// aapt resource value: 0x7f070047
 			public const int title_template = 2131165255;
 			
-			// aapt resource value: 0x7f070090
-			public const int toolbar = 2131165328;
+			// aapt resource value: 0x7f070097
+			public const int toolbar = 2131165335;
 			
 			// aapt resource value: 0x7f070037
 			public const int top = 2131165239;
@@ -2121,20 +2146,35 @@ namespace iReachAndroid
 			// aapt resource value: 0x7f070046
 			public const int topPanel = 2131165254;
 			
-			// aapt resource value: 0x7f07008c
-			public const int txtEmail = 2131165324;
+			// aapt resource value: 0x7f070092
+			public const int txtAge = 2131165330;
+			
+			// aapt resource value: 0x7f07008f
+			public const int txtDocEmail = 2131165327;
+			
+			// aapt resource value: 0x7f07008b
+			public const int txtEmail = 2131165323;
 			
 			// aapt resource value: 0x7f070087
 			public const int txtEmailSignin = 2131165319;
 			
-			// aapt resource value: 0x7f07008b
-			public const int txtName = 2131165323;
-			
 			// aapt resource value: 0x7f07008d
-			public const int txtPassword = 2131165325;
+			public const int txtFirstName = 2131165325;
+			
+			// aapt resource value: 0x7f070094
+			public const int txtHeight = 2131165332;
+			
+			// aapt resource value: 0x7f07008e
+			public const int txtLastName = 2131165326;
+			
+			// aapt resource value: 0x7f07008c
+			public const int txtPassword = 2131165324;
 			
 			// aapt resource value: 0x7f070088
 			public const int txtPasswordSignin = 2131165320;
+			
+			// aapt resource value: 0x7f070093
+			public const int txtWeight = 2131165331;
 			
 			// aapt resource value: 0x7f070009
 			public const int up = 2131165193;
@@ -2385,11 +2425,11 @@ namespace iReachAndroid
 		public partial class Menu
 		{
 			
-			// aapt resource value: 0x7f0d0000
-			public const int app_menu = 2131558400;
+			// aapt resource value: 0x7f0e0000
+			public const int app_menu = 2131623936;
 			
-			// aapt resource value: 0x7f0d0001
-			public const int drawer_view = 2131558401;
+			// aapt resource value: 0x7f0e0001
+			public const int drawer_view = 2131623937;
 			
 			static Menu()
 			{
@@ -2477,6 +2517,9 @@ namespace iReachAndroid
 			// aapt resource value: 0x7f080010
 			public const int abc_toolbar_collapse_description = 2131230736;
 			
+			// aapt resource value: 0x7f08001c
+			public const int age_prompt = 2131230748;
+			
 			// aapt resource value: 0x7f080017
 			public const int app_name = 2131230743;
 			
@@ -2489,6 +2532,15 @@ namespace iReachAndroid
 			// aapt resource value: 0x7f080018
 			public const int drawer_open = 2131230744;
 			
+			// aapt resource value: 0x7f08001b
+			public const int gender_prompt = 2131230747;
+			
+			// aapt resource value: 0x7f08001a
+			public const int group_prompt = 2131230746;
+			
+			// aapt resource value: 0x7f08001d
+			public const int height_prompt = 2131230749;
+			
 			// aapt resource value: 0x7f080016
 			public const int hello = 2131230742;
 			
@@ -2497,6 +2549,9 @@ namespace iReachAndroid
 			
 			// aapt resource value: 0x7f080011
 			public const int status_bar_notification_info_overflow = 2131230737;
+			
+			// aapt resource value: 0x7f08001e
+			public const int weight_prompt = 2131230750;
 			
 			static String()
 			{

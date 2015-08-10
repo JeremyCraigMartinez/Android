@@ -5,5 +5,22 @@
 
 	<string name="drawer_open">Open navigation drawer</string>
 	<string name="drawer_close">Close navigation drawer</string>
-	
+
+ 	<string name="group_prompt">Choose a planet</string>
+    <string-array name="groups_array">
+        <item>cancer</item>
+        <item>type i diabetes</item>
+        <item>type ii diabetes</item>
+    </string-array>
+
+    <string name="gender_prompt">Choose a planet</string>
+    <string-array name="gender_array">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string name="age_prompt">Years</string>
+    <string name="height_prompt">inches</string>
+    <string name="weight_prompt">lbs</string>
+
 </resources>

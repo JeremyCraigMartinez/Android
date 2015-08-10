@@ -22,25 +22,14 @@
     <TableRow>
         <TextView
             android:layout_column="0"
-            android:text="Full Name: "
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:gravity="right" />
-        <EditText
-            android:id="@+id/txtName"
-            android:layout_column="1"
-            android:layout_span="2" />
-    </TableRow>
-    <TableRow>
-        <TextView
-            android:layout_column="0"
             android:text="Email Address: "
             android:layout_marginTop="4dp"
             android:gravity="right" />
         <EditText
             android:id="@+id/txtEmail"
             android:layout_column="1"
-            android:layout_span="2" />
+            android:layout_span="2"
+            android:inputType="textEmailAddress" />
     </TableRow>
     <TableRow>
         <TextView
@@ -52,12 +41,142 @@
         <EditText
             android:id="@+id/txtPassword"
             android:layout_column="1"
-            android:layout_span="2" />
+            android:layout_span="2"
+            android:inputType="textPassword" />
     </TableRow>
     <View
         android:layout_height="1dip"
         android:background="#FF909090"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="10.0dip" />
+    <TableRow>
+        <TextView
+            android:layout_column="0"
+            android:text="First Name: "
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="right" />
+        <EditText
+            android:id="@+id/txtFirstName"
+            android:layout_column="1"
+            android:layout_span="2"
+            android:inputType="textPersonName" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_column="0"
+            android:text="Last Name: "
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="right" />
+        <EditText
+            android:id="@+id/txtLastName"
+            android:layout_column="1"
+            android:layout_span="2"
+            android:inputType="textPersonName" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_column="0"
+            android:text="Doctor's Email: "
+            android:layout_marginTop="10.0dip"
+            android:layout_marginBottom="4dp"
+            android:gravity="right" />
+        <EditText
+            android:id="@+id/txtDocEmail"
+            android:layout_column="1"
+            android:layout_span="2"
+            android:inputType="textEmailAddress" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:text="Gender: "
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="right" />
+        <Spinner
+            android:id="@+id/genderSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_column="1"
+            android:prompt="@string/gender_prompt" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:text="Group: "
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="right" />
+        <Spinner
+            android:id="@+id/groupSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_column="1"
+            android:prompt="@string/group_prompt" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:text="Age: "
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="right" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtAge"
+            android:layout_column="1"
+            android:ems="3"
+            android:inputType="number"
+            android:hint="@string/age_prompt" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:text="Weight: "
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="right" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtWeight"
+            android:layout_column="1"
+            android:ems="3"
+            android:inputType="number"
+            android:hint="@string/weight_prompt" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:text="Height: "
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="right" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtHeight"
+            android:layout_column="1"
+            android:ems="3"
+            android:inputType="number"
+            android:hint="@string/height_prompt" />
+    </TableRow>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
@@ -78,4 +197,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
     </LinearLayout>
+    <View
+        android:layout_height="1dip"
+        android:background="#FF909090"
+        android:layout_marginTop="100dp" />
 </TableLayout>
