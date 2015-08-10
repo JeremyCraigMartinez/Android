@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using Android.Util;
 using Newtonsoft.Json;
+using System.Globalization;
 
 namespace api_interaction_kit
 {
@@ -32,7 +33,10 @@ namespace api_interaction_kit
 
 		private bool food(int _id, int _serving_size)
 		{
-			return post("diets", json_functions.serializer(new food_item() {food_id = _id, serving_size = _serving_size, time_stamp = DateTime.Now}));
+			string now = Convert.ToString (DateTime.Now);
+			string pattern = "HH:mm-MM-dd-yyyy";
+			return post("diet", json_functions.serializer(new food_item() {foodID = Convert.ToString(_id), quantity = _serving_size,
+				created = DateTime.ParseExact(now, pattern , CultureInfo.InvariantCulture).ToString()}));
 		}
 
 		private bool post(string location, string content)

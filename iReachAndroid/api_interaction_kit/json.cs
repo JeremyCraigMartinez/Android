@@ -18,11 +18,11 @@ namespace api_interaction_kit
 		[DataMember]
 		public string last_name;
 		[DataMember]
-		public string age;
+		public int age;
 		[DataMember]
-		public string height;
+		public int height;
 		[DataMember]
-		public string weight;
+		public int weight;
 		[DataMember]
 		public string sex;
 		[DataMember]
@@ -33,11 +33,11 @@ namespace api_interaction_kit
 	public class food_item
 	{
 		[DataMember]
-		public DateTime time_stamp;
+		public string created;
 		[DataMember]
-		public int food_id;
+		public string foodID;
 		[DataMember]
-		public int serving_size;
+		public int quantity;
 	}
 
 	[DataContract]
