@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iReachAndroid.UITests", "iR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api_interaction_kit", "api_interaction_kit\api_interaction_kit.csproj", "{1EB0BDB2-351E-48BB-B855-EAAAF1CAE6ED}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared", "Shared\Shared.shproj", "{D140C41E-62E4-4C7C-AE67-6CF2B136E19C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

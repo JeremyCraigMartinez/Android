@@ -42,20 +42,23 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
-    <Reference Include="Xamarin.Android.Support.v4">
-      <HintPath>..\packages\Xamarin.Android.Support.v4.22.2.0.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Android.Support.v7.AppCompat">
-      <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.22.2.0.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Android.Support.v7.RecyclerView">
-      <HintPath>..\packages\Xamarin.Android.Support.v7.RecyclerView.22.2.0.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Android.Support.Design">
-      <HintPath>..\packages\Xamarin.Android.Support.Design.22.2.0.0\lib\MonoAndroid403\Xamarin.Android.Support.Design.dll</HintPath>
-    </Reference>
     <Reference Include="SQLite">
       <HintPath>..\Components\sqlite-net-1.0.8.3\lib\android\SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.CardView">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.CardView.22.2.1.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.CardView.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>..\packages\Xamarin.Android.Support.v4.22.2.1.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.RecyclerView">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.RecyclerView.22.2.1.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.AppCompat">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.22.2.1.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Design">
+      <HintPath>..\packages\Xamarin.Android.Support.Design.22.2.1.0\lib\MonoAndroid403\Xamarin.Android.Support.Design.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +80,8 @@
     <Compile Include="Fragments\BrowseFoodFragment.cs" />
     <Compile Include="Fragments\MyFoodDiaryFragment.cs" />
     <Compile Include="Application\iReachApp.cs" />
+    <Compile Include="Adapters\FoodListAdapter.cs" />
+    <Compile Include="Fragments\FoodDetailFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -85,7 +90,9 @@
     <None Include="packages.config" />
     <None Include="EmptyCSharpFile.cs" />
     <None Include="EmptyClass.cs" />
-    <None Include="Adapters\FoodListAdapter.cs" />
+    <None Include="DB\SearchableDatabase.cs" />
+    <None Include="DB\DictionaryDatabase.cs" />
+    <None Include="DB\DictionaryProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -127,7 +134,39 @@
     <AndroidResource Include="Resources\layout\fragment_browse_food.axml" />
     <AndroidResource Include="Resources\layout\fragment_food_diary.axml" />
     <AndroidResource Include="Resources\Raw\food.db" />
+    <AndroidResource Include="Resources\layout\FoodDetails.axml" />
+    <AndroidResource Include="Resources\values\dimen.xml" />
+    <AndroidResource Include="Resources\drawable\material.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_accessibility_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_arrow_back_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_book_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_close_grey24dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_healing_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_keyboard_voice_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_menu_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_restaurant_menu_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_search_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_arrow_back_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_close_grey24dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_keyboard_voice_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_menu_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_search_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_arrow_back_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_close_grey24dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_keyboard_voice_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_menu_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_search_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_settings.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_arrow_back_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_close_grey24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_keyboard_voice_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_menu_white_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_search_white_24dp.png" />
+    <AndroidResource Include="Raw\dictionary.txt" />
   </ItemGroup>
+  <Import Project="..\Shared\Shared.projitems" Label="Shared" Condition="Exists('..\Shared\Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Resources\layout\" />
@@ -139,6 +178,8 @@
     <Folder Include="Adapters\" />
     <Folder Include="Resources\Raw\" />
     <Folder Include="Application\" />
+    <Folder Include="Raw\" />
+    <Folder Include="DB\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\api_interaction_kit\api_interaction_kit.csproj">

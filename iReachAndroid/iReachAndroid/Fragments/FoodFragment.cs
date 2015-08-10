@@ -14,6 +14,7 @@ using Android.Util;
 using Android.Views;
 using iReachAndroid.Activities;
 using iReachAndroid.Helpers;
+using iReachAndroid.Fragments;
 
 namespace iReachAndroid
 {

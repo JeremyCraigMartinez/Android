@@ -1,24 +1,24 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using System.Collections.Generic;
+using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
-using Android.Runtime;
-using Android.Support.Design.Widget;
-using Android.Support.V4.App;
-using Android.Support.V4.View;
-using Android.Util;
 using Android.Views;
-using iReachAndroid.Activities;
-using iReachAndroid.Helpers;
+using Android.Widget;
+using IReach.BL;
 
-namespace iReachAndroid
+
+namespace iReachAndroid.Fragments
 {
-	public class BrowseFoodFragment : Fragment
+	public class BrowseFoodFragment : Android.Support.V4.App.Fragment
 	{
+ 
+		protected Adapters.FoodListAdapter fooditemListAdapter;
+		protected IList<FoodItem> foodItems;
+
+		private Button AddFoodButton;
+		private ListView FoodListView;
+
 		public override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
@@ -28,7 +28,38 @@ namespace iReachAndroid
 
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
+			var ignored = base.OnCreateView (inflater, container, savedInstanceState);
 			var view = inflater.Inflate (Resource.Layout.fragment_browse_food, null);
+			 
+		 
+			AddFoodButton = view.FindViewById<Button> (Resource.Id.btnAddFood);
+			FoodListView = view.FindViewById<ListView> (Resource.Id.lstFood);
+
+			if (AddFoodButton != null) {
+				AddFoodButton.Click += (sender, e) => { 
+					
+					FoodDetailFragment foodDetail = new FoodDetailFragment ();					 
+					var fragtrans = FragmentManager.BeginTransaction ();
+					fragtrans.Replace (Resource.Id.main_content_frame, foodDetail).Commit ();
+				};
+			}
+
+			// wire up task click handler
+			if (FoodListView != null) { 
+
+				FoodListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
+					 
+					FoodDetailFragment foodDetail = new FoodDetailFragment ();
+					var fragtrans = FragmentManager.BeginTransaction ();
+
+					Bundle data = new Bundle ();
+					data.PutInt("FoodId", foodItems[e.Position].ID);
+
+					foodDetail.Arguments = data;
+					fragtrans.Replace (Resource.Id.main_content_frame, foodDetail).Commit ();
+
+				};
+			}
 
 			return view;
 		}

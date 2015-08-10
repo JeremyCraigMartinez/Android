@@ -4,22 +4,23 @@ using System.Collections.Generic;
 using Android.Widget;
 using Android.App;
 using Android;
+using IReach.BL;
 
-namespace iReachAndroid
+namespace iReachAndroid.Adapters
 {
-	public class FoodListAdapter : BaseAdapter<Food>
+	public class FoodListAdapter : BaseAdapter<FoodItem>
 	{
 		protected Activity mContext = null;
-		protected IList<Food> mFoods = new List<Food>();
+		protected IList<FoodItem> mFoods = new List<FoodItem>();
 
-		public FoodListAdapter (Activity context, IList<Food> foods)
+		public FoodListAdapter (Activity context, IList<FoodItem> foods)
 		{
 			this.mContext = context;
 			this.mFoods = foods;		
 			
 		}
 
-		public override Food this[int position]
+		public override FoodItem this[int position]
 		{
 			get { return mFoods [position]; }
 		}
@@ -45,8 +46,7 @@ namespace iReachAndroid
 				           false)
 			           ) as CheckedTextView;
 
-			view.SetText (item.ComName == "" ? "<new food>" : item.ComName, TextView.BufferType.Normal);
-
+			view.SetText (item.Name == "" ? "<new food>" : item.Name, TextView.BufferType.Normal);
 
 			return view;
 		}
