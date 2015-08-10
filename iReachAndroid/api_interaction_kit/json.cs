@@ -30,6 +30,17 @@ namespace api_interaction_kit
 	}
 
 	[DataContract]
+	public class food_item
+	{
+		[DataMember]
+		public DateTime time_stamp;
+		[DataMember]
+		public int food_id;
+		[DataMember]
+		public int serving_size;
+	}
+
+	[DataContract]
 	public class login_information
 	{
 		[DataMember]

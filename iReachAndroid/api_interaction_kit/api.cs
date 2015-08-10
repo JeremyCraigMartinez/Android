@@ -74,13 +74,7 @@ namespace api_interaction_kit
 		public api getInstance() 
 		{
 			return singletron;
-		}
-			
-//		public override void OnCreate()
-//		{
-//			base.OnCreate ();
-//			singletron = this;
-//		}
+		}			
 
 		public void login (string username, string pass)
 		{
@@ -94,7 +88,8 @@ namespace api_interaction_kit
 				password = pass;
 				server_update (true, Response_Type.login_result);
 				state_change (ref state, States.Initializing);
-			} else
+			} 
+			else
 				server_update (false, Response_Type.login_result);
 		}
 
@@ -203,6 +198,13 @@ namespace api_interaction_kit
 		{
 			run_lock = true;
 			events.Add (new request_create_group_event (name, this));
+			run_lock = false;
+		}
+
+		public void api_food_upload (int id, int serving_size)
+		{
+			run_lock = true;
+			events.Add (new post_food_item(id, serving_size, this));
 			run_lock = false;
 		}
 

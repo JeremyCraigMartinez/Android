@@ -45,7 +45,7 @@ namespace iReachAndroid.Fragments
 
 					// Here switch to Home Fragment
 					var intent = new Intent(Activity, typeof(MainActivity));
-					intent.PutExtra ("ProfileType", "Guest");
+					intent.PutExtra ("ProfileType", "Guest"); // should this be guest?
 
 					StartActivity (intent);
 
