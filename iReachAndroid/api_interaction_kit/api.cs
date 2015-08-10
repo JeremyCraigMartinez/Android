@@ -30,7 +30,7 @@ namespace api_interaction_kit
 		Error
 	}
 
-	public partial class api : Application
+	public partial class api
 	{
 		#region Variables
 
@@ -42,6 +42,8 @@ namespace api_interaction_kit
 		private string password;
 
 		private static api singletron;
+
+		 
 		//Announces what's going on
 		public delegate void Announcment (Announcement_Type input);
 
@@ -74,11 +76,11 @@ namespace api_interaction_kit
 			return singletron;
 		}
 			
-		public override void OnCreate()
-		{
-			base.OnCreate ();
-			singletron = this;
-		}
+//		public override void OnCreate()
+//		{
+//			base.OnCreate ();
+//			singletron = this;
+//		}
 
 		public void login (string username, string pass)
 		{

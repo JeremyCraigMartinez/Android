@@ -73,7 +73,6 @@
     <Compile Include="Helpers\ClickListener.cs" />
     <Compile Include="Fragments\SigninDialopFragment.cs" />
     <Compile Include="Fragments\SignupDialogFragment.cs" />
-    <Compile Include="Adapters\FoodListAdapter.cs" />
     <Compile Include="Fragments\ScanFoodFragment.cs" />
     <Compile Include="Fragments\BrowseFoodFragment.cs" />
     <Compile Include="Fragments\MyFoodDiaryFragment.cs" />
@@ -86,6 +85,7 @@
     <None Include="packages.config" />
     <None Include="EmptyCSharpFile.cs" />
     <None Include="EmptyClass.cs" />
+    <None Include="Adapters\FoodListAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using iReach.Core;
+//using iReach.Core;
 using Android.Widget;
 using Android.App;
 using Android;

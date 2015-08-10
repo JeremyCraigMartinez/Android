@@ -1,20 +1,22 @@
 ﻿using System;
-using iReach.Core.Helpers;
+//using iReach.Core.Helpers;
 using System.IO;
 using System.Threading.Tasks;
-using iReach.Core.Database;
+//using iReach.Core.Database;
 using System.Collections.Generic;
 using SQLite;
 using Android.App;
 using Android.Runtime;
-using iReach.Core;
-
+//using iReach.Core;
+using api_interaction_kit;
 namespace iReachAndroid
 {
 	[Application]			
 	public class iReachApp : Application
 	{
-		public iReachApi api;
+
+		public static api ireachApi;
+
 
 		public iReachApp(IntPtr handle, JniHandleOwnership ownerShip) : base(handle, ownerShip)
 		{
@@ -23,20 +25,27 @@ namespace iReachAndroid
 		{
 
 			base.OnCreate ();
-			var docFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-		
-			var dbFile = Path.Combine(docFolder, "food.db"); // FILE NAME TO USE WHEN COPIED
-			Console.WriteLine("DataPath: " + dbFile);
-
-			if (!System.IO.File.Exists(dbFile)) {
-				var s = Resources.OpenRawResource(Resource.Raw.food);  // DATA FILE RESOURCE ID
-				FileStream writeStream = new FileStream(dbFile, FileMode.OpenOrCreate, FileAccess.Write);
-				ReadWriteStream(s, writeStream);
-			}
-
-
+//			var docFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+//		
+//			var dbFile = Path.Combine(docFolder, "food.db"); // FILE NAME TO USE WHEN COPIED
+//			Console.WriteLine("DataPath: " + dbFile);
+//
+//			if (!System.IO.File.Exists(dbFile)) {
+//				var s = Resources.OpenRawResource(Resource.Raw.food);  // DATA FILE RESOURCE ID
+//				FileStream writeStream = new FileStream(dbFile, FileMode.OpenOrCreate, FileAccess.Write);
+//				ReadWriteStream(s, writeStream);	}
+//
+			ireachApi = new api();
 			
 
+		}
+
+		public static api GetInstance()
+		{
+			if (ireachApi == null)
+				return new api ();
+			else
+				return ireachApi;
 		}
 		// readStream is the stream you need to read
 		// writeStream is the stream you want to write to

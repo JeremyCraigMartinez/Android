@@ -28,7 +28,7 @@ namespace iReachAndroid
 
 		public override void OnCreate (Bundle savedInstanceState)
 		{
-			api = (api_interaction_kit.api)Android.App.Application.Context;
+//			api = (api_interaction_kit.api)Android.App.Application.Context;
 			api.server_update += Api_server_update;
 			base.OnCreate (savedInstanceState);
 			// Create your fragment here
@@ -66,7 +66,7 @@ namespace iReachAndroid
 
 		void MSubmitButton_Click (object sender, EventArgs e)
 		{
-			api.api_create_new_user (mEmail, mPassword);
+			api.api_create_new_user (mEmail.Text, mPassword.Text);
 		}
 	}
 }

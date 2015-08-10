@@ -24,12 +24,13 @@ namespace iReachAndroid.Fragments
 		private EditText mTextPassword;
 		private Button mSubmitButton;
 		private Button mCancelButton;
-		private api_interaction_kit.api api;
+		private static api_interaction_kit.api api;
 
 		public override void OnCreate (Bundle savedInstanceState)
 		{
-			api = (api_interaction_kit.api)Android.App.Application.Context;
+			api = (api_interaction_kit.api)iReachApp.GetInstance ();	
 			api.server_update += Api_server_update;
+
 			base.OnCreate (savedInstanceState);
 			// Create your fragment here
 
@@ -39,6 +40,13 @@ namespace iReachAndroid.Fragments
 		{
 			if (r == api_interaction_kit.Response_Type.login_result) {
 				if ((bool)o == true) {
+
+					// Here switch to Home Fragment
+					var intent = new Intent(Activity, typeof(MainActivity));
+					intent.PutExtra ("ProfileType", "Guest");
+
+					StartActivity (intent);
+
 				}
 			}
 		}
