@@ -30,7 +30,7 @@ namespace iReachAndroid.Fragments
 
 		public override void OnCreate (Bundle savedInstanceState)
 		{
-			api = (api_interaction_kit.api)iReachApp.GetInstance ();	
+			api = iReachApp.GetInstance();	
 			api.server_update += Api_server_update;
 
 			base.OnCreate (savedInstanceState);

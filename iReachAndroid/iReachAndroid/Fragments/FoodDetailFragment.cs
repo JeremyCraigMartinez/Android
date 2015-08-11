@@ -25,7 +25,7 @@ namespace iReachAndroid.Fragments
 		public FoodDetailFragment()
 		{
 
-			mApi = (api_interaction_kit.api)iReachApp.GetInstance ();	
+			mApi = iReachApp.GetInstance();	
 			mApi.server_update += MApi_server_update;
 
 		}	

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -42,8 +43,6 @@ namespace api_interaction_kit
 		private string userName;
 		private string password;
 
-		private static api apiSingleton;
-
 		 
 		//Announces what's going on
 		public delegate void Announcment (Announcement_Type input);
@@ -71,11 +70,6 @@ namespace api_interaction_kit
 				return true;
 			};
 		}
-
-		public api getInstance() 
-		{
-			return apiSingleton;
-		}			
 
 		public void login (string username, string pass)
 		{
@@ -148,12 +142,17 @@ namespace api_interaction_kit
 
 		private void connect ()
 		{
-			NetworkCredential credentials = new NetworkCredential (userName, password);
-			HttpClientHandler handler = new HttpClientHandler { Credentials = credentials };
-			client = new HttpClient (handler);
-			client.BaseAddress = new Uri ("https://" + server_ip + ":" + server_port + "/");
-			client.DefaultRequestHeaders.Accept.Clear ();
-			client.DefaultRequestHeaders.Accept.Add (new MediaTypeWithQualityHeaderValue ("application/json"));
+//			NetworkCredential credentials = new NetworkCredential (userName, password);
+//			HttpClientHandler handler = new HttpClientHandler { Credentials = credentials };
+//			client = new HttpClient (handler);
+//			client.BaseAddress = new Uri ("https://" + server_ip + ":" + server_port + "/");
+//			client.DefaultRequestHeaders.Accept.Clear ();
+//			client.DefaultRequestHeaders.Accept.Add (new MediaTypeWithQualityHeaderValue ("application/json"));
+
+			var basic_auth_header = Encoding.ASCII.GetBytes (userName + ":" + password);
+			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue ("Basic",
+				Convert.ToBase64String (basic_auth_header));
+
 		}
 
 		/// <summary>
@@ -164,14 +163,18 @@ namespace api_interaction_kit
 			events = new List<event_object> ();
 			bool clear = false;
 			while (state == States.Running) {
-				if (!run_lock && events.Count != 0) {
-					foreach (event_object e in events) {
-						e.execute ();
-						clear = true;
+				try {
+					if (!run_lock && events.Count != 0) {
+						foreach (event_object e in events) {
+							e.execute ();
+							clear = true;
+						}
+					} else if (events.Count != 0 && clear) {
+						events.Clear ();
+						clear = false;
 					}
-				} else if (events.Count != 0 && clear) {
-					events.Clear ();
-					clear = false;
+				} catch (Exception ex) {
+					string e = ex.ToString ();
 				}
 			}
 		}

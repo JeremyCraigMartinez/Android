@@ -87,16 +87,17 @@ namespace api_interaction_kit
 		{
 			string id;
 			int serving_size;
-			DateTime time_stamp;
-			public post_food_item ( string _id, int _serving_size, api reference)
+			public post_food_item ( string _id, int _serving_size, api Reference)
 			{
 				id = _id;
-				serving_size = _serving_size;				
+				serving_size = _serving_size;
+				reference = Reference;
 			}
 
 			public override void execute ()
 			{
-				reference.server_response_helper (reference.food (id, serving_size), Response_Type.food_sent);
+				bool t = reference.food (id, serving_size);
+				reference.server_response_helper (t, Response_Type.food_sent);
 			}
 		}
 	}
