@@ -57,7 +57,6 @@ namespace iReachAndroid.Fragments
 
 					foodDetail.Arguments = data;
 					fragtrans.Replace (Resource.Id.main_content_frame, foodDetail).Commit ();
-
 				};
 			}
 

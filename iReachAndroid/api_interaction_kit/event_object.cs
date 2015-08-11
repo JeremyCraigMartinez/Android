@@ -85,18 +85,18 @@ namespace api_interaction_kit
 
 		public class post_food_item : event_object
 		{
-			int id;
+			string id;
 			int serving_size;
 			DateTime time_stamp;
-			public post_food_item ( int _id, int _serving_size, api reference)
+			public post_food_item ( string _id, int _serving_size, api reference)
 			{
 				id = _id;
-				serving_size = _serving_size;
+				serving_size = _serving_size;				
 			}
 
 			public override void execute ()
 			{
-				reference.food (id, serving_size);
+				reference.server_response_helper (reference.food (id, serving_size), Response_Type.food_sent);
 			}
 		}
 	}

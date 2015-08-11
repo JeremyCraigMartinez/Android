@@ -18,20 +18,30 @@ namespace iReachAndroid.Fragments
 		protected Button saveButton = null;
 		protected SeekBar _seekbar; 
 		protected TextView AmountTextEdit = null;
-		 
-		private static api_interaction_kit.api mApi;
 
-		public override void OnCreate (Bundle savedInstanceState)
+		protected Android.Support.V4.App.FragmentManager fragManager;
+
+		private static api_interaction_kit.api mApi;
+		public FoodDetailFragment()
 		{
+
 			mApi = (api_interaction_kit.api)iReachApp.GetInstance ();	
 			mApi.server_update += MApi_server_update;
 
-			// Create your fragment here
-		}
+		}	
 
 		void MApi_server_update (object o, api_interaction_kit.Response_Type r)
 		{
-			if(r == api_interaction_kit.Response_Type.)
+			BrowseFoodFragment browseFrag = new BrowseFoodFragment ();
+			if (r == api_interaction_kit.Response_Type.food_sent) {
+			
+				if ((bool)o == true) {
+
+					var fragTrans = fragManager.BeginTransaction ();
+					fragTrans.Replace (Resource.Id.main_content_frame, browseFrag, "BrowseFood");
+					fragTrans.Commit ();
+				}
+			}
 		}
 
 		 
@@ -55,7 +65,7 @@ namespace iReachAndroid.Fragments
 			_seekbar.ProgressChanged += (object sender, SeekBar.ProgressChangedEventArgs e) => {
 				if (e.FromUser)
 				{
-					AmountTextEdit.Text = string.Format("The value of the SeekBar is {0}", e.Progress);
+					AmountTextEdit.Text = string.Format("{0}", e.Progress);
 				}
 			};
  
@@ -84,14 +94,15 @@ namespace iReachAndroid.Fragments
 			foodItem.Name = nameTextEdit.Text;
 			foodItem.Amount = AmountTextEdit.Text;
 		 
-
-				
+			var serving = Convert.ToInt32(foodItem.Amount);				
 			IReach.BL.Managers.ItemManager.SaveFood(foodItem);
+//
+//			BrowseFoodFragment foodListFrag = new BrowseFoodFragment();
+//			var fragtrans = FragmentManager.BeginTransaction ();
+//			fragtrans.Replace (Resource.Id.main_content_frame, foodListFrag).Commit ();
 
+			mApi.api_food_upload (foodItem.Name, serving);
 
-			BrowseFoodFragment foodListFrag = new BrowseFoodFragment();
-			var fragtrans = FragmentManager.BeginTransaction ();
-			fragtrans.Replace (Resource.Id.main_content_frame, foodListFrag).Commit ();
 		}
 
 		protected void CancelDelete()

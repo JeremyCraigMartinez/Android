@@ -19,6 +19,7 @@ namespace api_interaction_kit
 
 	public enum Response_Type
 	{
+		food_sent,
 		login_result,
 		user_created,
 		user_info
@@ -41,7 +42,7 @@ namespace api_interaction_kit
 		private string userName;
 		private string password;
 
-		private static api singletron;
+		private static api apiSingleton;
 
 		 
 		//Announces what's going on
@@ -73,7 +74,7 @@ namespace api_interaction_kit
 
 		public api getInstance() 
 		{
-			return singletron;
+			return apiSingleton;
 		}			
 
 		public void login (string username, string pass)
@@ -201,7 +202,7 @@ namespace api_interaction_kit
 			run_lock = false;
 		}
 
-		public void api_food_upload (int id, int serving_size)
+		public void api_food_upload (string id, int serving_size)
 		{
 			run_lock = true;
 			events.Add (new post_food_item(id, serving_size, this));
