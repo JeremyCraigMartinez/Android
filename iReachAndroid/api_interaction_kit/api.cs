@@ -180,10 +180,10 @@ namespace api_interaction_kit
 			run_lock = false;
 		}
 
-		public void api_create_new_user (string username, string password)
+		public void api_create_new_user (user_information user)
 		{
 			run_lock = true;
-			events.Add (new create_user_event (username, password, this));
+			events.Add (new create_user_event (user, this));
 			run_lock = false;
 		}
 

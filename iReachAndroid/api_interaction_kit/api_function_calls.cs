@@ -16,9 +16,9 @@ namespace api_interaction_kit
 			return _get ("patients", typeof(user_information));
 		}
 
-		private void create_user(string Email, string Pass)
+		private void create_user(user_information user)
 		{
-			post ("patients", json_functions.serializer (new user_information (){ email = Email }));
+			post ("patients", user.ToString());
 		}
 
 		private void create_group(string name)

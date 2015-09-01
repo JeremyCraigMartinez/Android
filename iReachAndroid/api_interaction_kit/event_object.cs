@@ -40,19 +40,17 @@ namespace api_interaction_kit
 
 		public class create_user_event : event_object
 		{
-			string user = "";
-			string p = "";
+			user_information _user;
 
-			public create_user_event (string Username, string Pass, api Reference)
+			public create_user_event (user_information user, api Reference)
 			{
-				user = Username;
-				p = Pass;
+				_user = user;
 				reference = Reference;
 			}
 
 			public override void execute ()
 			{
-				reference.create_user (user, p);
+				reference.create_user (_user);
 			}
 		}
 
