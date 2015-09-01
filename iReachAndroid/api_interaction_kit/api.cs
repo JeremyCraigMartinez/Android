@@ -142,12 +142,6 @@ namespace api_interaction_kit
 
 		private void connect ()
 		{
-//			NetworkCredential credentials = new NetworkCredential (userName, password);
-//			HttpClientHandler handler = new HttpClientHandler { Credentials = credentials };
-//			client = new HttpClient (handler);
-//			client.BaseAddress = new Uri ("https://" + server_ip + ":" + server_port + "/");
-//			client.DefaultRequestHeaders.Accept.Clear ();
-//			client.DefaultRequestHeaders.Accept.Add (new MediaTypeWithQualityHeaderValue ("application/json"));
 
 			var basic_auth_header = Encoding.ASCII.GetBytes (userName + ":" + password);
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue ("Basic",

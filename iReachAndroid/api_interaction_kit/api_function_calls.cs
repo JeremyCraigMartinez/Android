@@ -61,6 +61,20 @@ namespace api_interaction_kit
 			announcment (Announcement_Type.Error);
 			return null;
 		}
+		private bool _put(string location, HttpContent content)
+		{
+			HttpResponseMessage response = client.PutAsync (location, content).Result;
+			if (response.IsSuccessStatusCode)
+				return true;
+			return false;
+		}
+		private bool _delete(string location)
+		{
+			HttpResponseMessage response = client.DeleteAsync (location).Result;
+			if (response.IsSuccessStatusCode)
+				return true;
+			return false;
+		}
 	}
 }
 
