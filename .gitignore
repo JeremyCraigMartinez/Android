@@ -24,3 +24,4 @@ UpgradeLog.*
 
 # dotCover
 *.dotCover
+iReachAndroid/api_interaction_kit/Resources/Resource.designer.cs

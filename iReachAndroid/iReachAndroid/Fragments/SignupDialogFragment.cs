@@ -135,7 +135,7 @@ namespace iReachAndroid
 
 		void MSubmitButton_Click (object sender, EventArgs e)
 		{ 
-			api.api_create_new_user (mEmail.Text, mPassword.Text);
+			//api.api_create_new_user (mEmail.Text, mPassword.Text);   old call
 		}
 	}
 }
