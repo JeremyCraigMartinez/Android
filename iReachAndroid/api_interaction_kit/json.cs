@@ -41,6 +41,15 @@ namespace api_interaction_kit
 	}
 
 	[DataContract]
+	public class raw_data
+	{
+		[DataMember]
+		public string time_stamp;
+		[DataMember]
+		public string data;
+	}
+
+	[DataContract]
 	public class login_information
 	{
 		[DataMember]

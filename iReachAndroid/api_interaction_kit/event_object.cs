@@ -98,5 +98,17 @@ namespace api_interaction_kit
 				reference.server_response_helper (t, Response_Type.food_sent);
 			}
 		}
+		public class raw_data_event: event_object
+		{
+			string time_stamp;
+			string data;
+
+			public raw_data_event(string _time_stamp, string _data, api Reference) { time_stamp = _time_stamp; data = _data; reference = Reference; }
+			public override void execute()
+			{
+				bool t = reference.post_raw_data (time_stamp, data);
+				reference.server_response_helper (t, Response_Type.raw_data);
+			}
+		}
 	}
 }

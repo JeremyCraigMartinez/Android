@@ -10,27 +10,11 @@ using Android.App;
 
 namespace api_interaction_kit
 {
-	public enum States
-	{
-		Initializing,
-		Running,
-		Offline,
-		Stopping
-	}
+	public enum States { Initializing, Running, Offline, Stopping }
 
-	public enum Response_Type
-	{
-		food_sent,
-		login_result,
-		user_created,
-		user_info
-	}
+	public enum Response_Type { food_sent, login_result, user_created, user_info, raw_data }
 
-	public enum Announcement_Type
-	{
-		Initialization_Complete,
-		Error
-	}
+	public enum Announcement_Type { Initialization_Complete, Error }
 
 	public partial class api
 	{
@@ -203,6 +187,13 @@ namespace api_interaction_kit
 		{
 			run_lock = true;
 			events.Add (new post_food_item(id, serving_size, this));
+			run_lock = false;
+		}
+
+		public void api_upload_raw_data(string time_stamp, string data)
+		{
+			run_lock = true;
+			events.Add (new raw_data_event(time_stamp, data, this));
 			run_lock = false;
 		}
 
