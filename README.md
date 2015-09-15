@@ -168,3 +168,32 @@ ViewModels
  diagram mvvm
 credits Reynolds Mark Xamarin Essentials  
 
+
+
+With Async and await
+
+
+Async methods have three possible return types: Task<TResult>, Task, and void. In Visual Basic, the void return type is written as a Sub procedure.
+
+Microsoft MSDN : https://msdn.microsoft.com/en-us/library/hh524395.aspx#BKMK_TaskTReturnType> 
+
+
+
+Task(T) Return Type
+
+used for an async method that contains a Return (Visual Basic) or return (C#) statement in which the operand has typeTResult.
+
+
+Returning a  Task<int> : 
+
+	• The task must have int return type.
+	• Task must call await for actual work to be done 
+	
+
+
+
+
+
+	
+
+	
