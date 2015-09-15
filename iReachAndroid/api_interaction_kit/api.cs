@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Collections.Concurrent;
 using Android;
 using Android.App;
 
@@ -41,9 +42,10 @@ namespace api_interaction_kit
 
 		HttpClient client;
 
-		List<event_object> events;
+		//List<event_object> events;
+		ConcurrentQueue<event_object> event_queue;
 
-		bool run_lock;
+		//bool run_lock;
 
 		#endregion
 
@@ -120,7 +122,6 @@ namespace api_interaction_kit
 		/// </summary>
 		private void initialize ()
 		{
-			run_lock = false;
 			connect ();
 		}
 
@@ -138,37 +139,27 @@ namespace api_interaction_kit
 		/// </summary>
 		private void start ()
 		{
-			events = new List<event_object> ();
-			bool clear = false;
+			event_queue = new ConcurrentQueue<event_object> ();
 			while (state == States.Running) {
-				try {
-					if (!run_lock && events.Count != 0) {
-						foreach (event_object e in events) {
+					while (!event_queue.IsEmpty) 
+					{
+						event_object e;
+						if(event_queue.TryDequeue(out e))
 							e.execute ();
-							clear = true;
-						}
-					} else if (events.Count != 0 && clear) {
-						events.Clear ();
-						clear = false;
 					}
-				} catch (Exception ex) {
-					string e = ex.ToString ();
-				}
 			}
 		}
 
 		public void api_update_user_data (string username)
 		{
-			run_lock = true;
-			events.Add (new request_user_event (username, this));
-			run_lock = false;
+			//events.Add (new request_user_event (username, this));
+			event_queue.Enqueue(new request_user_event (username, this));
 		}
 
 		public void api_create_new_user (user_information user)
 		{
-			run_lock = true;
-			events.Add (new create_user_event (user, this));
-			run_lock = false;
+			//events.Add (new create_user_event (user, this));
+			event_queue.Enqueue(new create_user_event (user, this));
 		}
 
 		public void server_response_helper (Object o, Response_Type r)
@@ -178,29 +169,25 @@ namespace api_interaction_kit
 
 		public void api_create_group (string name)
 		{
-			run_lock = true;
-			events.Add (new request_create_group_event (name, this));
-			run_lock = false;
+			//events.Add (new request_create_group_event (name, this));
+			event_queue.Enqueue(new request_create_group_event (name, this));
 		}
 
 		public void api_food_upload (string id, int serving_size)
 		{
-			run_lock = true;
-			events.Add (new post_food_item(id, serving_size, this));
-			run_lock = false;
+			//events.Add (new post_food_item(id, serving_size, this));
+			event_queue.Enqueue(new post_food_item(id, serving_size, this));
 		}
 
 		public void api_upload_raw_data(string time_stamp, string data)
 		{
-			run_lock = true;
-			events.Add (new raw_data_event(time_stamp, data, this));
-			run_lock = false;
+			//events.Add (new raw_data_event(time_stamp, data, this));
+			event_queue.Enqueue(new raw_data_event(time_stamp, data, this));
 		}
 
 		private void exit ()
 		{
 			client.Dispose ();
-			events.Clear ();
 		}
 	}
 }
