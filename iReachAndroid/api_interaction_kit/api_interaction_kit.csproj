@@ -58,7 +58,6 @@
     <Compile Include="event_object.cs" />
     <Compile Include="json.cs" />
     <Compile Include="api_function_calls.cs" />
-    <Compile Include="android_sensors.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

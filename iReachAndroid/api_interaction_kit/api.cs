@@ -42,10 +42,11 @@ namespace api_interaction_kit
 
 		HttpClient client;
 
-		//List<event_object> events;
 		ConcurrentQueue<event_object> event_queue;
+		ConcurrentQueue<event_object> long_term_storage; //ice cold raw data
 
-		//bool run_lock;
+
+		hardware_inspector hardware_manager;
 
 		#endregion
 
@@ -140,13 +141,23 @@ namespace api_interaction_kit
 		private void start ()
 		{
 			event_queue = new ConcurrentQueue<event_object> ();
+			long_term_storage = new ConcurrentQueue<event_object> ();
 			while (state == States.Running) {
-					while (!event_queue.IsEmpty) 
-					{
-						event_object e;
-						if(event_queue.TryDequeue(out e))
-							e.execute ();
-					}
+
+				if (!event_queue.IsEmpty) 
+				{
+					event_object e;
+					if (event_queue.TryDequeue (out e))
+						e.execute ();
+				}
+
+				if (!long_term_storage.IsEmpty &&
+					hardware_inspector.connected_to_wifi()) 
+				{
+					event_object e;
+					if (long_term_storage.TryDequeue (out e))
+						e.execute ();
+				}
 			}
 		}
 
