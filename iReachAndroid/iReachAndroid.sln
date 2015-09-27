@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api_interaction_kit", "api_
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared", "Shared\Shared.shproj", "{D140C41E-62E4-4C7C-AE67-6CF2B136E19C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iReach_Android_Jitter", "iReach_Android\iReach_Android_Jitter.csproj", "{734BE1D7-6AB0-437D-B015-C82B02F771AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iReach_Android.UITests", "iReach_Android.UITests\iReach_Android.UITests.csproj", "{A1ED981D-164D-4472-9079-877AB146F2F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +27,14 @@ Global
 		{3B6C5B67-45E9-48F2-9F64-63A6A4300481}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B6C5B67-45E9-48F2-9F64-63A6A4300481}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B6C5B67-45E9-48F2-9F64-63A6A4300481}.Release|Any CPU.Build.0 = Release|Any CPU
+		{734BE1D7-6AB0-437D-B015-C82B02F771AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{734BE1D7-6AB0-437D-B015-C82B02F771AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{734BE1D7-6AB0-437D-B015-C82B02F771AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{734BE1D7-6AB0-437D-B015-C82B02F771AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1ED981D-164D-4472-9079-877AB146F2F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1ED981D-164D-4472-9079-877AB146F2F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1ED981D-164D-4472-9079-877AB146F2F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1ED981D-164D-4472-9079-877AB146F2F1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E49DA6B9-2E78-4351-B694-124ADB0EBB29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E49DA6B9-2E78-4351-B694-124ADB0EBB29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E49DA6B9-2E78-4351-B694-124ADB0EBB29}.Release|Any CPU.ActiveCfg = Release|Any CPU
