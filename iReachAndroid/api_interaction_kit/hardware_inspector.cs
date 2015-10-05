@@ -1,33 +1,27 @@
-﻿using Android;
+﻿using Android.Runtime;
+using Android.App;
 using Android.Net;
 using Android.Content;
 using Android.OS;
 
 namespace api_interaction_kit
 {
-	public static class hardware_inspector
+	public class hardware_inspector
 	{
-//		public static bool wifi(Context c)
-//		{
-//			using (ConnectivityManager m = (ConnectivityManager)c.GetSystemService(Context.ConnectivityService)) 
-//			{
-//				if (m.GetNetworkInfo (ConnectivityType.Wifi).GetState () == NetworkInfo.State.Connected)
-//					return true;
-//			}
-//			return false;
-//		}
-//
-//		public static bool plugged_in(Context c)
-//		{
-//			return false;
-//		}
-		public static bool connected_to_wifi()
+		public ConnectivityManager connectivity_manager;
+
+		public hardware_inspector(ref ConnectivityManager manager)
 		{
-			var connectivity_manager = (ConnectivityManager)Context.GetSystemService(Android.App.Activity.ConnectivityService);
+			connectivity_manager = manager;
+		}
+
+		public bool connected_to_wifi()
+		{
 			var mobile_state = connectivity_manager.GetNetworkInfo(ConnectivityType.Mobile).GetState();
 			return(mobile_state == NetworkInfo.State.Connected);
 		}
 	}
+
 	public class Battery : BroadcastReceiver
 	{
 		#region Variables

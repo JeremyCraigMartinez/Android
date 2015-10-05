@@ -26,15 +26,15 @@ namespace api_interaction_kit
 		public class request_user_event : event_object
 		{
 
-			public request_user_event (string Username, api Reference)
+			public request_user_event (api Reference)
 			{
-				data = Username;
 				reference = Reference;
 			}
 
 			public override void execute ()
 			{
-				reference.server_response_helper (reference.request_user_data (), Response_Type.user_info);
+				user_information u = (user_information)reference.request_user_data ();
+				reference.server_response_helper (u, Response_Type.user_info);
 			}
 		}
 

@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using Android;
 using Android.App;
+using Android.Net;
 
 namespace api_interaction_kit
 {
-	public enum States { Initializing, Running, Offline, Stopping }
+	public enum States { Initializing, LogIn, Running, Offline, Stopping }
 
 	public enum Response_Type { food_sent, login_result, user_created, user_info, raw_data }
 
-	public enum Announcement_Type { Initialization_Complete, Error }
+	public enum Announcement_Type { Initialization_Complete, Log_In_Complete, Error }
 
 	public partial class api
 	{
@@ -45,8 +46,7 @@ namespace api_interaction_kit
 		ConcurrentQueue<event_object> event_queue;
 		ConcurrentQueue<event_object> long_term_storage; //ice cold raw data
 
-
-		hardware_inspector hardware_manager;
+		hardware_inspector inspector;
 
 		#endregion
 
@@ -61,15 +61,14 @@ namespace api_interaction_kit
 		public void login (string username, string pass)
 		{
 			client = new HttpClient ();
-			client.BaseAddress = new Uri ("https://" + server_ip + ":" + server_port + "/");
+			client.BaseAddress = new System.Uri ("https://" + server_ip + ":" + server_port + "/");
 			client.DefaultRequestHeaders.Accept.Clear ();
 			client.DefaultRequestHeaders.Accept.Add (new MediaTypeWithQualityHeaderValue ("application/json"));
 
 			if (authenticate (username, pass)) {
 				userName = username;
 				password = pass;
-				server_update (true, Response_Type.login_result);
-				state_change (ref state, States.Initializing);
+				state_change (ref state, States.LogIn);
 			} 
 			else
 				server_update (false, Response_Type.login_result);
@@ -81,8 +80,10 @@ namespace api_interaction_kit
 		/// <param name="input">Input.</param>
 		private void listener (Announcement_Type input)
 		{
-			if (input == Announcement_Type.Initialization_Complete)
+			if (input == Announcement_Type.Log_In_Complete) {
+				server_update (true, Response_Type.login_result);
 				state_change (ref state, States.Running);
+			}
 			else if (input == Announcement_Type.Error)
 				state_change (ref state, States.Stopping);
 		}
@@ -96,6 +97,9 @@ namespace api_interaction_kit
 		{
 			switch (old_state) {
 			case States.Initializing:
+				announcment (Announcement_Type.Initialization_Complete);
+				break;
+			case States.LogIn:
 				break;
 			case States.Running:
 				break;
@@ -105,8 +109,9 @@ namespace api_interaction_kit
 			old_state = new_state;
 			switch (old_state) {
 			case States.Initializing:
-				initialize ();
-				announcment (Announcement_Type.Initialization_Complete);
+				break;
+			case States.LogIn:
+				connect ();
 				break;
 			case States.Running:
 				Task t = new Task (start);
@@ -118,12 +123,9 @@ namespace api_interaction_kit
 			}
 		}
 
-		/// <summary>
-		/// Initializes the connection.
-		/// </summary>
-		private void initialize ()
+		public void initialize (ref ConnectivityManager m)
 		{
-			connect ();
+			inspector = new hardware_inspector(ref m);
 		}
 
 		private void connect ()
@@ -132,6 +134,7 @@ namespace api_interaction_kit
 			var basic_auth_header = Encoding.ASCII.GetBytes (userName + ":" + password);
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue ("Basic",
 				Convert.ToBase64String (basic_auth_header));
+			announcment (Announcement_Type.Log_In_Complete);
 
 		}
 
@@ -152,7 +155,7 @@ namespace api_interaction_kit
 				}
 
 				if (!long_term_storage.IsEmpty &&
-					hardware_inspector.connected_to_wifi()) 
+					inspector.connected_to_wifi()) 
 				{
 					event_object e;
 					if (long_term_storage.TryDequeue (out e))
@@ -161,10 +164,9 @@ namespace api_interaction_kit
 			}
 		}
 
-		public void api_update_user_data (string username)
+		public void api_request_user_data ()
 		{
-			//events.Add (new request_user_event (username, this));
-			event_queue.Enqueue(new request_user_event (username, this));
+			event_queue.Enqueue(new request_user_event (this));
 		}
 
 		public void api_create_new_user (user_information user)
@@ -195,6 +197,7 @@ namespace api_interaction_kit
 			//events.Add (new raw_data_event(time_stamp, data, this));
 			event_queue.Enqueue(new raw_data_event(time_stamp, data, this));
 		}
+			
 
 		private void exit ()
 		{

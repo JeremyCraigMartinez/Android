@@ -62,7 +62,15 @@
     <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
-    <AndroidResource Include="Resources\layout\Create_User.axml" />
+    <AndroidResource Include="Resources\layout\landing_page.axml" />
+    <AndroidResource Include="Resources\layout\create_user.axml" />
+    <AndroidResource Include="Resources\layout\user_page.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\api_interaction_kit\api_interaction_kit.csproj">
+      <Project>{1EB0BDB2-351E-48BB-B855-EAAAF1CAE6ED}</Project>
+      <Name>api_interaction_kit</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

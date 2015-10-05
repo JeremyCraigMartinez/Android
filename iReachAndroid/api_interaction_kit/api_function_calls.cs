@@ -59,7 +59,7 @@ namespace api_interaction_kit
 			HttpResponseMessage response = client.GetAsync (location).Result;
 			if (response.IsSuccessStatusCode) 
 			{
-				var data = response.Content.ReadAsStreamAsync().Result;
+				var data = response.Content.ReadAsStringAsync ().Result;
 				return json_functions.deserializer(data, T);
 			}
 			announcment (Announcement_Type.Error);

@@ -3,4 +3,6 @@
 	<string name="login">Login</string>
 	<string name="create_account">Create Account</string>
 	<string name="app_name">iReach_Android</string>
+	<string name="ApplicationName">Create Account</string>
+	<string name="Hello">iReach_Android</string>
 </resources>

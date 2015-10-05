@@ -10,6 +10,8 @@ namespace api_interaction_kit
 	public class user_information
 	{
 		[DataMember]
+		public string id;
+		[DataMember]
 		public string email;
 		[DataMember]
 		public string pass;
@@ -26,7 +28,9 @@ namespace api_interaction_kit
 		[DataMember]
 		public string sex;
 		[DataMember]
-		public string group;
+		public string[] group;
+		[DataMember]
+		public string doctor;
 	}
 
 	[DataContract]
@@ -80,10 +84,12 @@ namespace api_interaction_kit
 			return JsonConvert.SerializeObject (o);
 		}
 
-		static public Object deserializer (Stream data, Type T)
+		static public Object deserializer (string data, Type T)
 		{
-			System.Runtime.Serialization.Json.DataContractJsonSerializer s = new System.Runtime.Serialization.Json.DataContractJsonSerializer (T);
-			return(s.ReadObject (data));
+			var temp = JsonConvert.DeserializeObject (data, T); 
+			return temp;
+			//System.Runtime.Serialization.Json.DataContractJsonSerializer s = new System.Runtime.Serialization.Json.DataContractJsonSerializer (T);
+			//return(s.ReadObject (data));
 		}
 	}
 }

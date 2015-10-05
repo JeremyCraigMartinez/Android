@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="154.5dp"
+        android:id="@+id/linearLayout1"
+        android:layout_weight="2">
+        <Button
+            android:layout_weight="1"
+            android:text="User Profile"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/user_profile_button"
+            android:background="#ffffed6a"
+            android:textColor="#ff000000" />
+        <Button
+            android:layout_weight="1"
+            android:text="Force Push Raw Data"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/use_the_force"
+            android:background="#ffa3ff6e"
+            android:textColor="#ff000000" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="154.5dp"
+        android:id="@+id/linearLayout1"
+        android:layout_weight="2">
+        <Button
+            android:layout_weight="1"
+            android:text="Eat a KitKat"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/food_button"
+            android:background="#ff7eedff"
+            android:textColor="#ff000000" />
+        <Button
+            android:layout_weight="1"
+            android:text="&lt;Place Holder&gt;"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/button2"
+            android:background="#ffff6c6c"
+            android:textColor="#ff000000" />
+    </LinearLayout>
+</LinearLayout>
