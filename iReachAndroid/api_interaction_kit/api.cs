@@ -14,9 +14,9 @@ namespace api_interaction_kit
 {
 	public enum States { Initializing, LogIn, Running, Offline, Stopping }
 
-	public enum Response_Type { food_sent, login_result, user_created, user_info, raw_data }
+	public enum Response_Type { food_sent, login_result, user_created, user_info, raw_data, doctor_list, group_list }
 
-	public enum Announcement_Type { Initialization_Complete, Log_In_Complete, Error }
+	public enum Announcement_Type { Initialization_Complete, Log_In_Complete, Running, Error }
 
 	public partial class api
 	{
@@ -28,7 +28,6 @@ namespace api_interaction_kit
 
 		private string userName;
 		private string password;
-
 		 
 		//Announces what's going on
 		public delegate void Announcment (Announcement_Type input);
@@ -60,11 +59,6 @@ namespace api_interaction_kit
 
 		public void login (string username, string pass)
 		{
-			client = new HttpClient ();
-			client.BaseAddress = new System.Uri ("https://" + server_ip + ":" + server_port + "/");
-			client.DefaultRequestHeaders.Accept.Clear ();
-			client.DefaultRequestHeaders.Accept.Add (new MediaTypeWithQualityHeaderValue ("application/json"));
-
 			if (authenticate (username, pass)) {
 				userName = username;
 				password = pass;
@@ -125,7 +119,19 @@ namespace api_interaction_kit
 
 		public void initialize (ref ConnectivityManager m)
 		{
+			client = new HttpClient ();
+			client.BaseAddress = new System.Uri ("https://" + server_ip + ":" + server_port + "/");
+			client.DefaultRequestHeaders.Accept.Clear ();
+			client.DefaultRequestHeaders.Accept.Add (new MediaTypeWithQualityHeaderValue ("application/json"));
+
 			inspector = new hardware_inspector(ref m);
+			event_queue = new ConcurrentQueue<event_object> ();
+			long_term_storage = new ConcurrentQueue<event_object> ();
+		}
+
+		public void _create_user(create_user_information user)
+		{
+			server_response_helper(create_user (user), Response_Type.user_created);
 		}
 
 		private void connect ()
@@ -143,8 +149,7 @@ namespace api_interaction_kit
 		/// </summary>
 		private void start ()
 		{
-			event_queue = new ConcurrentQueue<event_object> ();
-			long_term_storage = new ConcurrentQueue<event_object> ();
+			announcment (Announcement_Type.Running);
 			while (state == States.Running) {
 
 				if (!event_queue.IsEmpty) 
@@ -169,9 +174,8 @@ namespace api_interaction_kit
 			event_queue.Enqueue(new request_user_event (this));
 		}
 
-		public void api_create_new_user (user_information user)
+		public void api_create_new_user (create_user_information user)
 		{
-			//events.Add (new create_user_event (user, this));
 			event_queue.Enqueue(new create_user_event (user, this));
 		}
 
@@ -182,22 +186,27 @@ namespace api_interaction_kit
 
 		public void api_create_group (string name)
 		{
-			//events.Add (new request_create_group_event (name, this));
 			event_queue.Enqueue(new request_create_group_event (name, this));
 		}
 
 		public void api_food_upload (string id, int serving_size)
 		{
-			//events.Add (new post_food_item(id, serving_size, this));
 			event_queue.Enqueue(new post_food_item(id, serving_size, this));
 		}
 
 		public void api_upload_raw_data(string time_stamp, string data)
 		{
-			//events.Add (new raw_data_event(time_stamp, data, this));
-			event_queue.Enqueue(new raw_data_event(time_stamp, data, this));
+			long_term_storage.Enqueue(new raw_data_event(time_stamp, data, this));
 		}
-			
+
+		public void api_get_doctor_list()
+		{
+			event_queue.Enqueue (new request_doctor_event (this));
+		}
+		public void api_get_group_list()
+		{
+			event_queue.Enqueue (new request_group_event (this));
+		}
 
 		private void exit ()
 		{

@@ -3,6 +3,8 @@
 	<uses-sdk android:minSdkVersion="16" />
 	<application android:label="iReach_Android">
 
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 	<receiver android:name=".BootReceiver" android:enabled="true" android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
 			<intent-filter>
 				<action android:name="android.intent.action.BOOT_COMPLETED" />

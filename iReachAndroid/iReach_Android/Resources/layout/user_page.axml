@@ -163,7 +163,15 @@
         android:gravity="right"
         android:weightSum="2"
         android:minWidth="25px"
-        android:minHeight="25px" />
+        android:minHeight="25px">
+        <Button
+            android:text="Back"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/user_back_btn"
+            android:background="#ffff4b4b"
+            android:textColor="#ff000000" />
+    </LinearLayout>
     <View
         android:layout_height="1dip"
         android:background="#FF909090"

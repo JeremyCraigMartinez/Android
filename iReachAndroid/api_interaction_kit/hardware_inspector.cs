@@ -17,8 +17,9 @@ namespace api_interaction_kit
 
 		public bool connected_to_wifi()
 		{
-			var mobile_state = connectivity_manager.GetNetworkInfo(ConnectivityType.Mobile).GetState();
-			return(mobile_state == NetworkInfo.State.Connected);
+//			var mobile_state = connectivity_manager.GetNetworkInfo(ConnectivityType.Mobile).GetState();
+//			return(mobile_state == NetworkInfo.State.Connected);
+			return true;
 		}
 	}
 

@@ -40,9 +40,9 @@ namespace api_interaction_kit
 
 		public class create_user_event : event_object
 		{
-			user_information _user;
+			create_user_information _user;
 
-			public create_user_event (user_information user, api Reference)
+			public create_user_event (create_user_information user, api Reference)
 			{
 				_user = user;
 				reference = Reference;
@@ -50,7 +50,7 @@ namespace api_interaction_kit
 
 			public override void execute ()
 			{
-				reference.create_user (_user);
+				reference.server_response_helper(reference.create_user (_user), Response_Type.user_created);
 			}
 		}
 
@@ -108,6 +108,26 @@ namespace api_interaction_kit
 			{
 				bool t = reference.post_raw_data (time_stamp, data);
 				reference.server_response_helper (t, Response_Type.raw_data);
+			}
+		}
+		public class request_doctor_event : event_object
+		{
+			public request_doctor_event (api Reference) {reference = Reference;}
+
+			public override void execute ()
+			{
+				Doctors d = (Doctors)reference.request_doctor_list ();
+				reference.server_response_helper (d, Response_Type.doctor_list);
+			}
+		}
+		public class request_group_event : event_object
+		{
+			public request_group_event (api Reference) {reference = Reference;}
+
+			public override void execute ()
+			{
+				Groups g = (Groups)reference.request_group_list ();
+				reference.server_response_helper (g, Response_Type.group_list);
 			}
 		}
 	}

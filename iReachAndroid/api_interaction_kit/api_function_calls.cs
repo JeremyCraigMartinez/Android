@@ -15,10 +15,17 @@ namespace api_interaction_kit
 		{
 			return _get ("patients", typeof(user_information));
 		}
-
-		private void create_user(user_information user)
+		private Object request_doctor_list()
 		{
-			post ("patients", user.ToString());
+			return _get ("doctors", typeof(Doctors));
+		}
+		private Object request_group_list()
+		{
+			return _get ("groups", typeof(Groups));
+		}
+		private bool create_user(create_user_information user)
+		{
+			return post ("patients", json_functions.serializer(user));
 		}
 
 		private void create_group(string name)
@@ -40,9 +47,9 @@ namespace api_interaction_kit
 			return post("diet", json_functions.serializer(new food_item() {foodID =  _id , quantity = _serving_size,
 				created = DateTime.Now.ToString("HH:mm-MM-dd-yyyy")}));
 		}
-		private bool post_raw_data(string _time_stamp, string _data)
+		private bool post_raw_data(string time_stamp, string _data)
 		{
-			return post ("raw_data", json_functions.serializer (new raw_data () { time_stamp = _time_stamp, data = _data }));
+			return post ("raw_data", json_functions.serializer (new raw_data () { created = time_stamp, data = _data, email = userName }));
 		}
 
 		private bool post(string location, string content)
