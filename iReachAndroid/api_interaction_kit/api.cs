@@ -47,6 +47,7 @@ namespace api_interaction_kit
 
 		hardware_inspector inspector;
 
+
 		#endregion
 
 		public api ()
@@ -124,7 +125,7 @@ namespace api_interaction_kit
 			client.DefaultRequestHeaders.Accept.Clear ();
 			client.DefaultRequestHeaders.Accept.Add (new MediaTypeWithQualityHeaderValue ("application/json"));
 
-			inspector = new hardware_inspector(ref m);
+			inspector = new hardware_inspector();
 			event_queue = new ConcurrentQueue<event_object> ();
 			long_term_storage = new ConcurrentQueue<event_object> ();
 		}
@@ -160,7 +161,7 @@ namespace api_interaction_kit
 				}
 
 				if (!long_term_storage.IsEmpty &&
-					inspector.connected_to_wifi()) 
+					inspector.wifi) 
 				{
 					event_object e;
 					if (long_term_storage.TryDequeue (out e))
@@ -194,9 +195,10 @@ namespace api_interaction_kit
 			event_queue.Enqueue(new post_food_item(id, serving_size, this));
 		}
 
-		public void api_upload_raw_data(string time_stamp, string data)
+		public void api_upload_raw_data(raw_data input)
 		{
-			long_term_storage.Enqueue(new raw_data_event(time_stamp, data, this));
+			input.email = userName;
+			long_term_storage.Enqueue(new raw_data_event(input, this));
 		}
 
 		public void api_get_doctor_list()

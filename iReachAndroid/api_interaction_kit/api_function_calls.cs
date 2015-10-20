@@ -47,9 +47,9 @@ namespace api_interaction_kit
 			return post("diet", json_functions.serializer(new food_item() {foodID =  _id , quantity = _serving_size,
 				created = DateTime.Now.ToString("HH:mm-MM-dd-yyyy")}));
 		}
-		private bool post_raw_data(string time_stamp, string _data)
+		private bool post_raw_data(raw_data input)
 		{
-			return post ("raw_data", json_functions.serializer (new raw_data () { created = time_stamp, data = _data, email = userName }));
+			return post ("raw_data", json_functions.serializer (input));
 		}
 
 		private bool post(string location, string content)

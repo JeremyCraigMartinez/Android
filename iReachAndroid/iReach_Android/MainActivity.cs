@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Text;
+using System.Collections.Generic;
 using Android.App;
 using Android.Net;
 using Android.Content;
@@ -27,6 +27,8 @@ namespace iReach_Android
 		private string m_email;
 		private string m_pass;
 		private string sex_gender;
+		private sensor_data sd;
+		private DateTime time;
 
 		private static readonly object _synclock = new object();
 
@@ -49,14 +51,49 @@ namespace iReach_Android
 		{
 			if (initialized) {
 				lock (_synclock) {
-					
-					string text = "";
-					text += e.Values [0] + ", ";
-					text += e.Values [1] + ", ";
-					text += e.Values [2];
-					//for (int i = 0; i < e.Values.Count; i++)
-								//	interaction_kit.api_upload_raw_data (DateTime.Now.ToString("HH:mm-MM-dd-yyyy"), e.Values [i].ToString ());
-					interaction_kit.api_upload_raw_data (DateTime.Now.ToString("HH:mm-MM-dd-yyyy"), text);
+					if(time.Second == DateTime.Now.Second)
+					{
+						if (e.Sensor.Type == SensorType.Accelerometer) {
+							sd.accel.x.Add (e.Values [0].ToString());
+							sd.accel.y.Add (e.Values [1].ToString());
+							sd.accel.z.Add (e.Values [2].ToString());
+						}
+						if (e.Sensor.Type == SensorType.Gyroscope) {
+							sd.gyro.x.Add (e.Values [0].ToString());
+							sd.gyro.y.Add (e.Values [1].ToString());
+							sd.gyro.z.Add (e.Values [2].ToString());
+						}
+						if (e.Sensor.Type == SensorType.MagneticField) {
+							sd.mag.x.Add (e.Values [0].ToString());
+							sd.mag.y.Add (e.Values [1].ToString());
+							sd.mag.z.Add (e.Values [2].ToString());
+						}
+					}
+					else
+					{
+						try {
+							raw_data data = new raw_data (new _a () {x = sd.accel.x.ToArray (),
+								y = sd.accel.y.ToArray (),
+								z = sd.accel.z.ToArray ()
+							},
+								                new _g () {x = sd.gyro.x.ToArray (),
+									y = sd.gyro.y.ToArray (),
+									z = sd.gyro.z.ToArray ()
+								},
+								                new _m () {x = sd.mag.x.ToArray (),
+									y = sd.mag.y.ToArray (),
+									z = sd.mag.z.ToArray ()
+								}
+							                );
+							
+							data.created = time.ToString ("HH:mm-MM-dd-yyyy");
+							sd = new sensor_data ();
+							time = DateTime.Now;
+							interaction_kit.api_upload_raw_data (data);
+						} catch (Exception ex) {
+							
+						}
+					}
 				}
 			}
 		}
@@ -64,7 +101,9 @@ namespace iReach_Android
 		protected override void OnResume()
 		{
 			base.OnResume();
-			sensor_manager.RegisterListener(this, sensor_manager.GetDefaultSensor(SensorType.Accelerometer), SensorDelay.Ui);
+			sensor_manager.RegisterListener(this, sensor_manager.GetDefaultSensor(SensorType.Accelerometer), SensorDelay.Ui); // ~15Hz
+			sensor_manager.RegisterListener(this, sensor_manager.GetDefaultSensor(SensorType.Gyroscope), SensorDelay.Ui);
+			sensor_manager.RegisterListener(this, sensor_manager.GetDefaultSensor(SensorType.MagneticField), SensorDelay.Ui);
 		}
 
 		protected override void OnPause()
@@ -161,15 +200,9 @@ namespace iReach_Android
 			});
 		}
 
-		void Create_cancel_Click (object sender, EventArgs e)
-		{
-			change_state (ref state, State.Initialize);
-		}
+		void Create_cancel_Click (object sender, EventArgs e) { change_state (ref state, State.Initialize); }
 
-		void Create_user_btn_Click (object sender, EventArgs e)
-		{
-			change_state (ref state, State.Create_User_Page);
-		}
+		void Create_user_btn_Click (object sender, EventArgs e)	{ change_state (ref state, State.Create_User_Page); }
 
 		void User_info_btn_Click (object sender, EventArgs e)
 		{
@@ -177,10 +210,7 @@ namespace iReach_Android
 			SetContentView (Resource.Layout.user_page);
 		}
 
-		void Kit_kat_Click (object sender, EventArgs e)
-		{
-			interaction_kit.api_food_upload ("19250", 1);
-		}
+		void Kit_kat_Click (object sender, EventArgs e) { interaction_kit.api_food_upload ("19250", 1); }
 
 		void initialize()
 		{
@@ -191,7 +221,8 @@ namespace iReach_Android
 			interaction_kit.announcment += Interaction_kit_announcment;
 
 			sensor_manager = (SensorManager)GetSystemService (Context.SensorService);
-
+			sd = new sensor_data ();
+			time = DateTime.Now;
 
 			SetContentView (Resource.Layout.Main);
 		}
