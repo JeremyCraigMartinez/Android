@@ -5,4 +5,10 @@
 	<string name="app_name">iReach_Android</string>
 	<string name="ApplicationName">Create Account</string>
 	<string name="Hello">iReach_Android</string>
+	<string name="sensor_prompt">Fastest</string>
+	<string-array name="sensor_settings">
+    	<item>Fast</item>
+    	<item>Normal</item>
+    	<item>Slow</item>
+	</string-array>
 </resources>

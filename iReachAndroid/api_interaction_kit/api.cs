@@ -28,6 +28,8 @@ namespace api_interaction_kit
 
 		private string userName;
 		private string password;
+
+		public bool force_pushing;
 		 
 		//Announces what's going on
 		public delegate void Announcment (Announcement_Type input);
@@ -128,6 +130,8 @@ namespace api_interaction_kit
 			inspector = new hardware_inspector();
 			event_queue = new ConcurrentQueue<event_object> ();
 			long_term_storage = new ConcurrentQueue<event_object> ();
+
+			force_pushing = false;
 		}
 
 		public void _create_user(create_user_information user)
@@ -160,8 +164,8 @@ namespace api_interaction_kit
 						e.execute ();
 				}
 
-				if (!long_term_storage.IsEmpty &&
-					inspector.wifi) 
+				if ((!long_term_storage.IsEmpty &&
+					inspector.wifi) || force_pushing) 
 				{
 					event_object e;
 					if (long_term_storage.TryDequeue (out e))
@@ -214,5 +218,6 @@ namespace api_interaction_kit
 		{
 			client.Dispose ();
 		}
+			
 	}
 }

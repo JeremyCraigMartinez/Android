@@ -12,7 +12,7 @@ namespace api_interaction_kit
 
 		public hardware_inspector()
 		{
-			wifi = true;
+			wifi = false;
 		}
 	}
 

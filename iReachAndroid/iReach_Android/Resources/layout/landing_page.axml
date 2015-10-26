@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@android:color/background_light">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -19,7 +20,7 @@
             android:textColor="#ff000000" />
         <Button
             android:layout_weight="1"
-            android:text="Force Push Raw Data"
+            android:text="User Activity"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/use_the_force"
@@ -34,7 +35,7 @@
         android:layout_weight="2">
         <Button
             android:layout_weight="1"
-            android:text="Eat a KitKat"
+            android:text="Log Food Data"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/food_button"
@@ -42,10 +43,10 @@
             android:textColor="#ff000000" />
         <Button
             android:layout_weight="1"
-            android:text="&lt;Place Holder&gt;"
+            android:text="Settings"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:id="@+id/button2"
+            android:id="@+id/settings_button"
             android:background="#ffff6c6c"
             android:textColor="#ff000000" />
     </LinearLayout>

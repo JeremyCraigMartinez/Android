@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/background_light"
+    android:minWidth="25px"
+    android:minHeight="25px">
+<!--    <TextView
+    	android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sensor_prompt"
+    />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sensor_spinner" 
+        android:prompt="@string/sensor_prompt"
+    />-->
+    <Button
+        android:text="Force Push"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/force_push_button"
+        android:textColor="#ffffffff" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/space1"
+        android:layout_marginBottom="10dp" />
+    <Button
+        android:text="Back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/settings_back_button"
+        android:background="@android:color/holo_red_dark" />
+</LinearLayout>
