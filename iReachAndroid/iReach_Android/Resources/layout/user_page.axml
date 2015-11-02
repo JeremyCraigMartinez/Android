@@ -5,7 +5,8 @@
     android:stretchColumns="1"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    android:paddingBottom="4dp">
+    android:paddingBottom="4dp"
+    android:background="@android:color/background_light">
     <TableRow>
         <TextView
             android:layout_column="0"

@@ -54,19 +54,6 @@ namespace api_interaction_kit
 			}
 		}
 
-		public class request_accel_event : event_object
-		{
-			public request_accel_event ()
-			{
-				
-			}
-
-			public override void execute ()
-			{
-			
-			}
-		}
-
 		public class request_create_group_event : event_object
 		{
 			public request_create_group_event (string group, api Reference)

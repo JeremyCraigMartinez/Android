@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Android.Hardware;
 using api_interaction_kit;
 
@@ -15,59 +16,75 @@ namespace iReach_Android
 		{
 			if (initialized) {
 				lock (_synclock) {
-					if(time.Second == DateTime.Now.Second)
+					if(time.Second + 30 >= DateTime.Now.Second)
 					{
 						if (e.Sensor.Type == SensorType.Accelerometer) {
-							sd.accel.x.Add (e.Values [0].ToString());
-							sd.accel.y.Add (e.Values [1].ToString());
-							sd.accel.z.Add (e.Values [2].ToString());
+							sd.accel.x.Add (e.Values [0]);
+							sd.accel.y.Add (e.Values [1]);
+							sd.accel.z.Add (e.Values [2]);
 						}
 						if (e.Sensor.Type == SensorType.Gyroscope) {
-							sd.gyro.x.Add (e.Values [0].ToString());
-							sd.gyro.y.Add (e.Values [1].ToString());
-							sd.gyro.z.Add (e.Values [2].ToString());
+							sd.gyro.x.Add (e.Values [0]);
+							sd.gyro.y.Add (e.Values [1]);
+							sd.gyro.z.Add (e.Values [2]);
 						}
 						if (e.Sensor.Type == SensorType.MagneticField) {
-							sd.mag.x.Add (e.Values [0].ToString());
-							sd.mag.y.Add (e.Values [1].ToString());
-							sd.mag.z.Add (e.Values [2].ToString());
+							sd.mag.x.Add (e.Values [0]);
+							sd.mag.y.Add (e.Values [1]);
+							sd.mag.z.Add (e.Values [2]);
 						}
 					}
 					else
 					{
-						try {
-							raw_data data = new raw_data (new _a () {x = sd.accel.x.ToArray (),
-								y = sd.accel.y.ToArray (),
-								z = sd.accel.z.ToArray ()
-							},
-								new _g () {x = sd.gyro.x.ToArray (),
-									y = sd.gyro.y.ToArray (),
-									z = sd.gyro.z.ToArray ()
-								},
-								new _m () {x = sd.mag.x.ToArray (),
-									y = sd.mag.y.ToArray (),
-									z = sd.mag.z.ToArray ()
-								}
-							);
-
-							data.created = time.ToString ("HH:mm-MM-dd-yyyy");
-							sd = new sensor_data ();
-							time = DateTime.Now;
-							interaction_kit.api_upload_raw_data (data);
-						} catch (Exception ex) {
-							string _e_ = ex.ToString();
-						}
+						//Task.Factory.StartNew (() => upload_raw_data (sd));
+						Task t = new Task(()=>upload_raw_data(sd));
+						t.Start ();
+						sd = new sensor_data ();
+						time = DateTime.Now;
 					}
 				}
+			}
+		}
+
+		protected void upload_raw_data(sensor_data input)
+		{
+			try 
+			{
+				raw_data data = new raw_data (new _a () {
+					x = input.accel.x.ToArray (),
+					y = input.accel.y.ToArray (),
+					z = input.accel.z.ToArray ()
+				},
+					new _g () {
+						x = input.gyro.x.ToArray (),
+						y = input.gyro.y.ToArray (),
+						z = input.gyro.z.ToArray ()
+					},
+					new _m () {
+						x = input.mag.x.ToArray (),
+						y = input.mag.y.ToArray (),
+						z = input.mag.z.ToArray ()
+					}
+				);
+
+				data.created = time.ToString ("HH:mm-MM-dd-yyyy");
+				if((data.data.accelerometer.x.Length > 0 && data.data.accelerometer.y.Length > 0 && data.data.accelerometer.z.Length > 0) ||
+					(data.data.gyroscope.x.Length > 0 && data.data.gyroscope.y.Length > 0 && data.data.gyroscope.z.Length > 0) ||
+					(data.data.magnetometer.x.Length > 0 && data.data.magnetometer.y.Length > 0 && data.data.magnetometer.z.Length > 0))
+						interaction_kit.api_upload_raw_data (data);
+			} 
+			catch (Exception ex) 
+			{
+				string _e_ = ex.ToString();
 			}
 		}
 
 		protected override void OnResume()
 		{
 			base.OnResume();
-			sensor_manager.RegisterListener(this, sensor_manager.GetDefaultSensor(SensorType.Accelerometer), SensorDelay.Fastest); // ~50Hz
-			sensor_manager.RegisterListener(this, sensor_manager.GetDefaultSensor(SensorType.Gyroscope), SensorDelay.Fastest);
-			sensor_manager.RegisterListener(this, sensor_manager.GetDefaultSensor(SensorType.MagneticField), SensorDelay.Fastest);
+			sensor_manager.RegisterListener(this, sensor_manager.GetDefaultSensor(SensorType.Accelerometer), SensorDelay.Game); // ~100Hz
+			sensor_manager.RegisterListener(this, sensor_manager.GetDefaultSensor(SensorType.Gyroscope), SensorDelay.Game);
+			sensor_manager.RegisterListener(this, sensor_manager.GetDefaultSensor(SensorType.MagneticField), SensorDelay.Game);
 		}
 
 		protected override void OnPause()

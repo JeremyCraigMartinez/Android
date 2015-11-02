@@ -43,7 +43,7 @@ namespace iReach_Android
 		{
 			interaction_kit = new api ();
 			connectivity_manager = (ConnectivityManager)GetSystemService (ConnectivityService);
-			interaction_kit.initialize(ref connectivity_manager);
+			interaction_kit.initialize();
 			interaction_kit.server_update += Interaction_kit_server_update;
 			interaction_kit.announcment += Interaction_kit_announcment;
 

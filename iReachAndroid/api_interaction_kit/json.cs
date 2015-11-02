@@ -73,24 +73,24 @@ namespace api_interaction_kit
 	{
 		public class a
 		{
-			public List<string> x;
-			public List<string> y;
-			public List<string> z;
-			public a() { x = new List<string>(); y = new List<string>(); z = new List<string>(); }
+			public List<float> x;
+			public List<float> y;
+			public List<float> z;
+			public a() { x = new List<float>(); y = new List<float>(); z = new List<float>(); }
 		}
 		public class g
 		{
-			public List<string> x;
-			public List<string> y;
-			public List<string> z;
-			public g() { x = new List<string>(); y = new List<string>(); z = new List<string>(); }
+			public List<float> x;
+			public List<float> y;
+			public List<float> z;
+			public g() { x = new List<float>(); y = new List<float>(); z = new List<float>(); }
 		}
 		public class m
 		{
-			public List<string> x;
-			public List<string> y;
-			public List<string> z;
-			public m() { x = new List<string>(); y = new List<string>(); z = new List<string>(); }
+			public List<float> x;
+			public List<float> y;
+			public List<float> z;
+			public m() { x = new List<float>(); y = new List<float>(); z = new List<float>(); }
 		}
 		public a accel;
 		public g gyro;
@@ -105,31 +105,38 @@ namespace api_interaction_kit
 		public string created;
 		[DataMember]
 		public string email;
+		[DataContract]
+		public class Data
+		{
+			[DataMember]
+			public _a accelerometer;
+			[DataMember]
+			public _m magnetometer;
+			[DataMember]
+			public _g gyroscope;
+			public Data(_a a, _g g, _m m) {accelerometer = a; gyroscope = g; magnetometer = m;}
+		}
 		[DataMember]
-		public _a accel;
-		[DataMember]
-		public _g gyro;
-		[DataMember]
-		public _m mag;
-		public raw_data(_a a, _g g, _m m) { accel = a; gyro = g; mag = m; }
+		public Data data;
+		public raw_data(_a a, _g g, _m m) { data = new Data (a, g, m); }
 	}
 	public class _a
 	{
-		public string[] x;
-		public string[] y;
-		public string[] z;
+		public float[] x;
+		public float[] y;
+		public float[] z;
 	}
 	public class _g
 	{
-		public string[] x;
-		public string[] y;
-		public string[] z;
+		public float[] x;
+		public float[] y;
+		public float[] z;
 	}
 	public class _m
 	{
-		public string[] x;
-		public string[] y;
-		public string[] z;
+		public float[] x;
+		public float[] y;
+		public float[] z;
 	}
 
 	[DataContract]

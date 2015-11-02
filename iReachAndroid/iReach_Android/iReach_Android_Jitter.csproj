@@ -79,12 +79,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
+    <Folder Include="Main Activity Helpers\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\api_interaction_kit\api_interaction_kit.csproj">
       <Project>{1EB0BDB2-351E-48BB-B855-EAAAF1CAE6ED}</Project>
       <Name>api_interaction_kit</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Main Activity Helpers\" />
   </ItemGroup>
 </Project>

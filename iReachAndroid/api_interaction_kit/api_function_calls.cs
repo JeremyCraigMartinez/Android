@@ -40,10 +40,6 @@ namespace api_interaction_kit
 
 		private bool food(string _id, int _serving_size)
 		{
-//			string now = DateTime.Now.ToString("HH:mm-MM-dd-yyyy");
-//			string pattern = "HH:mm-MM-dd-yyyy";
-//			string parsed = DateTime.ParseExact (now, pattern, CultureInfo.InvariantCulture).ToString ();
-
 			return post("diet", json_functions.serializer(new food_item() {foodID =  _id , quantity = _serving_size,
 				created = DateTime.Now.ToString("HH:mm-MM-dd-yyyy")}));
 		}

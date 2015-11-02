@@ -120,7 +120,7 @@ namespace api_interaction_kit
 			}
 		}
 
-		public void initialize (ref ConnectivityManager m)
+		public void initialize ()
 		{
 			client = new HttpClient ();
 			client.BaseAddress = new System.Uri ("https://" + server_ip + ":" + server_port + "/");
