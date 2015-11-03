@@ -164,8 +164,8 @@ namespace api_interaction_kit
 						e.execute ();
 				}
 
-				if ((!long_term_storage.IsEmpty &&
-					inspector.wifi) || force_pushing) 
+				if (!long_term_storage.IsEmpty &&
+					(inspector.wifi || force_pushing)) 
 				{
 					event_object e;
 					if (long_term_storage.TryDequeue (out e))

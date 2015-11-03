@@ -1,4 +1,5 @@
 ﻿using System;
+using Android;
 using Android.App;
 using Android.Net;
 using Android.Content;
@@ -9,7 +10,7 @@ using api_interaction_kit;
 
 namespace iReach_Android
 {
-	[Activity (Label = "iReach_Android", MainLauncher = true, Icon = "@drawable/ireach_logo")]
+	[Activity (Label = "iReach_Android", MainLauncher = true, Icon = "@drawable/ireach_logo", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
 	public partial class MainActivity : Activity, ISensorEventListener
 	{
 		private enum State {Initialize, Log_In, Create_User_Page, Landing_Page, Account_Page, Settings_Page, Exit}
@@ -26,6 +27,7 @@ namespace iReach_Android
 		private string sex_gender;
 		private sensor_data sd;
 		private DateTime time;
+		int future_cut_off_time;
 
 		private static readonly object _synclock = new object();
 
@@ -50,6 +52,7 @@ namespace iReach_Android
 			sensor_manager = (SensorManager)GetSystemService (Context.SensorService);
 			sd = new sensor_data ();
 			time = DateTime.Now;
+			future_cut_off_time = 0;
 
 			SetContentView (Resource.Layout.Main);
 		}

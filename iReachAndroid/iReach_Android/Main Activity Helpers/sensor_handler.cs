@@ -16,31 +16,28 @@ namespace iReach_Android
 		{
 			if (initialized) {
 				lock (_synclock) {
-					if(time.Second + 30 >= DateTime.Now.Second)
-					{
-						if (e.Sensor.Type == SensorType.Accelerometer) {
-							sd.accel.x.Add (e.Values [0]);
-							sd.accel.y.Add (e.Values [1]);
-							sd.accel.z.Add (e.Values [2]);
-						}
-						if (e.Sensor.Type == SensorType.Gyroscope) {
-							sd.gyro.x.Add (e.Values [0]);
-							sd.gyro.y.Add (e.Values [1]);
-							sd.gyro.z.Add (e.Values [2]);
-						}
-						if (e.Sensor.Type == SensorType.MagneticField) {
-							sd.mag.x.Add (e.Values [0]);
-							sd.mag.y.Add (e.Values [1]);
-							sd.mag.z.Add (e.Values [2]);
-						}
-					}
-					else
+					if(future_cut_off_time == DateTime.Now.Second)
 					{
 						//Task.Factory.StartNew (() => upload_raw_data (sd));
 						Task t = new Task(()=>upload_raw_data(sd));
 						t.Start ();
 						sd = new sensor_data ();
-						time = DateTime.Now;
+						future_cut_off_time = (DateTime.Now.Second + 30) % 30;
+					}
+					if (e.Sensor.Type == SensorType.Accelerometer) {
+						sd.accel.x.Add (e.Values [0]);
+						sd.accel.y.Add (e.Values [1]);
+						sd.accel.z.Add (e.Values [2]);
+					}
+					if (e.Sensor.Type == SensorType.Gyroscope) {
+						sd.gyro.x.Add (e.Values [0]);
+						sd.gyro.y.Add (e.Values [1]);
+						sd.gyro.z.Add (e.Values [2]);
+					}
+					if (e.Sensor.Type == SensorType.MagneticField) {
+						sd.mag.x.Add (e.Values [0]);
+						sd.mag.y.Add (e.Values [1]);
+						sd.mag.z.Add (e.Values [2]);
 					}
 				}
 			}
