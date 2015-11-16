@@ -43,6 +43,7 @@ namespace api_interaction_kit_testing_suite
 			interaction_kit.login ("test@test.com", "test");
 			interaction_kit.api_request_user_data ();
 			test_raw_data ();
+			test_food_json ();
 			post ("Activating Full Sensor Data Gathering");
 			sensor_manager.RegisterListener(this, sensor_manager.GetDefaultSensor(SensorType.Accelerometer), SensorDelay.Game); // ~50Hz
 			sensor_manager.RegisterListener(this, sensor_manager.GetDefaultSensor(SensorType.Gyroscope), SensorDelay.Game);
@@ -88,7 +89,8 @@ namespace api_interaction_kit_testing_suite
 					post ("Login Successful");
 				else
 					post ("Login Failed");
-			} else if (r == Response_Type.user_info) {
+			}
+			else if (r == Response_Type.user_info) {
 				user_information user = (user_information)o;
 				if (user.first_name != "test") {
 					post ("First Name Incorrect");
@@ -111,13 +113,22 @@ namespace api_interaction_kit_testing_suite
 					return;
 				}
 				post ("User Information Correct");
-			} else if (r == Response_Type.raw_data) {
+			}
+			else if (r == Response_Type.raw_data) {
 				if ((bool)o) {
 					set_output (true);
 					post ("Posting Raw Sensor Data Was Successful");
 				} else {
 					set_output (false);
 					post ("Posting Raw Sensor Data Failed");
+				}
+			}
+			else if (r == Response_Type.food_sent) {
+				if ((bool)o) {
+					post ("Posting the Food Data Was Successful");
+				} else {
+					set_output (false);
+					post ("Posting Food Data Failed");
 				}
 			}
 
@@ -222,7 +233,24 @@ namespace api_interaction_kit_testing_suite
 			post (json);
 			return true;
 		}
+
+		protected bool test_food_json()
+		{
+			post ("Testing Food Json Serializer");
+
+			food_item food = new food_item ();
+			food.foodID = "35008";
+			food.created = "08:00-08-08-1990";
+			food.quantity = 3;
+
+			string food_string = json_functions.serializer (food);
+			if (!food_string.Contains ("\"created\":\"08:00-08-08-1990\"")) { post ("Failed to find creation date"); return false; }
+			if (!food_string.Contains ("\"foodID\":\"35008\"")) { post ("Failed to find foodID"); return false; }
+			if (!food_string.Contains ("\"quantity\":3")) { post ("Failed to find food quantity"); return false; }
+
+			interaction_kit.api_food_upload (food.foodID, food.quantity);
+
+			return true;
+		}
 	}
 }
-
-
