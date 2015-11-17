@@ -14,7 +14,7 @@ namespace api_interaction_kit
 {
 	public enum States { Initializing, LogIn, Running, Offline, Stopping }
 
-	public enum Response_Type { food_sent, login_result, user_created, user_info, raw_data, doctor_list, group_list }
+	public enum Response_Type { food_sent, login_result, user_created, user_info, raw_data, doctor_list, group_list, user_info_updated }
 
 	public enum Announcement_Type { Initialization_Complete, Log_In_Complete, Running, Error }
 
@@ -212,6 +212,10 @@ namespace api_interaction_kit
 		public void api_get_group_list()
 		{
 			event_queue.Enqueue (new request_group_event (this));
+		}
+		public void api_update_user_info(user_information info)
+		{
+			event_queue.Enqueue(new update_user_information_event(info, this));
 		}
 
 		private void exit ()

@@ -116,5 +116,16 @@ namespace api_interaction_kit
 				reference.server_response_helper (g, Response_Type.group_list);
 			}
 		}
+		public class update_user_information_event : event_object
+		{
+			user_information user;
+			public update_user_information_event (user_information u, api Reference) {user = u; reference = Reference;}
+
+			public override void execute ()
+			{
+				bool t = reference.update_user_info(user);
+				reference.server_response_helper(t, Response_Type.user_info_updated);
+			}
+		}
 	}
 }

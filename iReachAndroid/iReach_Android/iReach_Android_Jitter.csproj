@@ -76,6 +76,7 @@
       <Link>Resources\drawable-mdpi\iReach_Logo.png</Link>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\settings_layout.axml" />
+    <AndroidResource Include="Resources\layout\food_page.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

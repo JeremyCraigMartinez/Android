@@ -47,6 +47,10 @@ namespace api_interaction_kit
 		{
 			return post ("raw_data", json_functions.serializer (input));
 		}
+		private bool update_user_info(user_information content)
+		{
+			return _put("patients/update_info", json_functions.serializer(content));
+		}
 
 		private bool post(string location, string content)
 		{
@@ -68,9 +72,10 @@ namespace api_interaction_kit
 			announcment (Announcement_Type.Error);
 			return null;
 		}
-		private bool _put(string location, HttpContent content)
+		private bool _put(string location, string content)
 		{
-			HttpResponseMessage response = client.PutAsync (location, content).Result;
+			HttpResponseMessage response = client.PutAsync (location, 
+						new StringContent(content, Encoding.UTF8, "application/json")).Result
 			if (response.IsSuccessStatusCode)
 				return true;
 			return false;
