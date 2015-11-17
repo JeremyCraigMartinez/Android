@@ -27,7 +27,8 @@
         android:layout_span="2"
         android:inputType="textEmailAddress"
         android:background="@android:color/background_light"
-        android:hint="Email Address" />
+        android:hint="Email Address"
+        android:textColor="#ff000000" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -37,7 +38,8 @@
         android:layout_span="2"
         android:inputType="textPassword"
         android:background="@android:color/background_light"
-        android:hint="Password" />
+        android:hint="Password"
+        android:textColor="#ff000000" />
     <View
         android:layout_height="1dip"
         android:background="#FF909090"
@@ -51,7 +53,8 @@
         android:layout_span="2"
         android:inputType="textPersonName"
         android:background="@android:color/background_light"
-        android:hint="First Name" />
+        android:hint="First Name"
+        android:textColor="#ff000000" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -61,7 +64,8 @@
         android:layout_span="2"
         android:inputType="textPersonName"
         android:background="@android:color/background_light"
-        android:hint="Last Name" />
+        android:hint="Last Name"
+        android:textColor="#ff000000" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -101,7 +105,8 @@
         android:ems="3"
         android:inputType="number"
         android:background="@android:color/background_light"
-        android:hint="Height" />
+        android:hint="Height"
+        android:textColor="#ff000000" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -113,7 +118,8 @@
         android:ems="3"
         android:inputType="number"
         android:background="@android:color/background_light"
-        android:hint="Weight" />
+        android:hint="Weight"
+        android:textColor="#ff000000" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -125,7 +131,8 @@
         android:ems="3"
         android:inputType="number"
         android:background="@android:color/background_light"
-        android:hint="Age" />
+        android:hint="Age"
+        android:textColor="#ff000000" />
     <TableRow
         android:id="@+id/tableRow1">
         <TextView

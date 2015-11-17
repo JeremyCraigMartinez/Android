@@ -13,7 +13,7 @@ namespace iReach_Android
 	[Activity (Label = "iReach_Android", MainLauncher = true, Icon = "@drawable/ireach_logo", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
 	public partial class MainActivity : Activity, ISensorEventListener
 	{
-		private enum State {Initialize, Log_In, Create_User_Page, Landing_Page, Account_Page, Settings_Page, Exit}
+		private enum State {Initialize, Log_In, Create_User_Page, Landing_Page, Account_Page, Settings_Page, Food_Page, Exit}
 		private State state;
 
 		private api interaction_kit;

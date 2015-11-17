@@ -75,7 +75,7 @@ namespace api_interaction_kit
 		private bool _put(string location, string content)
 		{
 			HttpResponseMessage response = client.PutAsync (location, 
-						new StringContent(content, Encoding.UTF8, "application/json")).Result
+				new StringContent(content, Encoding.UTF8, "application/json")).Result;
 			if (response.IsSuccessStatusCode)
 				return true;
 			return false;

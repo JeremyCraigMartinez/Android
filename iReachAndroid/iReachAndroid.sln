@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iReach_Android_Jitter", "iR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iReach_Android.UITests", "iReach_Android.UITests\iReach_Android.UITests.csproj", "{A1ED981D-164D-4472-9079-877AB146F2F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api_interaction_kit_testing_suite", "api_interaction_kit\api_interaction_kit_test_suite\api_interaction_kit_testing_suite\api_interaction_kit_testing_suite.csproj", "{F6182614-4CA2-45DB-98FC-B1FFEFF873D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,5 +41,9 @@ Global
 		{E49DA6B9-2E78-4351-B694-124ADB0EBB29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E49DA6B9-2E78-4351-B694-124ADB0EBB29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E49DA6B9-2E78-4351-B694-124ADB0EBB29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6182614-4CA2-45DB-98FC-B1FFEFF873D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6182614-4CA2-45DB-98FC-B1FFEFF873D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6182614-4CA2-45DB-98FC-B1FFEFF873D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6182614-4CA2-45DB-98FC-B1FFEFF873D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -29,6 +29,8 @@ namespace iReach_Android
 				user_info_btn.Click -= User_info_btn_Click;
 				Button settings_btn = FindViewById<Button> (Resource.Id.settings_button);
 				settings_btn.Click -= Settings_btn_Click;
+				Button food_btn = FindViewById<Button> (Resource.Id.food_button);
+				food_btn.Click -= Food_btn_Click;
 				break;
 			case State.Account_Page:
 				break;
@@ -37,6 +39,8 @@ namespace iReach_Android
 				force_push_btn.Click -= Force_push_btn_Click;
 				Button settings_back_btn = FindViewById<Button> (Resource.Id.settings_back_button);
 				settings_back_btn.Click -= Settings_back_btn_Click;	
+				break;
+			case State.Food_Page:
 				break;
 			}
 
@@ -67,6 +71,8 @@ namespace iReach_Android
 				user_info_btn.Click += User_info_btn_Click;
 				Button settings_btn = FindViewById<Button> (Resource.Id.settings_button);
 				settings_btn.Click += Settings_btn_Click;
+				Button food_btn = FindViewById<Button> (Resource.Id.food_button);
+				food_btn.Click += Food_btn_Click;
 				break;
 			case State.Account_Page:
 				SetContentView (Resource.Layout.user_page);
@@ -84,6 +90,9 @@ namespace iReach_Android
 				settings_back_btn.Click += Settings_back_btn_Click;
 				if (interaction_kit.force_pushing) { force_push_btn.SetBackgroundColor(Android.Graphics.Color.Turquoise); } 
 				else { force_push_btn.SetBackgroundColor(Android.Graphics.Color.DarkRed); }
+				break;
+			case State.Food_Page:
+				SetContentView(Resource.Layout.food_page);
 				break;
 			}
 		}

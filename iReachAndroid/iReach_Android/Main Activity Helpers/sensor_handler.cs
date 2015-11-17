@@ -12,17 +12,16 @@ namespace iReach_Android
 
 		}
 
-		public void OnSensorChanged(SensorEvent e)
+		public void OnSensorChanged (SensorEvent e)
 		{
 			if (initialized) {
 				lock (_synclock) {
-					if(future_cut_off_time == DateTime.Now.Second)
-					{
-						//Task.Factory.StartNew (() => upload_raw_data (sd));
-						Task t = new Task(()=>upload_raw_data(sd));
+					if (future_cut_off_time == DateTime.Now.Second) {
+						Task t = new Task (() => upload_raw_data (sd, time));
 						t.Start ();
 						sd = new sensor_data ();
-						future_cut_off_time = (DateTime.Now.Second + 30) % 30;
+						time = DateTime.Now;
+						future_cut_off_time = (DateTime.Now.Second + 2) % 60;
 					}
 					if (e.Sensor.Type == SensorType.Accelerometer) {
 						sd.accel.x.Add (e.Values [0]);
@@ -43,7 +42,7 @@ namespace iReach_Android
 			}
 		}
 
-		protected void upload_raw_data(sensor_data input)
+		protected void upload_raw_data(sensor_data input, DateTime time)
 		{
 			try 
 			{
@@ -68,7 +67,9 @@ namespace iReach_Android
 				if((data.data.accelerometer.x.Length > 0 && data.data.accelerometer.y.Length > 0 && data.data.accelerometer.z.Length > 0) ||
 					(data.data.gyroscope.x.Length > 0 && data.data.gyroscope.y.Length > 0 && data.data.gyroscope.z.Length > 0) ||
 					(data.data.magnetometer.x.Length > 0 && data.data.magnetometer.y.Length > 0 && data.data.magnetometer.z.Length > 0))
-						interaction_kit.api_upload_raw_data (data);
+				{
+					interaction_kit.api_upload_raw_data (data);
+				}
 			} 
 			catch (Exception ex) 
 			{

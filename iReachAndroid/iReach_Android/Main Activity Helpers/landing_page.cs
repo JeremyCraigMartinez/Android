@@ -14,6 +14,11 @@ namespace iReach_Android
 		{
 			change_state (ref state, State.Settings_Page);
 		}
+
+		void Food_btn_Click (object sender, EventArgs e)
+		{
+			change_state(ref state, State.Food_Page);
+		}
 	}
 }
 
