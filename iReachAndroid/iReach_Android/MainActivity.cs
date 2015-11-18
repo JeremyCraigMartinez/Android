@@ -14,11 +14,15 @@ namespace iReach_Android
 	public partial class MainActivity : Activity, ISensorEventListener
 	{
 		private enum State {Initialize, Log_In, Create_User_Page, Landing_Page, Account_Page, Settings_Page, Food_Page, Exit}
+
 		private State state;
+		private Network_State network_state;
 
 		private api interaction_kit;
 
 		private SensorManager sensor_manager;
+		private wifi_watcher network_monitor;
+		private battery_watcher battery_monitor;
 
 		private bool initialized;
 
@@ -27,11 +31,11 @@ namespace iReach_Android
 		private string sex_gender;
 		private sensor_data sd;
 		private DateTime time;
-		int future_cut_off_time;
+		private int future_cut_off_time;
 
 		private static readonly object _synclock = new object();
 
-		public ConnectivityManager connectivity_manager;
+		private ConnectivityManager connectivity_manager;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -44,10 +48,17 @@ namespace iReach_Android
 		void initialize()
 		{
 			interaction_kit = new api ();
-			connectivity_manager = (ConnectivityManager)GetSystemService (ConnectivityService);
 			interaction_kit.initialize();
 			interaction_kit.server_update += Interaction_kit_server_update;
 			interaction_kit.announcment += Interaction_kit_announcment;
+
+			network_monitor = new wifi_watcher();
+			network_monitor.Connection_Status_Changed += Network_monitor_Connection_Status_Changed;
+			RegisterReceiver(network_monitor, new IntentFilter(ConnectivityManager.ConnectivityAction));
+
+			battery_monitor = new battery_watcher();
+			battery_monitor.Power_Status_Changed += Battery_monitor_Power_Status_Changed;
+			RegisterReceiver(battery_monitor, new IntentFilter(Intent.ActionBatteryChanged));
 
 			sensor_manager = (SensorManager)GetSystemService (Context.SensorService);
 			sd = new sensor_data ();
@@ -55,6 +66,16 @@ namespace iReach_Android
 			future_cut_off_time = 0;
 
 			SetContentView (Resource.Layout.Main);
+		}
+
+		void Battery_monitor_Power_Status_Changed (Power_State power_state)
+		{
+			interaction_kit.power_state = power_state;
+		}
+
+		void Network_monitor_Connection_Status_Changed (Network_State network_state)
+		{
+			interaction_kit.network_state = network_state;
 		}
 
 		void Interaction_kit_announcment (Announcement_Type input)

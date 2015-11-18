@@ -55,6 +55,7 @@
     <Compile Include="Main Activity Helpers\state_machine.cs" />
     <Compile Include="Main Activity Helpers\landing_page.cs" />
     <Compile Include="Main Activity Helpers\settings.cs" />
+    <Compile Include="battery_watcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

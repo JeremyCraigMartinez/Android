@@ -18,6 +18,10 @@ namespace api_interaction_kit
 
 	public enum Announcement_Type { Initialization_Complete, Log_In_Complete, Running, Error }
 
+	public enum Network_State {UNKOWN, WIFI, DATA, OFFLINE}
+
+	public enum Power_State {UNKOWN, CHARGING, DEPLETING}
+
 	public partial class api
 	{
 		#region Variables
@@ -29,6 +33,8 @@ namespace api_interaction_kit
 		private string userName;
 		private string password;
 
+		public Network_State network_state;
+		public Power_State power_state;
 		public bool force_pushing;
 		 
 		//Announces what's going on
@@ -46,8 +52,6 @@ namespace api_interaction_kit
 
 		ConcurrentQueue<event_object> event_queue;
 		ConcurrentQueue<event_object> long_term_storage; //ice cold raw data
-
-		hardware_inspector inspector;
 
 
 		#endregion
@@ -127,9 +131,11 @@ namespace api_interaction_kit
 			client.DefaultRequestHeaders.Accept.Clear ();
 			client.DefaultRequestHeaders.Accept.Add (new MediaTypeWithQualityHeaderValue ("application/json"));
 
-			inspector = new hardware_inspector();
 			event_queue = new ConcurrentQueue<event_object> ();
 			long_term_storage = new ConcurrentQueue<event_object> ();
+
+			network_state = Network_State.UNKOWN;
+			power_state = Power_State.UNKOWN;
 
 			force_pushing = false;
 		}
@@ -164,8 +170,8 @@ namespace api_interaction_kit
 						e.execute ();
 				}
 
-				if (!long_term_storage.IsEmpty &&
-					(inspector.wifi || force_pushing)) 
+				if ((!long_term_storage.IsEmpty && network_state == Network_State.WIFI && power_state == Power_State.CHARGING)
+					|| force_pushing) 
 				{
 					event_object e;
 					if (long_term_storage.TryDequeue (out e))
