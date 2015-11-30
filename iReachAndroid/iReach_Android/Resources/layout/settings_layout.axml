@@ -17,6 +17,18 @@
         android:id="@+id/sensor_spinner" 
         android:prompt="@string/sensor_prompt"
     />-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tb_battery_decay"
+        android:text="Battery Decay Rate:"
+        android:textColor="#ff000000"
+        android:background="@android:color/background_light" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/space1"
+        android:layout_marginBottom="10dp" />
     <Button
         android:text="Force Push"
         android:layout_width="match_parent"

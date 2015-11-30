@@ -78,8 +78,8 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\settings_layout.axml" />
     <AndroidResource Include="Resources\layout\food_page.axml" />
+    <AndroidResource Include="Resources\layout\user_activity_layout.axml" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Main Activity Helpers\" />
   </ItemGroup>
@@ -89,4 +89,5 @@
       <Name>api_interaction_kit</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

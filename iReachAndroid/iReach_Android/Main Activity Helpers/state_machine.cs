@@ -31,6 +31,8 @@ namespace iReach_Android
 				settings_btn.Click -= Settings_btn_Click;
 				Button food_btn = FindViewById<Button> (Resource.Id.food_button);
 				food_btn.Click -= Food_btn_Click;
+				Button user_activity_btn = FindViewById<Button> (Resource.Id.b_user_activity);
+				user_activity_btn.Click -= User_activity_btn_Click;
 				break;
 			case State.Account_Page:
 				break;
@@ -41,6 +43,8 @@ namespace iReach_Android
 				settings_back_btn.Click -= Settings_back_btn_Click;	
 				break;
 			case State.Food_Page:
+				break;
+			case State.User_Activity_Page:
 				break;
 			}
 
@@ -73,6 +77,8 @@ namespace iReach_Android
 				settings_btn.Click += Settings_btn_Click;
 				Button food_btn = FindViewById<Button> (Resource.Id.food_button);
 				food_btn.Click += Food_btn_Click;
+				Button user_activity_btn = FindViewById<Button> (Resource.Id.b_user_activity);
+				user_activity_btn.Click += User_activity_btn_Click;
 				break;
 			case State.Account_Page:
 				SetContentView (Resource.Layout.user_page);
@@ -88,14 +94,24 @@ namespace iReach_Android
 				force_push_btn.Click += Force_push_btn_Click;
 				Button settings_back_btn = FindViewById<Button> (Resource.Id.settings_back_button);
 				settings_back_btn.Click += Settings_back_btn_Click;
-				if (interaction_kit.force_pushing) { force_push_btn.SetBackgroundColor(Android.Graphics.Color.Turquoise); } 
-				else { force_push_btn.SetBackgroundColor(Android.Graphics.Color.DarkRed); }
+				if (interaction_kit.force_pushing) {
+					force_push_btn.SetBackgroundColor (Android.Graphics.Color.Turquoise);
+				} else {
+					force_push_btn.SetBackgroundColor (Android.Graphics.Color.DarkRed);
+				}
+				check_battery ();
 				break;
 			case State.Food_Page:
 				SetContentView(Resource.Layout.food_page);
 				break;
+			case State.User_Activity_Page:
+				SetContentView (Resource.Layout.user_activity_layout);
+				interaction_kit.api_request_processed_data();
+				break;
 			}
 		}
+
+
 
 		void Interaction_kit_server_update (object o, Response_Type r)
 		{
@@ -160,6 +176,23 @@ namespace iReach_Android
 				//					interaction_kit.login (m_email, m_pass);
 				//				else
 				change_state (ref state, State.Initialize);
+			}
+			if (r == Response_Type.processed_data_collection) {
+				int count = 5;
+				TextView tv = FindViewById<TextView> (Resource.Id.tv_processed_data);
+				RunOnUiThread (() => {tv.Text = "";});
+				foreach (var obj in o as Array) {
+					if (count != 0) {
+						Processed_Data pd = obj as Processed_Data;
+						RunOnUiThread (() => {
+							tv.Text += "Activity: " + pd.activity + Environment.NewLine +
+								"Calories Burned: " + pd.calories_burned.ToString() +
+								Environment.NewLine + Environment.NewLine;
+						});
+						count--;
+					} else
+						break;
+				}
 			}
 		}
 			

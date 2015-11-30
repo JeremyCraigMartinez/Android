@@ -96,6 +96,16 @@ namespace api_interaction_kit
 				reference.server_response_helper (t, Response_Type.raw_data);
 			}
 		}
+		public class request_processed_data_event : event_object
+		{
+			public request_processed_data_event(api Reference) { reference = Reference; }
+			public override void execute()
+			{
+				var processed_data = reference.request_processed_data ();
+				reference.server_response_helper (processed_data,
+					Response_Type.processed_data_collection);
+			}
+		}
 		public class request_doctor_event : event_object
 		{
 			public request_doctor_event (api Reference) {reference = Reference;}

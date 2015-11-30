@@ -19,6 +19,10 @@ namespace api_interaction_kit
 		{
 			return _get ("doctors", typeof(Doctors));
 		}
+		private Object[] request_processed_data()
+		{
+			return _get_array ("data", typeof(Processed_Data));
+		}
 		private Object request_group_list()
 		{
 			return _get ("groups", typeof(Groups));
@@ -51,7 +55,6 @@ namespace api_interaction_kit
 		{
 			return _put("patients/update_info", json_functions.serializer(content));
 		}
-
 		private bool post(string location, string content)
 		{
 			HttpResponseMessage response = client.PostAsync (location,
@@ -68,6 +71,17 @@ namespace api_interaction_kit
 			{
 				var data = response.Content.ReadAsStringAsync ().Result;
 				return json_functions.deserializer(data, T);
+			}
+			announcment (Announcement_Type.Error);
+			return null;
+		}
+		private Object[] _get_array(string location, Type T)
+		{
+			HttpResponseMessage response = client.GetAsync (location).Result;
+			if (response.IsSuccessStatusCode) 
+			{
+				var data = response.Content.ReadAsStringAsync ().Result;
+				return json_functions.deserialize_array(data, T);
 			}
 			announcment (Announcement_Type.Error);
 			return null;

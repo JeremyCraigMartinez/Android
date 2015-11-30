@@ -19,6 +19,10 @@ namespace iReach_Android
 		{
 			change_state(ref state, State.Food_Page);
 		}
+		void User_activity_btn_Click (object sender, EventArgs e)
+		{
+			change_state (ref state, State.User_Activity_Page);
+		}
 	}
 }
 

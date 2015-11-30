@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Runtime.Serialization;
 using System.Collections.Generic;
 using System.Text;
@@ -171,6 +172,22 @@ namespace api_interaction_kit
 		[DataMember]
 		public string[] doctors;
 	}
+	[DataContract]
+	public class Processed_Data
+	{
+		[DataMember]
+		public string _id;
+		[DataMember]
+		public string email;
+		[DataMember]
+		public string created;
+		[DataMember]
+		public string activity;
+		[DataMember]
+		public int duration;
+		[DataMember]
+		public float calories_burned;
+	}
 
 	public static class json_functions
 	{
@@ -181,9 +198,22 @@ namespace api_interaction_kit
 
 		static public Object deserializer (string data, Type T)
 		{
-			var temp = JsonConvert.DeserializeObject (data, T); 
-			return temp;
+			return JsonConvert.DeserializeObject (data, T); 
 		}
+
+		static public Object[] deserialize_array (string data, Type T)
+		{
+			JArray arr = JArray.Parse (data);
+			if (arr != null && arr.Count > 1) {
+				List<dynamic> l = new List<dynamic> ();
+				foreach (JToken token in arr.Children()) {
+					l.Add (JsonConvert.DeserializeObject (token.ToString (), T));
+				}
+				return l.ToArray ();
+			}
+			return null;
+		}
+
 	}
 }
 

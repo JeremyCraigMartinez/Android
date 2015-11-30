@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Android.Hardware;
+using Android.Widget;
 using api_interaction_kit;
 
 namespace iReach_Android
@@ -8,6 +9,7 @@ namespace iReach_Android
 	public partial class MainActivity
 	{
 		private bool sensors_on = false;
+		private float old_charge = 0;
 
 		public void OnAccuracyChanged(Sensor sensor, SensorStatus accuracy)
 		{
@@ -21,7 +23,7 @@ namespace iReach_Android
 					if (future_cut_off_time == DateTime.Now.Second) {
 						Task t = new Task (() => upload_raw_data (sd, time));
 						t.Start ();
-						if(battery_monitor.battery_decay > 5f) turn_off_sensors(); else turn_on_sensors();
+						check_battery ();
 						sd = new sensor_data ();
 						time = DateTime.Now;
 						future_cut_off_time = (DateTime.Now.Second + 2) % 60;
@@ -100,6 +102,22 @@ namespace iReach_Android
 			}
 		}
 		protected void turn_off_sensors() { sensor_manager.UnregisterListener(this); sensors_on = false; }
+
+		protected void check_battery()
+		{
+			float rate_of_decay = old_charge - battery_monitor.charge;
+			if(rate_of_decay > 6f) turn_off_sensors(); else turn_on_sensors();
+
+			old_charge = battery_monitor.charge > 0f ? battery_monitor.charge : 0f;
+
+			if (state == State.Settings_Page) {
+				TextView text_view = FindViewById<TextView> (Resource.Id.tb_battery_decay);
+				RunOnUiThread (() => {
+					text_view.Text = System.String.Format("Battery Decay Rate: {0}", 
+						(rate_of_decay / 100f));
+				});
+			}
+		}
 	}
 }
 

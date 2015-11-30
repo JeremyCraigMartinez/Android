@@ -13,7 +13,9 @@ namespace iReach_Android
 	[Activity (Label = "iReach_Android", MainLauncher = true, Icon = "@drawable/ireach_logo", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
 	public partial class MainActivity : Activity, ISensorEventListener
 	{
-		private enum State {Initialize, Log_In, Create_User_Page, Landing_Page, Account_Page, Settings_Page, Food_Page, Exit}
+		private enum State {Initialize, Log_In, Create_User_Page,
+			Landing_Page, Account_Page, Settings_Page, Food_Page,
+			User_Activity_Page, Exit}
 
 		private State state;
 		private Network_State network_state;
@@ -64,6 +66,8 @@ namespace iReach_Android
 			sd = new sensor_data ();
 			time = DateTime.Now;
 			future_cut_off_time = 0;
+
+			turn_on_sensors ();
 
 			SetContentView (Resource.Layout.Main);
 		}
