@@ -20,7 +20,9 @@ namespace iReach_Android
 
 		public Power_State state { get; private set; }
 
-		public int charge 	{ get; private set; }
+		public float charge 	{ get; private set; } // percentage of the battery
+		public float battery_decay { get; private set; }
+		private float old_charge = 0;
 
 		public delegate void POWER_CHANGE(Power_State power_state);
 		public event POWER_CHANGE Power_Status_Changed;
@@ -29,6 +31,8 @@ namespace iReach_Android
 
 		public battery_watcher() 
 		{ 
+			charge = 0f;
+			battery_decay = 0f;
 			state = Power_State.UNKOWN;
 		}
 
@@ -37,7 +41,9 @@ namespace iReach_Android
 
 			int level = intent.GetIntExtra(BatteryManager.ExtraLevel, -1);
 			int scale = intent.GetIntExtra(BatteryManager.ExtraScale, -1);
-			charge = ((int)((level / (float)scale) * 100)); 
+			old_charge = charge > 0f ? charge : 0f;
+			charge = ((level / (float)scale) * 100f); 
+			battery_decay = old_charge - charge;
 
 			int status = intent.GetIntExtra(BatteryManager.ExtraStatus, -1);
 			bool charging = (status == (int)BatteryStatus.Charging || status == (int)BatteryStatus.Full);

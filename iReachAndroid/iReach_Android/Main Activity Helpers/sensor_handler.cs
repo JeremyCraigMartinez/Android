@@ -7,6 +7,8 @@ namespace iReach_Android
 {
 	public partial class MainActivity
 	{
+		private bool sensors_on = false;
+
 		public void OnAccuracyChanged(Sensor sensor, SensorStatus accuracy)
 		{
 
@@ -19,6 +21,7 @@ namespace iReach_Android
 					if (future_cut_off_time == DateTime.Now.Second) {
 						Task t = new Task (() => upload_raw_data (sd, time));
 						t.Start ();
+						if(battery_monitor.battery_decay > 5f) turn_off_sensors(); else turn_on_sensors();
 						sd = new sensor_data ();
 						time = DateTime.Now;
 						future_cut_off_time = (DateTime.Now.Second + 2) % 60;
@@ -80,16 +83,23 @@ namespace iReach_Android
 		protected override void OnResume()
 		{
 			base.OnResume();
-			sensor_manager.RegisterListener(this, sensor_manager.GetDefaultSensor(SensorType.Accelerometer), SensorDelay.Game); // ~100Hz
-			sensor_manager.RegisterListener(this, sensor_manager.GetDefaultSensor(SensorType.Gyroscope), SensorDelay.Game);
-			sensor_manager.RegisterListener(this, sensor_manager.GetDefaultSensor(SensorType.MagneticField), SensorDelay.Game);
 		}
 
 		protected override void OnPause()
 		{
 			base.OnPause();
-			sensor_manager.UnregisterListener(this);
 		}
+
+		protected void turn_on_sensors() 
+		{
+			if (!sensors_on) {
+				sensor_manager.RegisterListener (this, sensor_manager.GetDefaultSensor (SensorType.Accelerometer), SensorDelay.Game); // ~50Hz
+				sensor_manager.RegisterListener (this, sensor_manager.GetDefaultSensor (SensorType.Gyroscope), SensorDelay.Game);
+				sensor_manager.RegisterListener (this, sensor_manager.GetDefaultSensor (SensorType.MagneticField), SensorDelay.Game);
+				sensors_on = true;
+			}
+		}
+		protected void turn_off_sensors() { sensor_manager.UnregisterListener(this); sensors_on = false; }
 	}
 }
 
