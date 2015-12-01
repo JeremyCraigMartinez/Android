@@ -22,8 +22,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/tb_battery_decay"
         android:text="Battery Decay Rate:"
-        android:textColor="#ff000000"
-        android:background="@android:color/background_light" />
+        android:textColor="#000000"
+        android:background="#ffffffff" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,10 +40,4 @@
         android:layout_height="wrap_content"
         android:id="@+id/space1"
         android:layout_marginBottom="10dp" />
-    <Button
-        android:text="Back"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/settings_back_button"
-        android:background="@android:color/holo_red_dark" />
 </LinearLayout>

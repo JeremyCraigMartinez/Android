@@ -8,8 +8,6 @@ using Android.OS;
 using Android.Hardware;
 using api_interaction_kit;
 
-using api_interaction_kit;
-
 namespace iReach_Android
 {
 	[BroadcastReceiver()]			

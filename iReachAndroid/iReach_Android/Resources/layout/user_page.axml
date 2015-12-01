@@ -25,12 +25,15 @@
             android:layout_column="0"
             android:text="Email Address: "
             android:layout_marginTop="4dp"
-            android:gravity="right" />
+            android:gravity="right"
+            android:textColor="#ff000000" />
         <EditText
             android:id="@+id/email"
             android:layout_column="1"
             android:layout_span="2"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:background="#ffffffff"
+            android:textColor="#000000" />
     </TableRow>
     <TableRow>
     </TableRow>
@@ -44,12 +47,15 @@
             android:text="First Name: "
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:gravity="right" />
+            android:gravity="right"
+            android:textColor="#ff000000" />
         <EditText
             android:id="@+id/first_name"
             android:layout_column="1"
             android:layout_span="2"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:background="#FFFFFF"
+            android:textColor="#000000" />
     </TableRow>
     <TableRow>
         <TextView
@@ -57,12 +63,15 @@
             android:text="Last Name: "
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:gravity="right" />
+            android:gravity="right"
+            android:textColor="#ff000000" />
         <EditText
             android:id="@+id/last_name"
             android:layout_column="1"
             android:layout_span="2"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:background="#FFFFFF"
+            android:textColor="#000000" />
     </TableRow>
     <TableRow>
         <TextView
@@ -70,10 +79,13 @@
             android:text="Gender: "
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:gravity="right" />
+            android:gravity="right"
+            android:textColor="#ff000000" />
         <EditText
             android:layout_column="1"
-            android:id="@+id/gender" />
+            android:id="@+id/gender"
+            android:background="#FFFFFF"
+            android:textColor="#000000" />
     </TableRow>
     <TableRow>
         <TextView
@@ -83,14 +95,17 @@
             android:text="Age: "
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:gravity="right" />
+            android:gravity="right"
+            android:textColor="#ff000000" />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/age"
             android:layout_column="1"
             android:ems="3"
-            android:inputType="number" />
+            android:inputType="number"
+            android:background="#FFFFFF"
+            android:textColor="#000000" />
     </TableRow>
     <TableRow>
         <TextView
@@ -100,14 +115,17 @@
             android:text="Weight: "
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:gravity="right" />
+            android:gravity="right"
+            android:textColor="#ff000000" />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/weight"
             android:layout_column="1"
             android:ems="3"
-            android:inputType="number" />
+            android:inputType="number"
+            android:background="#FFFFFF"
+            android:textColor="#000000" />
     </TableRow>
     <TableRow>
         <TextView
@@ -117,14 +135,17 @@
             android:text="Height: "
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:gravity="right" />
+            android:gravity="right"
+            android:textColor="#ff000000" />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/height"
             android:layout_column="1"
             android:ems="3"
-            android:inputType="number" />
+            android:inputType="number"
+            android:background="#FFFFFF"
+            android:textColor="#000000" />
     </TableRow>
     <TableRow
         android:id="@+id/tableRow1">
@@ -134,12 +155,15 @@
             android:layout_marginTop="10.0dip"
             android:layout_marginBottom="4dp"
             android:gravity="right"
-            android:id="@+id/textView3" />
+            android:id="@+id/textView3"
+            android:textColor="#ff000000" />
         <EditText
             android:id="@+id/doctor"
             android:layout_column="1"
             android:layout_span="2"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:background="#FFFFFF"
+            android:textColor="#000000" />
     </TableRow>
     <TableRow
         android:id="@+id/tableRow2">
@@ -151,10 +175,13 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:gravity="right"
-            android:id="@+id/textView4" />
+            android:id="@+id/textView4"
+            android:textColor="#ff000000" />
         <EditText
             android:layout_column="1"
-            android:id="@+id/group" />
+            android:id="@+id/group"
+            android:background="#FFFFFF"
+            android:textColor="#000000" />
     </TableRow>
     <LinearLayout
         android:orientation="horizontal"
@@ -164,17 +191,14 @@
         android:gravity="right"
         android:weightSum="2"
         android:minWidth="25px"
-        android:minHeight="25px">
-        <Button
-            android:text="Back"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/user_back_btn"
-            android:background="#ffff4b4b"
-            android:textColor="#ff000000" />
-    </LinearLayout>
+        android:minHeight="25px" />
     <View
         android:layout_height="1dip"
         android:background="#FF909090"
         android:layout_marginTop="100dp" />
+    <Button
+        android:text="Update"
+        android:id="@+id/update_user_btn"
+        android:background="#ffa3ff6e"
+        android:textColor="#ff000000" />
 </TableLayout>

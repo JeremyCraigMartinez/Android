@@ -71,8 +71,8 @@ namespace api_interaction_kit
 		public class post_food_item : event_object
 		{
 			string id;
-			int serving_size;
-			public post_food_item ( string _id, int _serving_size, api Reference)
+			float serving_size;
+			public post_food_item ( string _id, float _serving_size, api Reference)
 			{
 				id = _id;
 				serving_size = _serving_size;

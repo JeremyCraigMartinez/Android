@@ -42,7 +42,7 @@ namespace api_interaction_kit
 			return post("auth", json_functions.serializer(new login_information() {email = _email, password = _password}));
 		}
 
-		private bool food(string _id, int _serving_size)
+		private bool food(string _id, float _serving_size)
 		{
 			return post("diet", json_functions.serializer(new food_item() {foodID =  _id , quantity = _serving_size,
 				created = DateTime.Now.ToString("HH:mm-MM-dd-yyyy")}));

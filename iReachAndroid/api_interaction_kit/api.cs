@@ -201,7 +201,7 @@ namespace api_interaction_kit
 			event_queue.Enqueue(new request_create_group_event (name, this));
 		}
 
-		public void api_food_upload (string id, int serving_size)
+		public void api_food_upload (string id, float serving_size)
 		{
 			event_queue.Enqueue(new post_food_item(id, serving_size, this));
 		}

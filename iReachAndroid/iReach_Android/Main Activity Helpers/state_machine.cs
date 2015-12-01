@@ -19,9 +19,7 @@ namespace iReach_Android
 				}
 				break;
 			case State.Create_User_Page:
-				Button create_cancel = FindViewById<Button> (Resource.Id.create_cancel_btn);
 				Button create_submit_btn = FindViewById<Button> (Resource.Id.create_submit_btn);
-				create_cancel.Click -= Create_cancel_Click;
 				create_submit_btn.Click -= Create_submit_btn_Click;
 				break;
 			case State.Landing_Page:
@@ -39,12 +37,16 @@ namespace iReach_Android
 			case State.Settings_Page:
 				Button force_push_btn = FindViewById<Button> (Resource.Id.force_push_button);
 				force_push_btn.Click -= Force_push_btn_Click;
-				Button settings_back_btn = FindViewById<Button> (Resource.Id.settings_back_button);
-				settings_back_btn.Click -= Settings_back_btn_Click;	
 				break;
 			case State.Food_Page:
+				Button food_submit_btn = FindViewById<Button> (Resource.Id.save_food_btn);
+				food_submit_btn.Click -= Food_submit_btn_Click;
 				break;
 			case State.User_Activity_Page:
+				break;
+			case State.Log_In:
+				Button login_btn = FindViewById<Button> (Resource.Id.login_button);
+				login_btn.Click -= Login_button_Click;
 				break;
 			}
 
@@ -60,9 +62,7 @@ namespace iReach_Android
 				break;
 			case State.Create_User_Page:
 				SetContentView (Resource.Layout.create_user);
-				Button create_cancel = FindViewById<Button> (Resource.Id.create_cancel_btn);
 				Button create_submit_btn = FindViewById<Button> (Resource.Id.create_submit_btn);
-				create_cancel.Click += Create_cancel_Click;
 				create_submit_btn.Click += Create_submit_btn_Click;
 				interaction_kit.api_get_doctor_list ();
 				interaction_kit.api_get_group_list ();
@@ -82,6 +82,8 @@ namespace iReach_Android
 				break;
 			case State.Account_Page:
 				SetContentView (Resource.Layout.user_page);
+				Button update_user = FindViewById<Button>(Resource.Id.update_user_btn);
+				update_user.Click += Update_user_Click;
 				break;
 			case State.Settings_Page:
 				SetContentView (Resource.Layout.settings_layout);
@@ -92,8 +94,6 @@ namespace iReach_Android
 //				hertz_spinner.Adapter = adapter;
 				Button force_push_btn = FindViewById<Button> (Resource.Id.force_push_button);
 				force_push_btn.Click += Force_push_btn_Click;
-				Button settings_back_btn = FindViewById<Button> (Resource.Id.settings_back_button);
-				settings_back_btn.Click += Settings_back_btn_Click;
 				if (interaction_kit.force_pushing) {
 					force_push_btn.SetBackgroundColor (Android.Graphics.Color.Turquoise);
 				} else {
@@ -103,14 +103,22 @@ namespace iReach_Android
 				break;
 			case State.Food_Page:
 				SetContentView(Resource.Layout.food_page);
+				Button food_submit_btn = FindViewById<Button> (Resource.Id.save_food_btn);
+				food_submit_btn.Click += Food_submit_btn_Click;
 				break;
 			case State.User_Activity_Page:
 				SetContentView (Resource.Layout.user_activity_layout);
 				interaction_kit.api_request_processed_data();
 				break;
+			case State.Log_In:
+				SetContentView(Resource.Layout.Main);
+				Button login_btn = FindViewById<Button> (Resource.Id.login_button);
+				login_btn.Click += Login_button_Click;
+				Button create_u_btn = FindViewById<Button> (Resource.Id.Create_User_Button);
+				create_u_btn.Click += Create_user_btn_Click;
+				break;
 			}
 		}
-
 
 
 		void Interaction_kit_server_update (object o, Response_Type r)
@@ -147,10 +155,6 @@ namespace iReach_Android
 						first_name.Text = temp.first_name;
 						last_name.Text = temp.last_name;
 						doctor.Text = temp.doctor;
-
-						Button back = FindViewById<Button> (Resource.Id.user_back_btn);
-						back.Click += Back_Click;
-
 					});
 				}
 			}
@@ -178,28 +182,32 @@ namespace iReach_Android
 				change_state (ref state, State.Initialize);
 			}
 			if (r == Response_Type.processed_data_collection) {
-				int count = 5;
+				
 				TextView tv = FindViewById<TextView> (Resource.Id.tv_processed_data);
 				RunOnUiThread (() => {tv.Text = "";});
 				foreach (var obj in o as Array) {
-					if (count != 0) {
-						Processed_Data pd = obj as Processed_Data;
-						RunOnUiThread (() => {
-							tv.Text += "Activity: " + pd.activity + Environment.NewLine +
-								"Calories Burned: " + pd.calories_burned.ToString() +
-								Environment.NewLine + Environment.NewLine;
-						});
-						count--;
-					} else
+					Processed_Data pd = obj as Processed_Data;
+					//"HH:mm-MM-dd-yyyy"
+					string[] temp = pd.created.Split (new string[]{"-"}, StringSplitOptions.RemoveEmptyEntries);
+					int day = Convert.ToInt32 (temp [2]);
+
+					int today = DateTime.Now.Day;
+					int yesterday = today - 1;
+					//DateTime check = new DateTime (Convert.ToInt32 (temp [3]), Convert.ToInt32 (temp [1]), Convert.ToInt32 (temp [2]));
+					if (day != today && day != yesterday)
 						break;
+					RunOnUiThread (() => {
+						tv.Text +=
+							"Timestamp: " + pd.created + Environment.NewLine +
+							"Activity: " + pd.activity + Environment.NewLine +
+							"Calories Burned: " + pd.calories_burned.ToString () +
+							Environment.NewLine + Environment.NewLine;
+					});
 				}
 			}
 		}
-			
-		void Back_Click (object sender, EventArgs e)
-		{
-			change_state (ref state, State.Landing_Page);
-		}
+
+
 	}
 }
 

@@ -32,6 +32,8 @@ namespace api_interaction_kit
 		public string[] group;
 		[DataMember]
 		public string doctor;
+
+		public user_information() {}
 	}
 
 	[DataContract]
@@ -67,7 +69,7 @@ namespace api_interaction_kit
 		[DataMember]
 		public string foodID;
 		[DataMember]
-		public int quantity;
+		public float quantity;
 	}
 		
 	public class sensor_data

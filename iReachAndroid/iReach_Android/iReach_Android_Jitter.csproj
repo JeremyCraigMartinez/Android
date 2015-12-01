@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
+    <Reference Include="Mono.Data.Sqlite" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -49,13 +50,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BootReceiver.cs" />
     <Compile Include="wifi_watcher.cs" />
-    <Compile Include="Main Activity Helpers\create_user.cs" />
     <Compile Include="Main Activity Helpers\login.cs" />
     <Compile Include="Main Activity Helpers\sensor_handler.cs" />
     <Compile Include="Main Activity Helpers\state_machine.cs" />
     <Compile Include="Main Activity Helpers\landing_page.cs" />
     <Compile Include="Main Activity Helpers\settings.cs" />
     <Compile Include="battery_watcher.cs" />
+    <Compile Include="Main Activity Helpers\food_handling.cs" />
+    <Compile Include="Main Activity Helpers\user_profile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -77,8 +79,8 @@
       <Link>Resources\drawable-mdpi\iReach_Logo.png</Link>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\settings_layout.axml" />
-    <AndroidResource Include="Resources\layout\food_page.axml" />
     <AndroidResource Include="Resources\layout\user_activity_layout.axml" />
+    <AndroidResource Include="Resources\layout\food_page.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Main Activity Helpers\" />

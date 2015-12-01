@@ -26,9 +26,9 @@
         android:layout_column="1"
         android:layout_span="2"
         android:inputType="textEmailAddress"
-        android:background="@android:color/background_light"
+        android:background="#ffffffff"
         android:hint="Email Address"
-        android:textColor="#ff000000" />
+        android:textColor="#000000" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -37,9 +37,9 @@
         android:layout_column="1"
         android:layout_span="2"
         android:inputType="textPassword"
-        android:background="@android:color/background_light"
+        android:background="#ffffffff"
         android:hint="Password"
-        android:textColor="#ff000000" />
+        android:textColor="#000000" />
     <View
         android:layout_height="1dip"
         android:background="#FF909090"
@@ -52,9 +52,9 @@
         android:layout_column="1"
         android:layout_span="2"
         android:inputType="textPersonName"
-        android:background="@android:color/background_light"
+        android:background="#ffffffff"
         android:hint="First Name"
-        android:textColor="#ff000000" />
+        android:textColor="#000000" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -63,9 +63,9 @@
         android:layout_column="1"
         android:layout_span="2"
         android:inputType="textPersonName"
-        android:background="@android:color/background_light"
+        android:background="#ffffffff"
         android:hint="Last Name"
-        android:textColor="#ff000000" />
+        android:textColor="#000000" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -104,9 +104,9 @@
         android:layout_column="1"
         android:ems="3"
         android:inputType="number"
-        android:background="@android:color/background_light"
+        android:background="#ffffffff"
         android:hint="Height"
-        android:textColor="#ff000000" />
+        android:textColor="#000000" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -117,9 +117,9 @@
         android:layout_column="1"
         android:ems="3"
         android:inputType="number"
-        android:background="@android:color/background_light"
+        android:background="#ffffffff"
         android:hint="Weight"
-        android:textColor="#ff000000" />
+        android:textColor="#000000" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -130,9 +130,9 @@
         android:layout_column="1"
         android:ems="3"
         android:inputType="number"
-        android:background="@android:color/background_light"
+        android:background="#ffffffff"
         android:hint="Age"
-        android:textColor="#ff000000" />
+        android:textColor="#000000" />
     <TableRow
         android:id="@+id/tableRow1">
         <TextView
@@ -173,18 +173,12 @@
         android:gravity="right"
         android:weightSum="2">
         <Button
-            android:id="@+id/create_cancel_btn"
-            android:text="Cancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#ffd50000" />
-        <Button
             android:id="@+id/create_submit_btn"
             android:text="Submit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#ff04b500" />
+            android:background="#ffa3ff6e"
+            android:textColor="#ff000000" />
     </LinearLayout>
 </TableLayout>

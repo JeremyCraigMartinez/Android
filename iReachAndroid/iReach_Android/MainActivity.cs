@@ -7,6 +7,7 @@ using Android.Views;
 using Android.OS;
 using Android.Hardware;
 using api_interaction_kit;
+using Mono.Data.Sqlite;
 
 namespace iReach_Android
 {
@@ -86,6 +87,17 @@ namespace iReach_Android
 		{
 			if (input == Announcement_Type.Running)
 				initialized = true;
+		}
+
+
+		public override void OnBackPressed()
+		{
+			if(state == State.Landing_Page || state == State.Create_User_Page)
+				change_state(ref state, State.Log_In);
+			else if(state == State.Log_In)
+				base.OnBackPressed();
+			else
+				change_state(ref state, State.Landing_Page);
 		}
 
 	}

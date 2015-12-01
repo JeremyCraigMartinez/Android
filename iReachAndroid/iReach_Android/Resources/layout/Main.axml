@@ -42,9 +42,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:background="@android:color/holo_green_dark"
+        android:background="#ffa3ff6e"
         android:textAlignment="center"
-        android:fontFamily="@string/login" />
+        android:fontFamily="@string/login"
+        android:textColor="#ff000000" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -53,5 +54,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/Create_User_Button"
-        android:background="@android:color/holo_blue_dark" />
+        android:background="#ff7eedff"
+        android:textColor="#ff000000" />
 </LinearLayout>

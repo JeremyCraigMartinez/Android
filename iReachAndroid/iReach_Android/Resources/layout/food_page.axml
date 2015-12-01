@@ -1,59 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@android:color/background_light">
-<!--TextView android:id="@+id/TaskDetailsHeader" android:text="Task Details" android:layout_width="fill_parent" android:layout_height="wrap_content"/-->
-    <TextView
-        android:id="@+id/NameLabel"
-        android:text="Name:"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/TaskDetailsHeader" />
-    <EditText
-        android:id="@+id/txtFoodName"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/NameLabel"
-        android:imeOptions="actionNext"
-        android:maxLines="1" />
-    <TextView
-        android:id="@+id/serSizeLabel"
-        android:text="Serving Size:"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtFoodName" />
-    <LinearLayout
-        android:id="@+id/serSize"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <MultiAutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/serSizeLabel"
-        android:weightSum="3">
-        <SeekBar
-            android:id="@+id/seekbar"
-            android:layout_width="0.0dip"
-            android:layout_weight="2.0"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/AmountLabel"
-            android:text=": "
-            android:layout_width="0.0dp"
-            android:layout_weight="1.0"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <Button
-        android:id="@+id/btnCancelDelete"
-        android:text="Cancel"
-        android:layout_width="fill_parent"
+        android:id="@+id/auto_complete_food"
+        android:hint="Food"
+        android:textColor="#000000"
+        android:background="#ffffffff" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:id="@+id/space1" />
+    <EditText
+        android:inputType="numberDecimal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/serSize" />
+        android:id="@+id/serving_size_et"
+        android:hint="Serving Size"
+        android:textColor="#000000"
+        android:background="#ffffffff" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:id="@+id/space2" />
     <Button
-        android:id="@+id/btnSave"
-        android:text="Save"
-        android:layout_width="fill_parent"
+        android:text="Save Food"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dip"
-        android:paddingBottom="10dip"
-        android:layout_below="@+id/btnCancelDelete" />
-</RelativeLayout>
+        android:id="@+id/save_food_btn"
+        android:background="#ffa3ff6e"
+        android:textColor="#ff000000" />
+</LinearLayout>
