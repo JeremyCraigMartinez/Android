@@ -57,11 +57,16 @@ namespace api_interaction_kit
 		}
 		private bool post(string location, string content)
 		{
-			HttpResponseMessage response = client.PostAsync (location,
-				new StringContent(content, Encoding.UTF8, "application/json")).Result;
-			if (response.IsSuccessStatusCode)
-				return true;
-			return false;
+			try {
+				HttpResponseMessage response = client.PostAsync (location,
+					                               new StringContent (content, Encoding.UTF8, "application/json")).Result;
+				if (response.IsSuccessStatusCode)
+					return true;
+				return false;
+			} catch (Exception ex) {
+				string except = ex.ToString ();
+				return false;
+			}
 		}
 
 		private Object _get(string location, Type T)

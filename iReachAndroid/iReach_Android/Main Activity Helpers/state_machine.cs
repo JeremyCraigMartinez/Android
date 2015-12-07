@@ -143,8 +143,9 @@ namespace iReach_Android
 						var last_name = FindViewById<TextView> (Resource.Id.last_name);
 						var doctor = FindViewById<TextView> (Resource.Id.doctor);
 
-						foreach (string _temp in temp.group)
-							grps += (_temp + " - ");
+						if(temp.group != null)
+							foreach (string _temp in temp.group)
+								grps += (_temp + " - ");
 
 						email.Text = temp.email ?? "";
 						age.Text = temp.age.ToString () ?? "";
@@ -194,7 +195,7 @@ namespace iReach_Android
 					int today = DateTime.Now.Day;
 					int yesterday = today - 1;
 					//DateTime check = new DateTime (Convert.ToInt32 (temp [3]), Convert.ToInt32 (temp [1]), Convert.ToInt32 (temp [2]));
-					if (day != today && day != yesterday)
+					if (!check_processed_data(pd))// || (day != today && day != yesterday))
 						break;
 					RunOnUiThread (() => {
 						tv.Text +=
@@ -205,6 +206,24 @@ namespace iReach_Android
 					});
 				}
 			}
+		}
+		private bool check_processed_data(Processed_Data data)
+		{
+			if (data.activity == null) return false;
+			if (data.calories_burned == null) return false;
+			if (data.created == null) return false;
+			if (data.duration == null) return false;
+			if (data.email == null) return false;
+			if (data._id == null) return false;
+
+			if (data.activity == "") return false;
+			if (data.calories_burned == 0f) return false;
+			if (data.created == "") return false;
+			if (data.duration == 0) return false;
+			if (data.email == "") return false;
+			if (data._id == "") return false;
+
+			return true;
 		}
 
 

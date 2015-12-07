@@ -99,6 +99,5 @@ namespace iReach_Android
 			else
 				change_state(ref state, State.Landing_Page);
 		}
-
 	}
 }

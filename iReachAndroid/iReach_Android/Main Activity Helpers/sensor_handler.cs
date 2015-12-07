@@ -89,7 +89,7 @@ namespace iReach_Android
 
 		protected override void OnPause()
 		{
-			
+			base.OnPause ();
 		}
 
 		protected void turn_on_sensors() 
