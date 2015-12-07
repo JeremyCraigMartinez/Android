@@ -89,7 +89,7 @@ namespace iReach_Android
 
 		protected override void OnPause()
 		{
-			base.OnPause();
+			
 		}
 
 		protected void turn_on_sensors() 
@@ -106,7 +106,7 @@ namespace iReach_Android
 		protected void check_battery()
 		{
 			float rate_of_decay = old_charge - battery_monitor.charge;
-			if(rate_of_decay > 6f) turn_off_sensors(); else turn_on_sensors();
+			if(rate_of_decay > 1f) turn_off_sensors(); else turn_on_sensors();
 
 			old_charge = battery_monitor.charge > 0f ? battery_monitor.charge : 0f;
 

@@ -1,0 +1,21 @@
+Things to look into to and stuff that's left to do
+--------------------------------------------------------------
+
+------------------
+Things to fix
+------------------
+Popoulating Spinners in the User Profile and Create a User Pages.
+	-> The code is mostly written but get_array didnt exist until the day before project was over.
+	-> Use the _get_array instead of _get to properly get the array of doctors / groups
+
+New bug occurs after updating profile information
+	-> After updating a profile and you pull the information again it crashes the app
+	-> Yet on the website the information is correctly changed
+
+Theres a bug when you back all the way out to the login page, the engine crashes but the app still runs
+
+--------------------
+Things Left TODO
+--------------------
+Auto Complete from the USDA Food Database
+	-> The database can be found in the RAW folder

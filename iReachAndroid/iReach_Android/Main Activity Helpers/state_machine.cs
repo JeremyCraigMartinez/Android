@@ -146,15 +146,15 @@ namespace iReach_Android
 						foreach (string _temp in temp.group)
 							grps += (_temp + " - ");
 
-						email.Text = temp.email;
-						age.Text = temp.age.ToString ();
-						group.Text = grps;
-						gender.Text = temp.sex;
-						height.Text = temp.height.ToString ();
-						weight.Text = temp.weight.ToString ();
-						first_name.Text = temp.first_name;
-						last_name.Text = temp.last_name;
-						doctor.Text = temp.doctor;
+						email.Text = temp.email ?? "";
+						age.Text = temp.age.ToString () ?? "";
+						group.Text = grps ?? "";
+						gender.Text = temp.sex ?? "";
+						height.Text = temp.height.ToString () ?? "";
+						weight.Text = temp.weight.ToString () ?? "";
+						first_name.Text = temp.first_name ?? "";
+						last_name.Text = temp.last_name ?? "";
+						doctor.Text = temp.doctor ?? "";
 					});
 				}
 			}

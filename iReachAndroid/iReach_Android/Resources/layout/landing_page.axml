@@ -17,7 +17,8 @@
             android:layout_height="match_parent"
             android:id="@+id/user_profile_button"
             android:background="#ffffed6a"
-            android:textColor="#ff000000" />
+            android:textColor="#ff000000"
+            android:layout_margin="5dp" />
         <Button
             android:layout_weight="1"
             android:text="User Activity"
@@ -25,7 +26,8 @@
             android:layout_height="match_parent"
             android:id="@+id/b_user_activity"
             android:background="#ffa3ff6e"
-            android:textColor="#ff000000" />
+            android:textColor="#ff000000"
+            android:layout_margin="5dp" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -40,7 +42,8 @@
             android:layout_height="match_parent"
             android:id="@+id/food_button"
             android:background="#ff7eedff"
-            android:textColor="#ff000000" />
+            android:textColor="#ff000000"
+            android:layout_margin="5dp" />
         <Button
             android:layout_weight="1"
             android:text="Settings"
@@ -48,6 +51,7 @@
             android:layout_height="match_parent"
             android:id="@+id/settings_button"
             android:background="#ffff6c6c"
-            android:textColor="#ff000000" />
+            android:textColor="#ff000000"
+            android:layout_margin="5dp" />
     </LinearLayout>
 </LinearLayout>

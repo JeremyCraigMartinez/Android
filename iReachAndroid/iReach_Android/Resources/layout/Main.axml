@@ -20,7 +20,8 @@
         android:id="@+id/email_text_field"
         android:hint="Email"
         android:background="@android:color/background_light"
-        android:textColor="#ff000000" />
+        android:textColor="#ff000000"
+        android:layout_margin="5dp" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="20dp"
@@ -32,10 +33,11 @@
         android:id="@+id/password_text_field"
         android:hint="Password"
         android:background="@android:color/background_light"
-        android:textColor="#ff000000" />
+        android:textColor="#ff000000"
+        android:layout_margin="5dp" />
     <Space
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="25dp"
         android:id="@+id/space4" />
     <Button
         android:id="@+id/login_button"
@@ -45,7 +47,8 @@
         android:background="#ffa3ff6e"
         android:textAlignment="center"
         android:fontFamily="@string/login"
-        android:textColor="#ff000000" />
+        android:textColor="#ff000000"
+        android:layout_margin="5dp" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -55,5 +58,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/Create_User_Button"
         android:background="#ff7eedff"
-        android:textColor="#ff000000" />
+        android:textColor="#ff000000"
+        android:layout_margin="5dp" />
 </LinearLayout>
