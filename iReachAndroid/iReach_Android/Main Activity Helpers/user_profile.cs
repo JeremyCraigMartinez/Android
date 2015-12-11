@@ -1,5 +1,11 @@
 ﻿using System;
+using Android;
+using Android.Content;
+using Android.Views;
 using Android.Widget;
+using Android.OS;
+using Android.App;
+using Android.Graphics;
 using api_interaction_kit;
 
 namespace iReach_Android
@@ -13,23 +19,18 @@ namespace iReach_Android
 
 				var email = FindViewById<TextView> (Resource.Id.create_email);
 				var age = FindViewById<TextView> (Resource.Id.create_age);
-				//var group = FindViewById<Spinner> (Resource.Id.create_group_spinner);
-				//var gender = FindViewById<RadioGroup> (Resource.Id.create_gender_radio);
-				var male = FindViewById<RadioButton> (Resource.Id.radio_male_btn);
-				var female = FindViewById<RadioButton> (Resource.Id.female_radio_btn);
+				var doctor = FindViewById<Spinner> (Resource.Id.create_doctor_spinner);
+				var group = FindViewById<Spinner> (Resource.Id.create_group_spinner);
+				var gender = FindViewById<RadioGroup> (Resource.Id.create_gender_radio);
 				var height = FindViewById<TextView> (Resource.Id.create_height);
 				var weight = FindViewById<TextView> (Resource.Id.create_weight);
 				var first_name = FindViewById<TextView> (Resource.Id.create_firstn);
 				var last_name = FindViewById<TextView> (Resource.Id.create_lastn);
-				//var doctor = FindViewById<Spinner> (Resource.Id.create_doctor_spinner);
+
 				var pass = FindViewById<TextView> (Resource.Id.create_password);
 
-				sex_gender = "male";
-
-				if(male.Selected)
-					sex_gender = "male";
-				if(female.Selected)
-					sex_gender = "female";
+				int i = gender.IndexOfChild (FindViewById (gender.CheckedRadioButtonId));
+				if(i == 0) sex_gender = "Male"; else sex_gender = "Female";
 
 				temp.sex = sex_gender;
 				temp.email = email.Text;
@@ -39,9 +40,8 @@ namespace iReach_Android
 				temp.weight = Convert.ToInt32(weight.Text);
 				temp.first_name = first_name.Text;
 				temp.last_name = last_name.Text;
-				temp.doctor = "house@md.com";
-				string[] s = {"type ii diabetes"};
-				temp.group = s;
+				temp.doctor = doctor.SelectedItem.ToString();
+				temp.group = new string[]{group.SelectedItem.ToString()};
 
 				m_email = temp.email;
 				m_pass =  temp.pass;

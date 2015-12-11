@@ -1,5 +1,6 @@
 ﻿using System;
 using Android;
+using Android.Widget;
 using Android.App;
 using Android.Net;
 using Android.Content;
@@ -19,7 +20,7 @@ namespace iReach_Android
 			User_Activity_Page, Exit}
 
 		private State state;
-		private Network_State network_state;
+		//private Network_State network_state;
 
 		private api interaction_kit;
 
@@ -32,13 +33,17 @@ namespace iReach_Android
 		private string m_email;
 		private string m_pass;
 		private string sex_gender;
+
+		private string[] doctor_array;
+		private string[] group_array;
+
 		private sensor_data sd;
 		private DateTime time;
 		private int future_cut_off_time;
 
 		private static readonly object _synclock = new object();
 
-		private ConnectivityManager connectivity_manager;
+		//private ConnectivityManager connectivity_manager;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -54,6 +59,8 @@ namespace iReach_Android
 			interaction_kit.initialize();
 			interaction_kit.server_update += Interaction_kit_server_update;
 			interaction_kit.announcment += Interaction_kit_announcment;
+			interaction_kit.api_get_doctor_list();
+			interaction_kit.api_get_group_list();
 
 			network_monitor = new wifi_watcher();
 			network_monitor.Connection_Status_Changed += Network_monitor_Connection_Status_Changed;
@@ -87,17 +94,33 @@ namespace iReach_Android
 		{
 			if (input == Announcement_Type.Running)
 				initialized = true;
+			else if (input == Announcement_Type.SMError)
+			{
+				notify_user("Error In Interaction Kit State Machine");
+				initialized = false;
+				change_state(ref state, State.Log_In);
+			}
 		}
 
 
 		public override void OnBackPressed()
 		{
 			if(state == State.Landing_Page || state == State.Create_User_Page)
+			{
+				interaction_kit.logout();
 				change_state(ref state, State.Log_In);
+			}
 			else if(state == State.Log_In)
 				base.OnBackPressed();
 			else
 				change_state(ref state, State.Landing_Page);
+		}
+
+		private void notify_user(string input)
+		{
+			RunOnUiThread(() => {
+				Toast.MakeText(this, input, ToastLength.Short).Show();
+			});
 		}
 	}
 }

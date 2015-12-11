@@ -106,16 +106,16 @@ namespace api_interaction_kit
 					Response_Type.processed_data_collection);
 			}
 		}
-		public class request_doctor_event : event_object
-		{
-			public request_doctor_event (api Reference) {reference = Reference;}
-
-			public override void execute ()
-			{
-				Doctors d = (Doctors)reference.request_doctor_list ();
-				reference.server_response_helper (d, Response_Type.doctor_list);
-			}
-		}
+//		public class request_doctor_event : event_object
+//		{
+//			public request_doctor_event (api Reference) {reference = Reference;}
+//
+//			public override void execute ()
+//			{
+//				var d = reference.request_doctor_list ();
+//				reference.server_response_helper (d, Response_Type.doctor_list);
+//			}
+//		}
 		public class request_group_event : event_object
 		{
 			public request_group_event (api Reference) {reference = Reference;}

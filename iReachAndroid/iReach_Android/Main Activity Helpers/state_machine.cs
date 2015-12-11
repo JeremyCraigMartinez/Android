@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Android.Widget;
 using api_interaction_kit;
 
@@ -11,12 +12,6 @@ namespace iReach_Android
 		{
 			switch (state) {
 			case State.Initialize:
-				if (initialized) {
-					Button login_button = FindViewById<Button> (Resource.Id.login_button);
-					login_button.Click -= Login_button_Click;
-					Button create_user_btn = FindViewById<Button> (Resource.Id.Create_User_Button);
-					create_user_btn.Click -= Create_user_btn_Click;
-				}
 				break;
 			case State.Create_User_Page:
 				Button create_submit_btn = FindViewById<Button> (Resource.Id.create_submit_btn);
@@ -47,8 +42,10 @@ namespace iReach_Android
 			case State.User_Activity_Page:
 				break;
 			case State.Log_In:
-				Button login_btn = FindViewById<Button> (Resource.Id.login_button);
-				login_btn.Click -= Login_button_Click;
+				Button login_button = FindViewById<Button> (Resource.Id.login_button);
+				login_button.Click -= Login_button_Click;
+				Button create_user_btn = FindViewById<Button> (Resource.Id.Create_User_Button);
+				create_user_btn.Click -= Create_user_btn_Click;
 				break;
 			}
 
@@ -66,8 +63,16 @@ namespace iReach_Android
 				SetContentView (Resource.Layout.create_user);
 				Button create_submit_btn = FindViewById<Button> (Resource.Id.create_submit_btn);
 				create_submit_btn.Click += Create_submit_btn_Click;
-				interaction_kit.api_get_doctor_list ();
-				interaction_kit.api_get_group_list ();
+				if (doctor_array.Length > 0) {
+					var doctor = FindViewById<Spinner> (Resource.Id.create_doctor_spinner);	
+					ArrayAdapter<string> a = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerDropDownItem, doctor_array);
+					doctor.Adapter = a;
+				}
+				if (group_array.Length > 0) {
+					var group = FindViewById<Spinner> (Resource.Id.create_group_spinner);	
+					ArrayAdapter<string> a = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerDropDownItem, group_array);
+					group.Adapter = a;
+				}
 				break;
 			case State.Landing_Page:
 				SetContentView (Resource.Layout.landing_page);
@@ -130,7 +135,7 @@ namespace iReach_Android
 				if ((bool)o)
 					change_state (ref state, State.Landing_Page);
 				else
-					Toast.MakeText (this, "Failed to Log In", ToastLength.Short);
+					notify_user("Failed to Log In");
 			}
 			if (r == Response_Type.user_info) {
 				if ((user_information)o != null) {
@@ -162,73 +167,82 @@ namespace iReach_Android
 						last_name.Text = temp.last_name ?? "";
 						doctor.Text = temp.doctor ?? "";
 					});
+					notify_user("Successfully Pulled User Data");
 				}
-				Toast.MakeText (this, "Failed to Pull User Information", ToastLength.Short);
+				else
+					notify_user("Failed to Pull User Information");
 			}
 			if (r == Response_Type.doctor_list) {
-				//				if ((Doctors)o != null) {
-				//					RunOnUiThread (() => {
-				//						Doctors temp = (Doctors)o;
-				//						var doctor = FindViewById<Spinner> (Resource.Id.create_doctor_spinner);
-				//						ArrayAdapter a = new ArrayAdapter(this, Resource.Layout.create_user, temp.doctors);
-				//						doctor.Adapter = a;
-				//					});
-				//				}
+				if (o != null) {
+					List<string> doctors = new List<string>();
+					foreach (var obj in o as Array) {
+						doctors.Add(obj.ToString());
+					}
+					doctor_array = doctors.ToArray();
+				}
+
 			}
 			if (r == Response_Type.group_list) {
-				//				if ((Groups)o != null) {
-				//					RunOnUiThread (() => {
-				//						var group = FindViewById<Spinner> (Resource.Id.create_group_spinner);
-				//					});
-				//				}
+				if (o != null) {
+					List<string> groups = new List<string>();
+					foreach (var obj in o as Array) {
+						group temp = obj as group;
+						groups.Add(temp._id);
+					}
+					group_array = groups.ToArray();
+				}
 			}
 			if (r == Response_Type.user_created) {
 				if ((bool)o)
-					change_state (ref state, State.Initialize);
+					change_state (ref state, State.Log_In);
 				else
-					Toast.MakeText (this, "Failed to Create New User", ToastLength.Short);
+					notify_user("Failed to Create New User");
 
 			}
 			if (r == Response_Type.food_sent) {
 				if ((bool)o)
-					Toast.MakeText (this, "Food Saved", ToastLength.Short);
+					notify_user("Food Saved");
 				else
-					Toast.MakeText (this, "Failed to Save Food", ToastLength.Short);
+					notify_user("Failed to Save Food");
 			}
 			if (r == Response_Type.raw_data) {
 				if ((bool)o)
-					Toast.MakeText (this, "Sensor Data Sent Successfully", ToastLength.Short);
+					notify_user("Sensor Data Sent Successfully");
 				else
-					Toast.MakeText (this, "Failed to Send Sensor Data", ToastLength.Short);
+					notify_user("Failed to Send Sensor Data");
 			}
 			else if (r == Response_Type.user_info_updated) {
 				if ((bool)o)
-					Toast.MakeText (this, "User Profile Updated Successfully", ToastLength.Short);
+					notify_user("User Profile Updated Successfully");
 				else
-					Toast.MakeText (this, "Failed to Update User Profile", ToastLength.Short);
+					notify_user("Failed to Update User Profile");
 			}
 			if (r == Response_Type.processed_data_collection) {
 				
 				TextView tv = FindViewById<TextView> (Resource.Id.tv_processed_data);
-				RunOnUiThread (() => {tv.Text = "";});
-				foreach (var obj in o as Array) {
-					Processed_Data pd = obj as Processed_Data;
-					//"HH:mm-MM-dd-yyyy"
-					string[] temp = pd.created.Split (new string[]{"-"}, StringSplitOptions.RemoveEmptyEntries);
-					int day = Convert.ToInt32 (temp [2]);
-
-					int today = DateTime.Now.Day;
-					int yesterday = today - 1;
-					//DateTime check = new DateTime (Convert.ToInt32 (temp [3]), Convert.ToInt32 (temp [1]), Convert.ToInt32 (temp [2]));
-					if (!check_processed_data(pd))// || (day != today && day != yesterday))
-						break;
+				if (o != null) {
 					RunOnUiThread (() => {
-						tv.Text +=
-							"Timestamp: " + pd.created + Environment.NewLine +
+						tv.Text = "";
+					});
+					foreach (var obj in o as Array) {
+						Processed_Data pd = obj as Processed_Data;
+						//"HH:mm-MM-dd-yyyy"
+						string[] temp = pd.created.Split (new string[]{ "-" }, StringSplitOptions.RemoveEmptyEntries);
+						int day = Convert.ToInt32 (temp [2]);
+					
+						int today = DateTime.Now.Day;
+						int yesterday = today - 1;
+						//DateTime check = new DateTime (Convert.ToInt32 (temp [3]), Convert.ToInt32 (temp [1]), Convert.ToInt32 (temp [2]));
+						if (!check_processed_data (pd))// || (day != today && day != yesterday))
+							break;
+						RunOnUiThread (() => {
+							tv.Text +=
+								"Timestamp: " + pd.created + Environment.NewLine +
 							"Activity: " + pd.activity + Environment.NewLine +
 							"Calories Burned: " + pd.calories_burned.ToString () +
 							Environment.NewLine + Environment.NewLine;
-					});
+						});
+					}
 				}
 			}
 		}

@@ -15,9 +15,9 @@ namespace api_interaction_kit
 		{
 			return _get ("patients", typeof(user_information));
 		}
-		private Object request_doctor_list()
+		private Object[] request_doctor_list()
 		{
-			return _get ("doctors", typeof(Doctors));
+			return _get_array ("doctors");
 		}
 		private Object[] request_processed_data()
 		{
@@ -25,7 +25,7 @@ namespace api_interaction_kit
 		}
 		private Object request_group_list()
 		{
-			return _get ("groups", typeof(Groups));
+			return _get_array ("groups", typeof(group));
 		}
 		private bool create_user(create_user_information user)
 		{
@@ -91,6 +91,18 @@ namespace api_interaction_kit
 			announcment (Announcement_Type.Error);
 			return null;
 		}
+		private Object[] _get_array(string location)
+		{
+			HttpResponseMessage response = client.GetAsync (location).Result;
+			if (response.IsSuccessStatusCode) 
+			{
+				var data = response.Content.ReadAsStringAsync ().Result;
+				return json_functions.deserialize_array(data);
+			}
+			announcment (Announcement_Type.Error);
+			return null;
+		}
+
 		private bool _put(string location, string content)
 		{
 			HttpResponseMessage response = client.PutAsync (location, 

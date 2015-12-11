@@ -168,12 +168,12 @@ namespace api_interaction_kit
 		[DataMember]
 		public string[] groups;
 	}
-	[DataContract]
-	public class Doctors
-	{
-		[DataMember]
-		public string[] doctors;
-	}
+//	[DataContract]
+//	public class Doctor
+//	{
+//		[DataMember]
+//		public string doctor;
+//	}
 	[DataContract]
 	public class Processed_Data
 	{
@@ -212,6 +212,19 @@ namespace api_interaction_kit
 					l.Add (JsonConvert.DeserializeObject (token.ToString (), T));
 				}
 				return l.ToArray ();
+			}
+			return null;
+		}
+
+		static public Object[] deserialize_array (string data)
+		{
+			if (data != "") {
+				string s = data.Replace("\"", "");
+				s = s.Replace(@"\", "");
+				s = s.Replace("[", "");
+				s = s.Replace("]", "");
+				string[] temp = s.Split(new String[] {","}, StringSplitOptions.RemoveEmptyEntries); 
+				return temp;
 			}
 			return null;
 		}

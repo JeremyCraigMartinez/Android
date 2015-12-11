@@ -73,7 +73,6 @@
         <TextView
             android:layout_column="0"
             android:text="Gender: "
-            android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:gravity="right"
             android:textColor="#ff000000" />
@@ -138,7 +137,6 @@
         <TextView
             android:layout_column="0"
             android:text="Doctor: "
-            android:layout_marginTop="10.0dip"
             android:layout_marginBottom="4dp"
             android:gravity="right"
             android:id="@+id/textView3"
@@ -146,7 +144,7 @@
         <Spinner
             android:layout_column="1"
             android:id="@+id/create_doctor_spinner"
-            android:spinnerMode="dialog"
+            android:spinnerMode="dropdown"
             android:background="#ffffffff" />
     </TableRow>
     <TableRow
@@ -154,7 +152,6 @@
         <TextView
             android:layout_column="0"
             android:text="Group: "
-            android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:gravity="right"
             android:id="@+id/textView4"
@@ -175,7 +172,7 @@
         <Button
             android:id="@+id/create_submit_btn"
             android:text="Submit"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#ffa3ff6e"

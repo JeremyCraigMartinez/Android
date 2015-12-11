@@ -12,12 +12,12 @@ using Android.Net;
 
 namespace api_interaction_kit
 {
-	public enum States { Initializing, LogIn, Running, Offline, Stopping }
+	public enum States { Initializing, LogIn, Running, Offline, Stopping, Unknown }
 
 	public enum Response_Type { food_sent, login_result, user_created, user_info,
 		raw_data, doctor_list, group_list, user_info_updated, processed_data_collection }
 
-	public enum Announcement_Type { Initialization_Complete, Log_In_Complete, Running, Error }
+	public enum Announcement_Type { Initialization_Complete, Log_In_Complete, Running, Error, SMError }
 
 	public enum Network_State {UNKOWN, WIFI, DATA, OFFLINE}
 
@@ -60,6 +60,7 @@ namespace api_interaction_kit
 		public api ()
 		{
 			announcment += listener;
+			state = States.Unknown;
 			ServicePointManager.ServerCertificateValidationCallback = delegate {
 				return true;
 			};
@@ -74,6 +75,13 @@ namespace api_interaction_kit
 			} 
 			else
 				server_update (false, Response_Type.login_result);
+		}
+
+		public void logout()
+		{
+			userName = "";
+			password = "";
+			state_change(ref state, States.Unknown);
 		}
 
 		/// <summary>
@@ -148,7 +156,6 @@ namespace api_interaction_kit
 
 		private void connect ()
 		{
-
 			var basic_auth_header = Encoding.ASCII.GetBytes (userName + ":" + password);
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue ("Basic",
 				Convert.ToBase64String (basic_auth_header));
@@ -164,19 +171,23 @@ namespace api_interaction_kit
 			announcment (Announcement_Type.Running);
 			while (state == States.Running) {
 
-				if (!event_queue.IsEmpty) 
-				{
-					event_object e;
-					if (event_queue.TryDequeue (out e))
-						e.execute ();
-				}
-
-				if ((!long_term_storage.IsEmpty && network_state == Network_State.WIFI && power_state == Power_State.CHARGING)
-					|| force_pushing) 
-				{
-					event_object e;
-					if (long_term_storage.TryDequeue (out e))
-						e.execute ();
+				try {
+					if (!event_queue.IsEmpty) {
+						event_object e;
+						if (event_queue.TryDequeue (out e))
+							e.execute ();
+					}
+					
+					if ((!long_term_storage.IsEmpty && network_state == Network_State.WIFI && power_state == Power_State.CHARGING)
+					    || force_pushing) {
+						event_object e;
+						if (long_term_storage.TryDequeue (out e))
+							e.execute ();
+					}
+				} catch (Exception ex) {
+					string execpt = ex.ToString();
+					announcment(Announcement_Type.SMError);
+					logout();
 				}
 			}
 		}
@@ -214,11 +225,14 @@ namespace api_interaction_kit
 
 		public void api_get_doctor_list()
 		{
-			event_queue.Enqueue (new request_doctor_event (this));
+			var d = request_doctor_list ();
+			server_response_helper (d, Response_Type.doctor_list);
 		}
 		public void api_get_group_list()
 		{
-			event_queue.Enqueue (new request_group_event (this));
+			var g = request_group_list ();
+			server_response_helper (g, Response_Type.group_list);
+
 		}
 		public void api_update_user_info(user_information info)
 		{
