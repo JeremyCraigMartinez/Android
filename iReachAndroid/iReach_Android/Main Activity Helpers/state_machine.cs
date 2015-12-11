@@ -155,7 +155,7 @@ namespace iReach_Android
 
 						if(temp.group != null)
 							foreach (string _temp in temp.group)
-								grps += (_temp + " - ");
+								grps += (_temp + " ");
 
 						email.Text = temp.email ?? "";
 						age.Text = temp.age.ToString () ?? "";
@@ -193,8 +193,10 @@ namespace iReach_Android
 				}
 			}
 			if (r == Response_Type.user_created) {
-				if ((bool)o)
+				if ((bool)o){
+					notify_user("User Successfully Created");
 					change_state (ref state, State.Log_In);
+				}
 				else
 					notify_user("Failed to Create New User");
 
@@ -208,8 +210,8 @@ namespace iReach_Android
 			if (r == Response_Type.raw_data) {
 				if ((bool)o)
 					notify_user("Sensor Data Sent Successfully");
-				else
-					notify_user("Failed to Send Sensor Data");
+//				else
+//					notify_user("Failed to Send Sensor Data");
 			}
 			else if (r == Response_Type.user_info_updated) {
 				if ((bool)o)
