@@ -81,6 +81,7 @@
     <AndroidResource Include="Resources\layout\settings_layout.axml" />
     <AndroidResource Include="Resources\layout\user_activity_layout.axml" />
     <AndroidResource Include="Resources\layout\food_page.axml" />
+    <AndroidResource Include="Resources\layout\food_page_temp.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Main Activity Helpers\" />

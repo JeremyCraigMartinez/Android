@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light">
+    <RadioGroup
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/food_choices"
+        android:background="#ffffffff">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Breakfast:"
+            android:textColor="@android:color/black"
+            android:textSize="20dp" />
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Cold Cereal"
+            android:id="@+id/radioButton1"
+            android:textColor="#ff000000"
+            android:background="#ffffffff" />
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Breakfast Sandwich"
+            android:id="@+id/radioButton2"
+            android:textColor="#000000" />
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Scrambled Eggs"
+            android:id="@+id/radioButton3"
+            android:textColor="#000000" />
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pancakes"
+            android:id="@+id/radioButton4"
+            android:textColor="#ff000000" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:id="@+id/space1" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lunch:"
+            android:textColor="@android:color/black"
+            android:textSize="20dp" />
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cheese Burger"
+            android:id="@+id/radioButton5"
+            android:textColor="#000000" />
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Turkey Sandwich"
+            android:id="@+id/radioButton6"
+            android:textColor="#000000" />
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Salad"
+            android:id="@+id/radioButton7"
+            android:textColor="#ff000000" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:id="@+id/space1" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dinner:"
+            android:textColor="@android:color/black"
+            android:textSize="20dp" />
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lasagna"
+            android:id="@+id/radioButton8"
+            android:textColor="#000000" />
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pulled Pork"
+            android:id="@+id/radioButton9"
+            android:textColor="#000000" />
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chicken Tenders"
+            android:id="@+id/radioButton10"
+            android:textColor="#ff000000" />
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mixed Vegetables"
+            android:id="@+id/radioButton11"
+            android:textColor="#ff000000" />
+    </RadioGroup>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:id="@+id/space1" />
+    <Button
+        android:text="Save Food"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_save_food_temp"
+        android:background="#ffa3ff6e"
+        android:textColor="#ff000000" />
+</LinearLayout>

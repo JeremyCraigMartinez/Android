@@ -39,8 +39,10 @@ namespace iReach_Android
 				force_push_btn.Click -= Force_push_btn_Click;
 				break;
 			case State.Food_Page:
-				Button food_submit_btn = FindViewById<Button> (Resource.Id.save_food_btn);
-				food_submit_btn.Click -= Food_submit_btn_Click;
+//				Button food_submit_btn = FindViewById<Button> (Resource.Id.save_food_btn);
+//				food_submit_btn.Click -= Food_submit_btn_Click;
+				Button food_temp = FindViewById<Button> (Resource.Id.btn_save_food_temp);
+				food_temp.Click -= Food_temp_Click;
 				break;
 			case State.User_Activity_Page:
 				break;
@@ -82,7 +84,7 @@ namespace iReach_Android
 				break;
 			case State.Account_Page:
 				SetContentView (Resource.Layout.user_page);
-				Button update_user = FindViewById<Button>(Resource.Id.update_user_btn);
+				Button update_user = FindViewById<Button> (Resource.Id.update_user_btn);
 				update_user.Click += Update_user_Click;
 				break;
 			case State.Settings_Page:
@@ -102,16 +104,18 @@ namespace iReach_Android
 				check_battery ();
 				break;
 			case State.Food_Page:
-				SetContentView(Resource.Layout.food_page);
-				Button food_submit_btn = FindViewById<Button> (Resource.Id.save_food_btn);
-				food_submit_btn.Click += Food_submit_btn_Click;
+				SetContentView (Resource.Layout.food_page_temp);
+//				Button food_submit_btn = FindViewById<Button> (Resource.Id.save_food_btn);
+//				food_submit_btn.Click += Food_submit_btn_Click;
+				Button food_temp = FindViewById<Button> (Resource.Id.btn_save_food_temp);
+				food_temp.Click += Food_temp_Click;
 				break;
 			case State.User_Activity_Page:
 				SetContentView (Resource.Layout.user_activity_layout);
-				interaction_kit.api_request_processed_data();
+				interaction_kit.api_request_processed_data ();
 				break;
 			case State.Log_In:
-				SetContentView(Resource.Layout.Main);
+				SetContentView (Resource.Layout.Main);
 				Button login_btn = FindViewById<Button> (Resource.Id.login_button);
 				login_btn.Click += Login_button_Click;
 				Button create_u_btn = FindViewById<Button> (Resource.Id.Create_User_Button);
@@ -120,12 +124,13 @@ namespace iReach_Android
 			}
 		}
 
-
 		void Interaction_kit_server_update (object o, Response_Type r)
 		{
 			if (r == Response_Type.login_result) {
 				if ((bool)o)
 					change_state (ref state, State.Landing_Page);
+				else
+					Toast.MakeText (this, "Failed to Log In", ToastLength.Short);
 			}
 			if (r == Response_Type.user_info) {
 				if ((user_information)o != null) {
@@ -158,6 +163,7 @@ namespace iReach_Android
 						doctor.Text = temp.doctor ?? "";
 					});
 				}
+				Toast.MakeText (this, "Failed to Pull User Information", ToastLength.Short);
 			}
 			if (r == Response_Type.doctor_list) {
 				//				if ((Doctors)o != null) {
@@ -177,10 +183,29 @@ namespace iReach_Android
 				//				}
 			}
 			if (r == Response_Type.user_created) {
-				//				if ((bool)o)
-				//					interaction_kit.login (m_email, m_pass);
-				//				else
-				change_state (ref state, State.Initialize);
+				if ((bool)o)
+					change_state (ref state, State.Initialize);
+				else
+					Toast.MakeText (this, "Failed to Create New User", ToastLength.Short);
+
+			}
+			if (r == Response_Type.food_sent) {
+				if ((bool)o)
+					Toast.MakeText (this, "Food Saved", ToastLength.Short);
+				else
+					Toast.MakeText (this, "Failed to Save Food", ToastLength.Short);
+			}
+			if (r == Response_Type.raw_data) {
+				if ((bool)o)
+					Toast.MakeText (this, "Sensor Data Sent Successfully", ToastLength.Short);
+				else
+					Toast.MakeText (this, "Failed to Send Sensor Data", ToastLength.Short);
+			}
+			else if (r == Response_Type.user_info_updated) {
+				if ((bool)o)
+					Toast.MakeText (this, "User Profile Updated Successfully", ToastLength.Short);
+				else
+					Toast.MakeText (this, "Failed to Update User Profile", ToastLength.Short);
 			}
 			if (r == Response_Type.processed_data_collection) {
 				

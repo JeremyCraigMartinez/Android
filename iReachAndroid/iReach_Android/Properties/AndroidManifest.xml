@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.ireach_android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.ireach_android.jitter">
 	<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="19" />
-	<application android:label="iReach_Android">
+	<application android:label="iReach_Android_Jitter">
 		<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 		<receiver android:name=".BootReceiver" android:enabled="true" android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
 			<intent-filter>
