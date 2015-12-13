@@ -26,7 +26,7 @@ namespace iReach_Android
 						check_battery ();
 						sd = new sensor_data ();
 						time = DateTime.Now;
-						future_cut_off_time = (DateTime.Now.Second + 2) % 60;
+						future_cut_off_time = (DateTime.Now.Second + 15) % 60;
 					}
 					if (e.Sensor.Type == SensorType.Accelerometer) {
 						sd.accel.x.Add (e.Values [0]);

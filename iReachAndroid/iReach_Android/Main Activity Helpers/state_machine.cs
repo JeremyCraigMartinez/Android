@@ -34,10 +34,10 @@ namespace iReach_Android
 				force_push_btn.Click -= Force_push_btn_Click;
 				break;
 			case State.Food_Page:
-//				Button food_submit_btn = FindViewById<Button> (Resource.Id.save_food_btn);
-//				food_submit_btn.Click -= Food_submit_btn_Click;
-				Button food_temp = FindViewById<Button> (Resource.Id.btn_save_food_temp);
-				food_temp.Click -= Food_temp_Click;
+				Button food_submit_btn = FindViewById<Button> (Resource.Id.save_food_btn);
+				food_submit_btn.Click -= Food_submit_btn_Click;
+//				Button food_temp = FindViewById<Button> (Resource.Id.btn_save_food_temp);
+//				food_temp.Click -= Food_temp_Click;
 				break;
 			case State.User_Activity_Page:
 				break;
@@ -109,11 +109,11 @@ namespace iReach_Android
 				check_battery ();
 				break;
 			case State.Food_Page:
-				SetContentView (Resource.Layout.food_page_temp);
-//				Button food_submit_btn = FindViewById<Button> (Resource.Id.save_food_btn);
-//				food_submit_btn.Click += Food_submit_btn_Click;
-				Button food_temp = FindViewById<Button> (Resource.Id.btn_save_food_temp);
-				food_temp.Click += Food_temp_Click;
+				SetContentView (Resource.Layout.food_page);
+				Button food_submit_btn = FindViewById<Button> (Resource.Id.save_food_btn);
+				food_submit_btn.Click += Food_submit_btn_Click;
+//				Button food_temp = FindViewById<Button> (Resource.Id.btn_save_food_temp);
+//				food_temp.Click += Food_temp_Click;
 				break;
 			case State.User_Activity_Page:
 				SetContentView (Resource.Layout.user_activity_layout);
@@ -121,6 +121,9 @@ namespace iReach_Android
 				break;
 			case State.Log_In:
 				SetContentView (Resource.Layout.Main);
+				initialized = false;
+				interaction_kit.logout ();
+				interaction_kit.initialize ();
 				Button login_btn = FindViewById<Button> (Resource.Id.login_button);
 				login_btn.Click += Login_button_Click;
 				Button create_u_btn = FindViewById<Button> (Resource.Id.Create_User_Button);
@@ -171,6 +174,9 @@ namespace iReach_Android
 				}
 				else
 					notify_user("Failed to Pull User Information");
+				
+				interaction_kit.api_get_doctor_list();
+				interaction_kit.api_get_group_list();
 			}
 			if (r == Response_Type.doctor_list) {
 				if (o != null) {
@@ -235,7 +241,7 @@ namespace iReach_Android
 						int today = DateTime.Now.Day;
 						int yesterday = today - 1;
 						//DateTime check = new DateTime (Convert.ToInt32 (temp [3]), Convert.ToInt32 (temp [1]), Convert.ToInt32 (temp [2]));
-						if (!check_processed_data (pd))// || (day != today && day != yesterday))
+						if (!check_processed_data (pd) || (day != today && day != yesterday))
 							break;
 						RunOnUiThread (() => {
 							tv.Text +=

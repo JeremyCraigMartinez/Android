@@ -107,7 +107,6 @@ namespace iReach_Android
 		{
 			if(state == State.Landing_Page || state == State.Create_User_Page)
 			{
-				interaction_kit.logout();
 				change_state(ref state, State.Log_In);
 			}
 			else if(state == State.Log_In)
